@@ -19,8 +19,10 @@ This is a game made for a Game Jam. The theme of the Game Jam was "Time is your 
 
 ## Credits
 
-- Game Design, Programming, Art: Charles Pritchard
-- Music: TBC
+- Game Design: Charles Pritchard, [ADD YOUR NAME HERE]
+- Programming: Charles Pritchard, [ADD YOUR NAME HERE]
+- Art: TBC [ADD YOUR NAME HERE]
+- Music: TBC [ADD YOUR NAME HERE]
 
 ## License
 
