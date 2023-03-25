@@ -25,6 +25,8 @@ namespace DungeonDraws.Game
 
         public bool IsPaused { set; get; }
 
+        private int _gold;
+
         private string[] _advices = new[]
         {
             "Only good people don't do their taxes so remember to do yours!",
@@ -37,6 +39,7 @@ namespace DungeonDraws.Game
         {
             Instance = this;
             _dayTimer = _info.DayDuration;
+            _gold = _info.BaseGold;
         }
 
         private void Update()
@@ -52,7 +55,8 @@ namespace DungeonDraws.Game
                     _nextDayPanel.SetActive(true);
                     _nextDayAdvice.text = $"Tip: {_advices[Random.Range(0, _advices.Length)]}";
 
-                    _incomeText.text = $"Net Income: {_info.DailyIncome} Gold Coin";
+                    _gold += _info.DailyIncome;
+                    _incomeText.text = $"Net Income: {_info.DailyIncome} Gold Coin\nTotal Gold: {_gold}";
                 }
             }
         }
