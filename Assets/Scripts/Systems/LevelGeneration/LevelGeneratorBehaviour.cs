@@ -70,16 +70,16 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             transform.rotation = Quaternion.Euler(0, 0, 0);
             transform.localScale = Vector3.one;
 
-            _generator.setMapSize(_mapHeight, _mapWidth);
-            _generator.setRoomsNumberRange(_roomsNumberMin, _roomsNumberMax);
-            _generator.setRoomSizeRange(_roomSizeMin, _roomSizeMax);
-            _generator.setCorridorLengthRange(_corridorLengthMin, _corridorLengthMax);
-            _generator.setCorridorWidthRange(_corridorWidthMin, _corridorWidthMax);
-            _generator.setPlotter(new DetailedTilesPlotter());
-            if (_devLog) _generator.setLogger(new UnityEngineLogger());
-            _generator.setSeed(_seed);
+            _generator.SetMapSize(_mapHeight, _mapWidth);
+            _generator.SetRoomsNumberRange(_roomsNumberMin, _roomsNumberMax);
+            _generator.SetRoomSizeRange(_roomSizeMin, _roomSizeMax);
+            _generator.SetCorridorLengthRange(_corridorLengthMin, _corridorLengthMax);
+            _generator.SetCorridorWidthRange(_corridorWidthMin, _corridorWidthMax);
+            _generator.SetPlotter(new DetailedTilesPlotter());
+            if (_devLog) _generator.SetLogger(new UnityEngineLogger());
+            _generator.SetSeed(_seed);
 
-            _tilesMap = _generator.asMatrix();
+            _tilesMap = _generator.AsMatrix();
             //TODO: Some sort of mesh generation or tile placement for rendering?
             // _renderer.convertToMeshes(_tilesMap);
 

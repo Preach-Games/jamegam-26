@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Domain;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Plotters;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Pickers;
@@ -22,7 +20,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
         private int _seed;
         private int _mapRows;
         private int _mapColumns;
-        private int _maxAttempts;
+        private readonly int _maxAttempts;
 
         private IXLogger _logger;
         private IBoardPlotter _plotter;
@@ -30,81 +28,81 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
         private int _mapMargin;
         private bool _mapCropEnabled;
 
-        protected int getMinRoomSize()
+        private int GetMinRoomSize()
         {
             return _roomsNumberMin;
         }
 
-        protected int getSeed()
+        protected int GetSeed()
         {
             return _seed;
         }
 
-        protected IXLogger getLogger()
+        protected IXLogger GetLogger()
         {
             return _logger;
         }
 
-        protected void setBoard(Board board)
+        private void SetBoard(Board board)
         {
             _board = board;
         }
 
-        private void clearBoard()
+        private void ClearBoard()
         {
             _board = null;
         }
 
-        protected bool isBoardCleared()
+        private bool IsBoardCleared()
         {
             return _board == null;
         }
 
-        public void setCorridorLengthRange(int v1, int v2)
+        public void SetCorridorLengthRange(int v1, int v2)
         {
             _corridorLengthMin = v1;
             _corridorLengthMax = v2;
-            clearBoard();
+            ClearBoard();
         }
 
-        public void setCorridorWidthRange(int v1, int v2)
+        public void SetCorridorWidthRange(int v1, int v2)
         {
             _corridorWidthMin = v1;
             _corridorWidthMax = v2;
-            clearBoard();
+            ClearBoard();
         }
 
-        public void setRoomSizeRange(int v1, int v2)
+        public void SetRoomSizeRange(int v1, int v2)
         {
             _roomSizeMin = v1;
             _roomSizeMax = v2;
-            clearBoard();
+            ClearBoard();
         }
 
-        public void setRoomsNumberRange(int v1, int v2)
+        public void SetRoomsNumberRange(int v1, int v2)
         {
             _roomsNumberMin = v1;
             _roomsNumberMax = v2;
-            clearBoard();
+            ClearBoard();
         }
 
-        public void setSeed(int v)
+        public void SetSeed(int v)
         {
             _seed = v;
-            clearBoard();
+            ClearBoard();
         }
 
-        public void setMapSize(int rows, int columns)
+        public void SetMapSize(int rows, int columns)
         {
             _mapRows = rows;
             _mapColumns = columns;
-            clearBoard();
+            ClearBoard();
         }
 
-        public void setLogger(IXLogger logger)
+        public void SetLogger(IXLogger logger)
         {
             _logger = logger;
-            clearBoard();
+            ClearBoard();
         }
 
         public LevelGenerator(int maxAttempts)
@@ -116,13 +114,13 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             _mapMargin = 0;
             _mapCropEnabled = false;
             _maxAttempts = maxAttempts;
-            clearBoard();
+            ClearBoard();
         }
 
-        private Board asBoardSingle()
+        private Board AsBoardSingle()
         {
-            checkConstraints();
-            if (!isBoardCleared()) return _board;
+            CheckConstraints();
+            if (!IsBoardCleared()) return _board;
             _board = new Board(_mapRows - _mapMargin * 2, _mapColumns - _mapMargin * 2);
 
             CustomSeededPickerStrategy seedStrategy = new CustomSeededPickerStrategy(_seed);
@@ -163,22 +161,16 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             for (int i = 1; i < roomNumber; i++)
             {
                 //If room and corridor has not been dropped, pick random direction
-                if (roomCreationAttempt == 1)
-                {
-                    lastDirection = cardPointPicker.draw();
-                }
-                else
-                {
+                lastDirection = roomCreationAttempt == 1 ? cardPointPicker.draw() :
                     //else force to next direction
-                    lastDirection = cardPointPicker.nextClockwise(lastDirection);
-                }
+                    cardPointPicker.nextClockwise(lastDirection);
 
                 //Try to create a Corridor on a direction if there is enough space
                 int cardinalPointAttempt = 1;
-                Corridor lastCorridor = null;
+                Corridor lastCorridor;
                 do
                 {
-                    lastCorridor = generateCorridor(lastDirection, lastRoom, corrLengthPicker, corrWidthPicker,
+                    lastCorridor = GenerateCorridor(lastDirection, lastRoom, corrLengthPicker, corrWidthPicker,
                         cellRangePicker);
                     if (!_board.fitsIn(lastCorridor))
                     {
@@ -200,7 +192,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
                 _board.addCorridor(lastCorridor);
 
                 //Try to create a room. If there is enough space retry (until 4 times) restarting from a new corridor
-                Room newRoom = generateRoom(lastDirection, lastCorridor, roomSizePicker, cellRangePicker);
+                Room newRoom = GenerateRoom(lastDirection, lastCorridor, roomSizePicker, cellRangePicker);
                 if (!_board.fitsIn(newRoom))
                 {
                     _board.removeLast(); //remove last item added to the board (a corridor in this case)
@@ -209,7 +201,6 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
                         _logger.info("NO FITS: " + newRoom + " Retry: " + roomCreationAttempt);
                         roomCreationAttempt++;
                         i--;
-                        continue;
                     }
                     else
                     {
@@ -239,9 +230,9 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             return _board;
         }
 
-        private Board asBoard()
+        private Board AsBoard()
         {
-            if (!isBoardCleared()) return asBoardSingle();
+            if (!IsBoardCleared()) return AsBoardSingle();
 
             Board bestBoard = null;
             int count = 1;
@@ -249,26 +240,26 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             {
                 // getLogger().info("Board generation attempt: " + count+"/"+_maxAttempts);
 
-                Board board = asBoardSingle();
+                Board board = AsBoardSingle();
                 if (bestBoard == null) bestBoard = board;
                 else if (board.roomSize() > bestBoard.roomSize()) bestBoard = board;
 
-                if (bestBoard.roomSize() >= getMinRoomSize()) break;
+                if (bestBoard.roomSize() >= GetMinRoomSize()) break;
 
                 int seed = _seed;
                 if (seed >= 0) seed++;
                 else seed--;
-                setSeed(seed);
+                SetSeed(seed);
 
                 count++;
             }
 
             // getLogger().info("Board generation completed at attempt: " + count);
-            setBoard(bestBoard);
+            SetBoard(bestBoard);
             return bestBoard;
         }
 
-        private void checkConstraints()
+        private void CheckConstraints()
         {
             if (_roomsNumberMax < _roomsNumberMin) throw new FormatException("Invalid Room Number: Max < Min");
             if (_roomSizeMax < _roomSizeMin) throw new FormatException("Invalid Room Size: Max < Min");
@@ -279,29 +270,29 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
                 throw new FormatException("Invalid Corridor Width Max > Room Size Min");
         }
 
-        public void setMapCropEnabled(bool enabled)
+        public void SetMapCropEnabled(bool enabled)
         {
             _mapCropEnabled = enabled;
-            clearBoard();
+            ClearBoard();
         }
 
-        public void setMapMargin(int mapMargin)
+        public void SetMapMargin(int mapMargin)
         {
             _mapMargin = mapMargin;
-            clearBoard();
+            ClearBoard();
         }
 
-        public int[,] asMatrix()
+        public int[,] AsMatrix()
         {
-            return asBoard().asTilesMatrix(_plotter);
+            return AsBoard().asTilesMatrix(_plotter);
         }
 
-        public void setPlotter(IBoardPlotter plotter)
+        public void SetPlotter(IBoardPlotter plotter)
         {
             _plotter = plotter;
         }
 
-        private Room generateRoom(CardinalPoint lastCorridorDirection, Corridor lastCorr,
+        private Room GenerateRoom(CardinalPoint lastCorridorDirection, Corridor lastCorr,
             IntInRangePicker roomSizePicker, CellInRangePicker cellInRangePicker)
         {
             int roomRows = roomSizePicker.draw();
@@ -360,7 +351,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             return new Room(topLeftCell, grid);
         }
 
-        private Corridor generateCorridor(CardinalPoint mapDirection, Room lastRoom, IntInRangePicker corrLengthPicker,
+        private Corridor GenerateCorridor(CardinalPoint mapDirection, Room lastRoom, IntInRangePicker corrLengthPicker,
             IntInRangePicker corrWidthPicker, CellInRangePicker cellRangePicker)
         {
             int corridorLenght = corrLengthPicker.draw();
