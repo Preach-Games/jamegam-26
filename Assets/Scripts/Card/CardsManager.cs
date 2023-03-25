@@ -20,11 +20,9 @@ namespace DungeonDraws.Card
         private Transform _cardContainer;
 
         [SerializeField]
-        private CardInfo[] _cards;
-
-        [SerializeField]
         private GameInfo _info;
 
+        private List<CardInfo> _cards;
         private List<CardInfo> _deck;
 
         // Tooltip
@@ -38,7 +36,8 @@ namespace DungeonDraws.Card
         private void Awake()
         {
             Instance = this;
-            _deck = _cards.ToList();
+            _cards = _info.BaseDeck.ToList();
+            _deck = new(_cards);
             _tooltipText = _tooltip.GetComponentInChildren<TMP_Text>();
             _cardTimer = _info.TimeBeforeCardDisplay;
         }
@@ -63,7 +62,13 @@ namespace DungeonDraws.Card
         public void ResetDay()
         {
             HideCards();
-            _deck = _cards.ToList();
+            _deck = new(_cards);
+        }
+
+        public void AddCard(CardInfo card)
+        {
+            _deck.Add(card);
+            _cards.Add(card);
         }
 
         public void HideCards()
@@ -83,14 +88,21 @@ namespace DungeonDraws.Card
             for (int i = 0; i < _info.CardCount; i++)
             {
                 var card = Instantiate(_info.CardPrefab, _cardContainer);
-                card.GetComponent<Button>().onClick.AddListener(new(HideCards));
                 var index = Random.Range(0, _deck.Count);
+                card.GetComponent<Button>().onClick.AddListener(new(() =>
+                {
+                    foreach (var m in _deck[index].Modifiers)
+                    {
+                        m.Do();
+                    }
+                    HideCards();
+                }));
                 card.GetComponent<CardInstance>().Init(_deck[index]);
                 _deck.RemoveAt(index);
 
                 if (!_deck.Any())
                 {
-                    _deck = _cards.ToList();
+                    _deck = new(_cards);
                 }
             }
             _cardCanvas.SetActive(true);

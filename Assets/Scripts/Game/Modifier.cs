@@ -20,10 +20,33 @@ namespace DungeonDraws.Game
             {
                 ModifierType.HERO_SPAWN_RATE => $"Hero Spawn Rate: {PTS()}%",
                 ModifierType.INCOME => $"Gold Earned: {PTS()}%",
+                ModifierType.GOLD => $"Gold Earned: {PTS()}",
+                ModifierType.GOLD_IN_5_DAYS => $"Gold Earned in 5 Days: {PTS()}",
                 ModifierType.RATS => $"Rats Gained: {PTS()}",
-                ModifierType.SANITY => $"Dungeon Sanity: {PTS()}%",
+                ModifierType.GLOBAL_HEALTH => $"All Monsters Health: {PTS()}%",
                 _ => throw new NotImplementedException()
             };
+        }
+
+        public void Do()
+        {
+            switch (Type)
+            {
+                case ModifierType.INCOME:
+                    GameManager.Instance.AddExpensesPercent(PercentChange);
+                    break;
+
+                case ModifierType.GOLD:
+                    GameManager.Instance.AddExpenses(PercentChange, 0);
+                    break;
+
+                case ModifierType.GOLD_IN_5_DAYS:
+                    GameManager.Instance.AddExpenses(PercentChange, 5);
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         public override string ToString()

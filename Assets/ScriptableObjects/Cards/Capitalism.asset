@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Capitalism
   m_EditorClassIdentifier: 
   Name: Capitalism, ho!
-  Description: 'The ASS (Association of Sinful Seigneurs) decided to increase your
-    funding!
+  Description: 'Want more money? Just give some to us and we will come back in a
+    few days with even more of it!
 
-    The angry heroes at your doorsteps are probably looking forward
-    to decrease it'
+    It''s quick, easy and surely have nothing
+    to do with that corpse under the table'
   Modifiers:
-  - Type: 0
-    PercentChange: 15
-    IsBonus: 1
-  - Type: 1
-    PercentChange: 15
+  - Type: 4
+    PercentChange: 100
     IsBonus: 0
+  - Type: 5
+    PercentChange: 130
+    IsBonus: 1
