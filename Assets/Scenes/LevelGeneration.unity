@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 39397922}
   - component: {fileID: 39397923}
   m_Layer: 0
-  m_Name: Level Generator
+  m_Name: Board Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,15 +167,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f26098f13451748a56c890bdddfa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 11400000, guid: b245208d77f623a48ad30011394ddcdc, type: 2}
-  _devMode: 1
+  levelData: {fileID: 11400000, guid: ed69cf28cbcc2e445a928038fd36290f, type: 2}
+  _devMode: 0
   _devLog: 1
-  _randomSeed: 0
-  _floorPrefab: {fileID: 0}
-  _wallPrefab: {fileID: 0}
-  _wallSeparatorPrefab: {fileID: 0}
-  _cornerInPrefab: {fileID: 0}
-  _cornerOutPrefab: {fileID: 0}
+  _randomSeed: 1
+  _floorPrefab: {fileID: 9140526481582535184, guid: 7be2771040324564ea65c24b07d811df,
+    type: 3}
+  _wallPrefab: {fileID: 9140526481582535184, guid: fa7194b414fdbee428d2d0b2d043a39d,
+    type: 3}
+  _wallSeparatorPrefab: {fileID: 9140526481582535184, guid: 9b0220d5b76baa244b57eb43bad8aa58,
+    type: 3}
+  _cornerInPrefab: {fileID: 9140526481582535184, guid: 24a6747e4deecf94dbb56360fa3ec216,
+    type: 3}
+  _cornerOutPrefab: {fileID: 9140526481582535184, guid: aa356141d71ed5549bbb2a6fc9dd4bf3,
+    type: 3}
 --- !u!1 &385131943
 GameObject:
   m_ObjectHideFlags: 0

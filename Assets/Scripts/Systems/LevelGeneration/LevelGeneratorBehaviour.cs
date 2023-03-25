@@ -1,4 +1,6 @@
 using DungeonDraws.Scripts.Systems.LevelGeneration.Plotters;
+using DungeonDraws.Scripts.Systems.LevelGeneration.Renderer;
+using DungeonDraws.Scripts.Utils.Attributes;
 using GameJamKit.Scripts.Utils.Logging;
 using UnityEngine;
 
@@ -23,11 +25,12 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
         
         // TODO: Implement renderer
         private LevelGenerator _generator;
-        // private LevelRenderer _renderer;
+        private LevelRenderer _renderer;
 
         void Awake()
         {
             _generator = new LevelGenerator(10);
+            _renderer = LevelRenderer.newInstance(this);
         }
 
         void Start()
@@ -55,7 +58,8 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
                 devMode();
             }
         }
-
+        
+        [Button]
         private void generateDungeon() {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             transform.localScale = Vector3.one;
@@ -70,8 +74,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             _generator.SetSeed(levelData._seed);
 
             _tilesMap = _generator.AsMatrix();
-            //TODO: Some sort of mesh generation or tile placement for rendering?
-            // _renderer.convertToMeshes(_tilesMap);
+            _renderer.convertToMeshes(_tilesMap);
 
             transform.rotation = Quaternion.Euler(0, 90, 0);
             transform.localScale = new Vector3(-1, 1, -1);
