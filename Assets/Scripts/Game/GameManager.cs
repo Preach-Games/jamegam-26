@@ -80,6 +80,11 @@ namespace DungeonDraws.Game
             _upcomingExpenses[days] += amount;
         }
 
+        public void AddExpensesPercent(int amount)
+        {
+            _upcomingExpenses[0] += Mathf.CeilToInt(_info.DailyIncome * amount / 100f);
+        }
+
         public void NextDay()
         {
             IsPaused = false;

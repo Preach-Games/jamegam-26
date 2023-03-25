@@ -32,6 +32,10 @@ namespace DungeonDraws.Game
         {
             switch (Type)
             {
+                case ModifierType.INCOME:
+                    GameManager.Instance.AddExpensesPercent(PercentChange);
+                    break;
+
                 case ModifierType.GOLD:
                     GameManager.Instance.AddExpenses(PercentChange, 0);
                     break;
