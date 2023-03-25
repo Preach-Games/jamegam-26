@@ -1,5 +1,7 @@
 using DungeonDraws.SO;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +16,16 @@ namespace DungeonDraws.Card
         private Transform _cardContainer;
 
         [SerializeField]
+        private CardInfo[] _cards;
+
+        [SerializeField]
         private GameInfo _info;
+
+        private List<CardInfo> _deck;
 
         private void Awake()
         {
+            _deck = _cards.ToList();
             StartCoroutine(ShowCards());
         }
 
@@ -38,6 +46,14 @@ namespace DungeonDraws.Card
             {
                 var card = Instantiate(_info.CardPrefab, _cardContainer);
                 card.GetComponent<Button>().onClick.AddListener(new(HideCards));
+                var index = Random.Range(0, _deck.Count);
+                card.GetComponent<CardInstance>().Init(_deck[index]);
+                _deck.RemoveAt(index);
+
+                if (!_deck.Any())
+                {
+                    _deck = _cards.ToList();
+                }
             }
             _cardCanvas.SetActive(true);
         }

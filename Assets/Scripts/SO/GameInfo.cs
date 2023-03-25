@@ -9,5 +9,10 @@ namespace DungeonDraws.SO
         public int CardCount;
         public float TimeBeforeCardDisplay;
         public GameObject CardPrefab;
+
+        [Header("Global")]
+        public Range<float> HeroSpawnDelay;
+        public int BaseGold;
+        public int DailyIncome;
     }
 }

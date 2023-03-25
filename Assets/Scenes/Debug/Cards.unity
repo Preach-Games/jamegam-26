@@ -712,6 +712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2002116914}
   - component: {fileID: 2002116913}
+  - component: {fileID: 2002116915}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -733,6 +734,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardCanvas: {fileID: 749292326}
   _cardContainer: {fileID: 1068226856}
+  _cards:
+  - {fileID: 11400000, guid: 3dc753b04b4f9704fb8598da657c07ba, type: 2}
+  - {fileID: 11400000, guid: 0ee22c323878ad04cb889796c5c53b5f, type: 2}
   _info: {fileID: 11400000, guid: 9f9b98c44e5accf4f9a129f474d3d3e9, type: 2}
 --- !u!4 &2002116914
 Transform:
@@ -749,3 +753,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002116915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002116912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f4cefa5ec7eb44a92ee5b71b270c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _info: {fileID: 11400000, guid: 9f9b98c44e5accf4f9a129f474d3d3e9, type: 2}

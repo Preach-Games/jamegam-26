@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using DungeonDraws.SO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +13,14 @@ namespace DungeonDraws.Card
         [SerializeField]
         private Image _image;
 
-        public void Init(string title, string description, Sprite image)
+        private CardInfo _info;
+
+        public void Init(CardInfo info)
         {
-            _titleText.text = title;
-            _descriptionText.text = description;
-            _image.sprite = image;
+            _info = info;
+            _titleText.text = info.Name;
+            _descriptionText.text = info.Description;
+            _image.sprite = null;
         }
     }
 }
