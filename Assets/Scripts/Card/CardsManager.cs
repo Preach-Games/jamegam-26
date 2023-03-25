@@ -62,8 +62,8 @@ namespace DungeonDraws.Card
 
         public void ResetDay()
         {
+            HideCards();
             _deck = _cards.ToList();
-            _cardTimer = _info.TimeBeforeCardDisplay;
         }
 
         public void HideCards()
@@ -74,6 +74,7 @@ namespace DungeonDraws.Card
                 Destroy(_cardContainer.GetChild(i).gameObject);
             }
             _cardCanvas.SetActive(false);
+            _cardTimer = _info.TimeBeforeCardDisplay;
         }
 
         private void ShowCards()
@@ -92,7 +93,6 @@ namespace DungeonDraws.Card
                 }
             }
             _cardCanvas.SetActive(true);
-            _cardTimer = _info.TimeBeforeCardDisplay;
         }
 
         public bool IsPaused => _cardCanvas.activeInHierarchy;

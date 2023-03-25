@@ -16,3 +16,9 @@ MonoBehaviour:
   TimeBeforeCardDisplay: 5
   CardPrefab: {fileID: 8866023274045835825, guid: 850d652cb8f48d94086136f2813757fc,
     type: 3}
+  HeroSpawnDelay:
+    Min: 3
+    Max: 8
+  BaseGold: 10
+  DailyIncome: 5
+  DayDuration: 10
