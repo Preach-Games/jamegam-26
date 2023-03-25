@@ -21,7 +21,7 @@ namespace DungeonDraws.Game
                 ModifierType.HERO_SPAWN_RATE => $"Hero Spawn Rate: {PTS()}%",
                 ModifierType.INCOME => $"Gold Earned: {PTS()}%",
                 ModifierType.RATS => $"Rats Gained: {PTS()}",
-                ModifierType.SANITY => $"Dungeon Sanity: {PTS()}%",
+                ModifierType.GLOBAL_HEALTH => $"All Monsters Health: {PTS()}%",
                 _ => throw new NotImplementedException()
             };
         }

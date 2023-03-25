@@ -5,6 +5,6 @@
         INCOME,
         HERO_SPAWN_RATE,
         RATS,
-        SANITY
+        GLOBAL_HEALTH
     }
 }
