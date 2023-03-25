@@ -30,7 +30,7 @@ namespace DungeonDraws.Game
         private string[] _advices = new[]
         {
             "Only good people don't do their taxes so remember to do yours!",
-            "Bring your monsters once a year at the veterinary for their annual checkup",
+            "Bring your monsters at the veterinary once a year for their annual checkup",
             "1403's adventurer reform specify that mimic can only be up to 20% of your chests",
             "Don't forget to speak to your monsters about their various syndicate options"
         };
