@@ -1,5 +1,6 @@
 ﻿using DungeonDraws.Card;
 using DungeonDraws.SO;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -27,6 +28,8 @@ namespace DungeonDraws.Game
 
         private int _gold;
 
+        int[] _upcomingExpenses;
+
         private string[] _advices = new[]
         {
             "Only good people don't do their taxes so remember to do yours!",
@@ -40,6 +43,7 @@ namespace DungeonDraws.Game
             Instance = this;
             _dayTimer = _info.DayDuration;
             _gold = _info.BaseGold;
+            _upcomingExpenses = Enumerable.Repeat(0, 10).ToArray();
         }
 
         private void Update()
@@ -56,9 +60,24 @@ namespace DungeonDraws.Game
                     _nextDayAdvice.text = $"Tip: {_advices[Random.Range(0, _advices.Length)]}";
 
                     _gold += _info.DailyIncome;
-                    _incomeText.text = $"Net Income: {_info.DailyIncome} Gold Coin\nTotal Gold: {_gold}";
+                    _gold += _upcomingExpenses[0];
+                    _incomeText.text = $"Net Income: {_info.DailyIncome + _upcomingExpenses[0]} Gold Coin\nTotal Gold: {_gold}";
+                    for (int i = 0; i < _upcomingExpenses.Length - 1; i++)
+                    {
+                        _upcomingExpenses[i] = _upcomingExpenses[i + 1];
+                    }
+                    _upcomingExpenses[^1] = 0;
+                    if (_gold <= 0)
+                    {
+                        // Game Over
+                    }
                 }
             }
+        }
+
+        public void AddExpenses(int amount, int days)
+        {
+            _upcomingExpenses[days] += amount;
         }
 
         public void NextDay()

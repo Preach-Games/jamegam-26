@@ -28,6 +28,23 @@ namespace DungeonDraws.Game
             };
         }
 
+        public void Do()
+        {
+            switch (Type)
+            {
+                case ModifierType.GOLD:
+                    GameManager.Instance.AddExpenses(PercentChange, 0);
+                    break;
+
+                case ModifierType.GOLD_IN_5_DAYS:
+                    GameManager.Instance.AddExpenses(PercentChange, 5);
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
         public override string ToString()
         {
             return $"<color={(IsBonus ? "#00cc00" : "red")}>{TypeToString()}</color>";

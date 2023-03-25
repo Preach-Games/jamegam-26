@@ -83,8 +83,15 @@ namespace DungeonDraws.Card
             for (int i = 0; i < _info.CardCount; i++)
             {
                 var card = Instantiate(_info.CardPrefab, _cardContainer);
-                card.GetComponent<Button>().onClick.AddListener(new(HideCards));
                 var index = Random.Range(0, _deck.Count);
+                card.GetComponent<Button>().onClick.AddListener(new(() =>
+                {
+                    foreach (var m in _deck[index].Modifiers)
+                    {
+                        m.Do();
+                    }
+                    HideCards();
+                }));
                 card.GetComponent<CardInstance>().Init(_deck[index]);
                 _deck.RemoveAt(index);
 
