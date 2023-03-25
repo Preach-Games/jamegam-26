@@ -26,7 +26,7 @@ namespace DungeonDraws.Game
 
         public bool IsPaused { set; get; }
 
-        private int _gold;
+        public int Gold { set; get; }
 
         int[] _upcomingExpenses;
 
@@ -42,7 +42,7 @@ namespace DungeonDraws.Game
         {
             Instance = this;
             _dayTimer = _info.DayDuration;
-            _gold = _info.BaseGold;
+            Gold = _info.BaseGold;
             _upcomingExpenses = Enumerable.Repeat(0, 10).ToArray();
         }
 
@@ -59,15 +59,15 @@ namespace DungeonDraws.Game
                     _nextDayPanel.SetActive(true);
                     _nextDayAdvice.text = $"Tip: {_advices[Random.Range(0, _advices.Length)]}";
 
-                    _gold += _info.DailyIncome;
-                    _gold += _upcomingExpenses[0];
-                    _incomeText.text = $"Net Income: {_info.DailyIncome + _upcomingExpenses[0]} Gold Coin\nTotal Gold: {_gold}";
+                    Gold += _info.DailyIncome;
+                    Gold += _upcomingExpenses[0];
+                    _incomeText.text = $"Net Income: {_info.DailyIncome + _upcomingExpenses[0]} Gold Coin\nTotal Gold: {Gold}";
                     for (int i = 0; i < _upcomingExpenses.Length - 1; i++)
                     {
                         _upcomingExpenses[i] = _upcomingExpenses[i + 1];
                     }
                     _upcomingExpenses[^1] = 0;
-                    if (_gold <= 0)
+                    if (Gold <= 0)
                     {
                         // Game Over
                     }
