@@ -29,6 +29,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
         void Awake()
         {
             _generator = new LevelGenerator(10);
+            _renderer = LevelRenderer.newInstance(this);
         }
 
         void Start()
