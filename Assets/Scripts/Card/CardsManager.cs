@@ -83,12 +83,14 @@ namespace DungeonDraws.Card
             _tooltip.SetActive(true);
             _tooltip.transform.position = Mouse.current.position.ReadValue();
             _tooltipText.text = string.Join("\n", card.Modifiers.OrderBy(x => x.IsBonus).Select(x => x.ToString()));
+            Cursor.visible = false;
         }
 
         public void HideTooltip()
         {
             _target = null;
             _tooltip.SetActive(false);
+            Cursor.visible = true;
         }
     }
 }
