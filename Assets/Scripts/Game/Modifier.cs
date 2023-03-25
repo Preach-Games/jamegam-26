@@ -20,6 +20,8 @@ namespace DungeonDraws.Game
             {
                 ModifierType.HERO_SPAWN_RATE => $"Hero Spawn Rate: {PTS()}%",
                 ModifierType.INCOME => $"Gold Earned: {PTS()}%",
+                ModifierType.GOLD => $"Gold Earned: {PTS()}",
+                ModifierType.GOLD_IN_5_DAYS => $"Gold Earned in 5 Days: {PTS()}",
                 ModifierType.RATS => $"Rats Gained: {PTS()}",
                 ModifierType.GLOBAL_HEALTH => $"All Monsters Health: {PTS()}%",
                 _ => throw new NotImplementedException()
