@@ -18,6 +18,9 @@ namespace DungeonDraws.Game
         [SerializeField]
         private TMP_Text _nextDayAdvice;
 
+        [SerializeField]
+        private TMP_Text _incomeText;
+
         private float _dayTimer;
 
         public bool IsPaused { set; get; }
@@ -48,6 +51,8 @@ namespace DungeonDraws.Game
                     IsPaused = true;
                     _nextDayPanel.SetActive(true);
                     _nextDayAdvice.text = $"Tip: {_advices[Random.Range(0, _advices.Length)]}";
+
+                    _incomeText.text = $"Net Income: {_info.DailyIncome} Gold Coin";
                 }
             }
         }
