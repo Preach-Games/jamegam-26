@@ -238,7 +238,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             int count = 1;
             while (count < _maxAttempts)
             {
-                // getLogger().info("Board generation attempt: " + count+"/"+_maxAttempts);
+                _logger.info("Board generation attempt: " + count+"/"+_maxAttempts);
 
                 Board board = AsBoardSingle();
                 if (bestBoard == null) bestBoard = board;

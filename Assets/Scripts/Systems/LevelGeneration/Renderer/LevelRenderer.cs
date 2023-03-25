@@ -21,16 +21,12 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
             overlapWallSerators(boardHolder, map);
         }
 
-        private void addMainMashes(GameObject boardHolder, int[,] map) {
-            float floorSpan = 1;
+        private void addMainMashes(GameObject boardHolder, int[,] map)
+        {
+            Vector3 floorSize = _behavior._floorPrefab.GetComponentInChildren<MeshRenderer>().bounds.size;
+            float floorSpan = floorSize.x;
             float halfFloorSpan = floorSpan * 0.5f;
-            float oneQuarterFloorSpan = floorSpan * 0.25f;
-            float threeQuartersFloorSpan = floorSpan * 0.75f;
-            /*
-            Vector3 size = _floorPrefab.GetComponentInChildren<MeshRenderer>().bounds.size;
-            float xSpacing = size.x;
-            float zSpacing = size.z;
-            */
+            
             for (int row = 0; row < map.GetLength(0); row++) {
                 for (int col = 0; col < map.GetLength(1); col++) {
                     int value = map[row, col];
@@ -132,8 +128,9 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
         private void overlapWallSerators(GameObject boardHolder, int[,] map) {
             GameObject prefab = _behavior._wallSeparatorPrefab;
             String objectName = "Wall_Separator";
+            Vector3 floorSize = _behavior._floorPrefab.GetComponentInChildren<MeshRenderer>().bounds.size;
 
-            float floorSpan = 1f;
+            float floorSpan = floorSize.x;
             float halfFloorSpan = floorSpan * 0.5f;
             float oneQuarterFloorSpan = floorSpan * 0.25f;
             float threeQuartersFloorSpan = floorSpan * 0.75f;
@@ -206,7 +203,6 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
                     }
                 }
             }
-
         }
 
         private void _instantiate(GameObject prefab, float xPos, float zPos, float yRot, GameObject parent, int mapX, int mapZ, String name) {
@@ -215,8 +211,6 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
             instance.transform.Rotate(0, yRot, 0);
             instance.name = "(" + mapX + "," + mapZ + ") " + name;
             instance.transform.parent = parent.transform;
-
-            instance.transform.localScale = new Vector3(0.125f, 0.125f, 0.125f);
         }
     }
 }
