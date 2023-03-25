@@ -6,17 +6,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
 {
     public class LevelGeneratorBehaviour : MonoBehaviour
     {
-        public int _mapHeight = 100;
-        public int _mapWidth = 100;
-        public int _roomsNumberMin = 5;
-        public int _roomsNumberMax = 15;
-        public int _roomSizeMin = 5;
-        public int _roomSizeMax = 20;
-        public int _corridorLengthMin = 2;
-        public int _corridorLengthMax = 7;
-        public int _corridorWidthMin = 3;
-        public int _corridorWidthMax = 3;
-        public int _seed = 123456;
+        public LevelData levelData;
 
         public bool _devMode = false;
         public bool _devLog = false;
@@ -53,7 +43,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
         {
             if (_randomSeed)
             {
-                _seed = Time.time.ToString().GetHashCode();
+                levelData._seed = Time.time.ToString().GetHashCode();
             }
             generateDungeon();
         }
@@ -70,14 +60,14 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             transform.rotation = Quaternion.Euler(0, 0, 0);
             transform.localScale = Vector3.one;
 
-            _generator.SetMapSize(_mapHeight, _mapWidth);
-            _generator.SetRoomsNumberRange(_roomsNumberMin, _roomsNumberMax);
-            _generator.SetRoomSizeRange(_roomSizeMin, _roomSizeMax);
-            _generator.SetCorridorLengthRange(_corridorLengthMin, _corridorLengthMax);
-            _generator.SetCorridorWidthRange(_corridorWidthMin, _corridorWidthMax);
+            _generator.SetMapSize(levelData._mapHeight, levelData._mapWidth);
+            _generator.SetRoomsNumberRange(levelData._roomsNumberMin, levelData._roomsNumberMax);
+            _generator.SetRoomSizeRange(levelData._roomSizeMin, levelData._roomSizeMax);
+            _generator.SetCorridorLengthRange(levelData._corridorLengthMin, levelData._corridorLengthMax);
+            _generator.SetCorridorWidthRange(levelData._corridorWidthMin, levelData._corridorWidthMax);
             _generator.SetPlotter(new DetailedTilesPlotter());
             if (_devLog) _generator.SetLogger(new UnityEngineLogger());
-            _generator.SetSeed(_seed);
+            _generator.SetSeed(levelData._seed);
 
             _tilesMap = _generator.AsMatrix();
             //TODO: Some sort of mesh generation or tile placement for rendering?

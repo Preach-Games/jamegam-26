@@ -167,17 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f26098f13451748a56c890bdddfa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapHeight: 100
-  _mapWidth: 100
-  _roomsNumberMin: 5
-  _roomsNumberMax: 15
-  _roomSizeMin: 5
-  _roomSizeMax: 20
-  _corridorLengthMin: 2
-  _corridorLengthMax: 7
-  _corridorWidthMin: 3
-  _corridorWidthMax: 3
-  _seed: 123456
+  levelData: {fileID: 11400000, guid: b245208d77f623a48ad30011394ddcdc, type: 2}
   _devMode: 1
   _devLog: 1
   _randomSeed: 0
