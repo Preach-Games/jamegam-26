@@ -131,7 +131,6 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
             Vector3 floorSize = _behavior._floorPrefab.GetComponentInChildren<MeshRenderer>().bounds.size;
 
             float floorSpan = floorSize.x;
-            float halfFloorSpan = floorSpan * 0.5f;
             float oneQuarterFloorSpan = floorSpan * 0.25f;
             float threeQuartersFloorSpan = floorSpan * 0.75f;
 

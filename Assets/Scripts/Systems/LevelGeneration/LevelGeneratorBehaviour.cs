@@ -61,8 +61,8 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
         
         [Button]
         private void generateDungeon() {
-            // transform.rotation = Quaternion.Euler(0, 0, 0);
-            // transform.localScale = Vector3.one;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.localScale = Vector3.one;
 
             _generator.SetMapSize(levelData._mapHeight, levelData._mapWidth);
             _generator.SetRoomsNumberRange(levelData._roomsNumberMin, levelData._roomsNumberMax);
@@ -76,9 +76,9 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             _tilesMap = _generator.AsMatrix();
             _renderer.convertToMeshes(_tilesMap);
 
-            // transform.rotation = Quaternion.Euler(0, 90, 0);
-            // transform.localScale = new Vector3(-1, 1, -1);
-            // transform.position = new Vector3(0.5f, 0, 0.5f);
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+            transform.localScale = new Vector3(-1, 1, -1);
+            transform.position = new Vector3(0.5f, 0, 0.5f);
         }
     }
 }
