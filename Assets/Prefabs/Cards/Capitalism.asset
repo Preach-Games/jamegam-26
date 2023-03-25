@@ -21,5 +21,7 @@ MonoBehaviour:
   Modifiers:
   - Type: 0
     PercentChange: 15
+    IsBonus: 1
   - Type: 1
     PercentChange: 15
+    IsBonus: 0
