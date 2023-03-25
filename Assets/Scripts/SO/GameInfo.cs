@@ -14,5 +14,6 @@ namespace DungeonDraws.SO
         public Range<float> HeroSpawnDelay;
         public int BaseGold;
         public int DailyIncome;
+        public float DayDuration;
     }
 }

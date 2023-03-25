@@ -15,11 +15,9 @@ namespace DungeonDraws.Card
         private Image _image;
 
         private CardInfo _info;
-        private CardsManager _manager;
 
-        public void Init(CardsManager manager, CardInfo info)
+        public void Init(CardInfo info)
         {
-            _manager = manager;
             _info = info;
             _titleText.text = info.Name;
             _descriptionText.text = info.Description;
@@ -28,12 +26,12 @@ namespace DungeonDraws.Card
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            _manager.ShowTooltip(_info);
+            CardsManager.Instance.ShowTooltip(_info);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            _manager.HideTooltip();
+            CardsManager.Instance.HideTooltip();
         }
     }
 }

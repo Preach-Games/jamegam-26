@@ -11,6 +11,8 @@ namespace DungeonDraws.Card
 {
     public class CardsManager : MonoBehaviour
     {
+        public static CardsManager Instance { private set; get; }
+
         [SerializeField]
         private GameObject _cardCanvas;
 
@@ -31,20 +33,37 @@ namespace DungeonDraws.Card
         private TMP_Text _tooltipText;
 
         private CardInfo _target;
+        private float _cardTimer;
 
         private void Awake()
         {
+            Instance = this;
             _deck = _cards.ToList();
             _tooltipText = _tooltip.GetComponentInChildren<TMP_Text>();
-            StartCoroutine(ShowCards());
+            _cardTimer = _info.TimeBeforeCardDisplay;
         }
 
         private void Update()
         {
+            if (_cardTimer > 0f)
+            {
+                _cardTimer -= Time.deltaTime;
+                if (_cardTimer <= 0f)
+                {
+                    ShowCards();
+                }
+            }
+
             if (_target != null)
             {
                 _tooltip.transform.position = Mouse.current.position.ReadValue();
             }
+        }
+
+        public void ResetDay()
+        {
+            _deck = _cards.ToList();
+            _cardTimer = _info.TimeBeforeCardDisplay;
         }
 
         public void HideCards()
@@ -55,18 +74,16 @@ namespace DungeonDraws.Card
                 Destroy(_cardContainer.GetChild(i).gameObject);
             }
             _cardCanvas.SetActive(false);
-            StartCoroutine(ShowCards());
         }
 
-        private IEnumerator ShowCards()
+        private void ShowCards()
         {
-            yield return new WaitForSeconds(_info.TimeBeforeCardDisplay);
             for (int i = 0; i < _info.CardCount; i++)
             {
                 var card = Instantiate(_info.CardPrefab, _cardContainer);
                 card.GetComponent<Button>().onClick.AddListener(new(HideCards));
                 var index = Random.Range(0, _deck.Count);
-                card.GetComponent<CardInstance>().Init(this, _deck[index]);
+                card.GetComponent<CardInstance>().Init(_deck[index]);
                 _deck.RemoveAt(index);
 
                 if (!_deck.Any())
@@ -75,7 +92,10 @@ namespace DungeonDraws.Card
                 }
             }
             _cardCanvas.SetActive(true);
+            _cardTimer = _info.TimeBeforeCardDisplay;
         }
+
+        public bool IsPaused => _cardCanvas.activeInHierarchy;
 
         public void ShowTooltip(CardInfo card)
         {
