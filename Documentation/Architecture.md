@@ -9,20 +9,24 @@
 ## Systems
 
 - Saving/loading system
+- Level Generation
 - Character controller system
 - Dialogue system
 - Inventory system
-- Quest system
 - AI system
-- Physics system
 - Audio system
 - Input system
 - Camera system
 - UI system
-- Networking system
-- Localization system
-- Achievement system
-- Analytics system
+
+### Level Generation System
+
+- Need to generate level based upon set of Tiles.
+- It needs to have variety and be expandable in directions.
+- Use repeatable random seed generation.
+- Room placement along a grid.
+- Concept of tiles and methods provided by the level generator?
+    - Maybe seperation of concerns at scale but should be fine..
 
 ## Areas
 
