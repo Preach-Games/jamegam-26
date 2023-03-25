@@ -126,45 +126,6 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Domain
             return aCell.isWithin(_topLeftVertex, _botRightVertex);
         }
 
-        // Javascript API
-        public Cell[] walkableCells(Boolean excludeCellNextToWall)
-        {
-            int cellExclusion = 1;
-            if (excludeCellNextToWall)
-                cellExclusion = 2;
-
-            Cell innerTopLeft = topLeftVertex().plusCell(cellExclusion, cellExclusion);
-            Cell innerBotRight = bottomRightVertex().minusCell(cellExclusion, cellExclusion);
-
-            if (innerTopLeft.isGreatherThan(innerBotRight))
-                return new Cell[0];
-            return innerTopLeft.cells(innerBotRight);
-        }
-
-        // Javascript API
-        public bool hasCorridorAtEast()
-        {
-            return isEast(_incomingCorridor) || isEast(_outcomingCorridor);
-        }
-
-        // Javascript API
-        public bool hasCorridorAtSouth()
-        {
-            return isSouth(_incomingCorridor) || isSouth(_outcomingCorridor);
-        }
-
-        // Javascript API
-        public bool hasCorridorAtWest()
-        {
-            return isWest(_incomingCorridor) || isWest(_outcomingCorridor);
-        }
-
-        // Javascript API
-        public bool hasCorridorAtNorth()
-        {
-            return isNorth(_incomingCorridor) || isNorth(_outcomingCorridor);
-        }
-
         private bool isNorth(Corridor corr)
         {
             if (corr == null)
