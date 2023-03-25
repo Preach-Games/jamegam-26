@@ -1,5 +1,5 @@
+using DungeonDraws.Game;
 using DungeonDraws.SO;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -45,7 +45,7 @@ namespace DungeonDraws.Card
 
         private void Update()
         {
-            if (_cardTimer > 0f)
+            if (_cardTimer > 0f && !GameManager.Instance.IsPaused)
             {
                 _cardTimer -= Time.deltaTime;
                 if (_cardTimer <= 0f)
@@ -75,6 +75,7 @@ namespace DungeonDraws.Card
             }
             _cardCanvas.SetActive(false);
             _cardTimer = _info.TimeBeforeCardDisplay;
+            GameManager.Instance.IsPaused = false;
         }
 
         private void ShowCards()
@@ -93,9 +94,8 @@ namespace DungeonDraws.Card
                 }
             }
             _cardCanvas.SetActive(true);
+            GameManager.Instance.IsPaused = true;
         }
-
-        public bool IsPaused => _cardCanvas.activeInHierarchy;
 
         public void ShowTooltip(CardInfo card)
         {

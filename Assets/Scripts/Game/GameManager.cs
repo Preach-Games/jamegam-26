@@ -11,7 +11,12 @@ namespace DungeonDraws.Game
         [SerializeField]
         private GameInfo _info;
 
+        [SerializeField]
+        private GameObject _nextDayPanel;
+
         private float _dayTimer;
+
+        public bool IsPaused { set; get; }
 
         private void Awake()
         {
@@ -21,15 +26,22 @@ namespace DungeonDraws.Game
 
         private void Update()
         {
-            if (!CardsManager.Instance.IsPaused)
+            if (!IsPaused)
             {
                 _dayTimer -= Time.deltaTime;
                 if (_dayTimer < 0f)
                 {
                     _dayTimer = _info.DayDuration;
                     CardsManager.Instance.ResetDay();
+                    IsPaused = true;
+                    _nextDayPanel.SetActive(true);
                 }
             }
+        }
+
+        public void NextDay()
+        {
+            IsPaused = false;
         }
     }
 }
