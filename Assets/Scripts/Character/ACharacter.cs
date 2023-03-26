@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
+using static UnityEngine.GraphicsBuffer;
 
 namespace DungeonDraws.Character
 {
@@ -11,7 +12,10 @@ namespace DungeonDraws.Character
 
         private NavMeshAgent _agent;
 
-        private Transform _target;
+        private ACharacter _target;
+
+        private float _attackTimerRef = 2f;
+        private float _attackTimer;
 
         public void SetStaticTarget(Vector3 pos)
         {
@@ -19,7 +23,7 @@ namespace DungeonDraws.Character
             _target = null;
         }
 
-        public void SetDynamicTarget(Transform t)
+        public void SetDynamicTarget(ACharacter t)
         {
             _agent.SetDestination(t.position);
             _target = t;
@@ -32,7 +36,7 @@ namespace DungeonDraws.Character
                 var p = other.GetComponent<ACharacter>();
                 //if (Faction != p.Faction) TODO: I don't really care rn
                 {
-                    SetDynamicTarget(other.transform);
+                    SetDynamicTarget(p);
                 }
             }
         }
@@ -42,7 +46,7 @@ namespace DungeonDraws.Character
             if (other.CompareTag("Player"))
             {
                 var p = other.GetComponent<ACharacter>();
-                if (p.gameObject.GetInstanceID() == _target.gameObject.GetInstanceID())
+                if (p == _target)
                 {
                     _target = null;
                 }
@@ -51,16 +55,21 @@ namespace DungeonDraws.Character
 
         private void Update()
         {
-            _agent.isStopped = _target != null && Vector3.Distance(transform.position, _target.position) < 2f;
+            _attackTimer -= Time.deltaTime;
+            _agent.isStopped = _target != null && Vector3.Distance(transform.position, _target.transform.position) < 2f;
             if (_target != null)
             {
                 if (_agent.isStopped)
                 {
-                    Debug.Log("We can attack");
+                    if (_attackTimer <= 0f)
+                    {
+                        _attackTimer = _attackTimerRef;
+                        Attack(_target);
+                    }
                 }
                 else
                 {
-                    _agent.SetDestination(_target.position);
+                    _agent.SetDestination(_target.transform.position);
                 }
             }
         }
@@ -112,6 +121,7 @@ namespace DungeonDraws.Character
         protected void Init()
         {
             _agent = GetComponent<NavMeshAgent>();
+            _attackTimer = _attackTimerRef;
 
             Assert.IsNotNull(_info);
             Physique = _info.Physique;
