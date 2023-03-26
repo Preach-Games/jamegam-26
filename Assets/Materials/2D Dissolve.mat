@@ -42,11 +42,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dissolve: 0.392
+    - _Dissolve: 1
     - _NoiseScale: 10
     - _OutlineTreshold: 0.02
     m_Colors:
-    - _DissolveColor: {r: 0.7506164, g: 8.3466425, b: 0.42520565, a: 1}
+    - _DissolveColor: {r: 7.9235544, g: 88.10769, b: 4.4884977, a: 1}
     - _OutlineColor: {r: 8.4142475, g: 2.4719439, b: 27.809378, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2009714848591191500
