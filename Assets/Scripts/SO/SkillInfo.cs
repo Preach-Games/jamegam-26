@@ -1,9 +1,10 @@
 ﻿using DungeonDraws.Character;
 using DungeonDraws.Character.Skill.Effect;
+using DungeonDraws.Character.Skill.Effect.Impl;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static DungeonDraws.SO.SkillInfo;
 
 namespace DungeonDraws.SO
 {
@@ -25,7 +26,16 @@ namespace DungeonDraws.SO
         public EffectType[] Effects;
 
 
-        public List<AEffect> _effects;
+        private AEffect[] _effects;
+
+        public void Init()
+        {
+            _effects = Effects.Select(x => (AEffect)(x switch
+            {
+                EffectType.Damage => new DamageEffect(),
+                _ => throw new NotImplementedException()
+            })).ToArray();
+        }
 
         private bool CanUse(ACharacter a, ACharacter b)
         {

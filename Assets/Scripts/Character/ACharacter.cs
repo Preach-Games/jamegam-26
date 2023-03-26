@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
@@ -32,7 +31,6 @@ namespace DungeonDraws.Character
         private int _mp;
         private int _mpMax;
         private int _init;
-
         private int _status;
 
         protected void Init()
