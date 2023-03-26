@@ -28,6 +28,11 @@ namespace DungeonDraws.Character
             _target = t;
         }
 
+        public void UnsetTarget()
+        {
+            _target = null;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -127,11 +132,14 @@ namespace DungeonDraws.Character
         private int _init;
         private int _status;
 
-        protected void Init()
+        protected void AwakeInternal()
         {
             _agent = GetComponent<NavMeshAgent>();
             _attackTimer = _attackTimerRef;
+        }
 
+        protected void StartInternal()
+        {
             Physique = Info.Physique;
             Agility = Info.Agility;
             Mind = Info.Mind;

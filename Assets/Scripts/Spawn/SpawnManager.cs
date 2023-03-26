@@ -35,6 +35,13 @@ namespace DungeonDraws.Spawn
             GameManager.Instance.OnDayReset += (_sender, _e) =>
             {
                 // Remove all heroes
+                if (_objects.ContainsKey(Faction.OVERLORD))
+                {
+                    foreach (var elem in _objects[Faction.OVERLORD])
+                    {
+                        elem.UnsetTarget();
+                    }
+                }
                 if (_objects.ContainsKey(Faction.HERO))
                 {
                     foreach (var elem in _objects[Faction.HERO])

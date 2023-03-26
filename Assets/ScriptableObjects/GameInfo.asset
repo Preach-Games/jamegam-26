@@ -29,7 +29,7 @@ MonoBehaviour:
     Max: 4
   BaseGold: 10
   DailyIncome: 5
-  DayDuration: 3
-  TimeBetweenSpawn: 5
+  DayDuration: 4
+  TimeBetweenSpawn: 3
   Enemies:
   - {fileID: 11400000, guid: 83a2ab697014e6b478b1079d93605ac0, type: 2}
