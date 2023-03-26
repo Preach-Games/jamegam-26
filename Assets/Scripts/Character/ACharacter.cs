@@ -8,11 +8,11 @@ namespace DungeonDraws.Character
     {
 
         [SerializeField]
-        public CharacterInfo _info = null;
+        public DungeonDraws.SO.CharacterInfo _info = null;
 
-        private int _physique = 0;
-        private int _agility = 0;
-        private int _mind = 0;
+        public int _physique = 0;
+        public int _agility = 0;
+        public int _mind = 0;
 
         private int _hp = 0;
         private int _hpMax = 0;
@@ -68,14 +68,14 @@ namespace DungeonDraws.Character
             CheckStatus();
         }
 
-        public void Attack(ACharacter Target) 
+        public void Attack(ACharacter target) 
         {
             int rollA = Random.Range(1, 21);
             int rollD = Random.Range(1, 21);
 
-            if (rollA + _agility > rollD + Target._agility)
+            if (rollA + _agility > rollD + target._agility)
             {
-                Target.Hurt(_physique);
+                target.Hurt(_physique);
             }
         }
 
