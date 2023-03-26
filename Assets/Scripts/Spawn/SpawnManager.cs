@@ -35,11 +35,14 @@ namespace DungeonDraws.Spawn
             GameManager.Instance.OnDayReset += (_sender, _e) =>
             {
                 // Remove all heroes
-                foreach (var elem in _objects[Faction.HERO])
+                if (_objects.ContainsKey(Faction.HERO))
                 {
-                    Destroy(elem.gameObject);
+                    foreach (var elem in _objects[Faction.HERO])
+                    {
+                        Destroy(elem.gameObject);
+                    }
+                    _objects[Faction.HERO].Clear();
                 }
-                _objects[Faction.HERO].Clear();
 
                 // Reset spawn rate
                 SpawnRate = _info.TimeBetweenSpawn;
