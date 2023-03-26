@@ -12,5 +12,6 @@ namespace DungeonDraws.SO
 
         public GameObject Prefab;
         public Faction Faction;
+        public Race Race;
     }
 }

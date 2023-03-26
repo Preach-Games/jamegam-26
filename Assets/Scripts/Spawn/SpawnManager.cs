@@ -2,6 +2,7 @@
 using DungeonDraws.Game;
 using DungeonDraws.SO;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace DungeonDraws.Spawn
@@ -19,6 +20,9 @@ namespace DungeonDraws.Spawn
 
         [SerializeField]
         private GameObject _character;
+
+        [SerializeField]
+        private Transform[] _enemySpawns;
 
         public float SpawnRate { private set; get; }
 
@@ -40,6 +44,16 @@ namespace DungeonDraws.Spawn
                 // Reset spawn rate
                 SpawnRate = _info.TimeBetweenSpawn;
             };
+        }
+
+        public void SpawnRat()
+        {
+            SpawnAtRandom(_info.Enemies.FirstOrDefault(x => x.Race == Race.RAT));
+        }
+
+        private void SpawnAtRandom(SO.CharacterInfo info)
+        {
+            Spawn(info, _enemySpawns[Random.Range(0, _enemySpawns.Length)].position);
         }
 
         public GameObject Spawn(SO.CharacterInfo info, Vector3 pos)

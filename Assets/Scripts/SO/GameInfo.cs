@@ -23,5 +23,6 @@ namespace DungeonDraws.SO
 
         [Header("Spawn")]
         public float TimeBetweenSpawn;
+        public CharacterInfo[] Enemies;
     }
 }

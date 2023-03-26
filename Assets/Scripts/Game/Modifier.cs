@@ -1,6 +1,7 @@
 ﻿using DungeonDraws.Character;
 using DungeonDraws.Spawn;
 using System;
+using UnityEngine;
 
 namespace DungeonDraws.Game
 {
@@ -52,6 +53,13 @@ namespace DungeonDraws.Game
 
                 case ModifierType.HERO_SPAWN_RATE:
                     SpawnManager.Instance.ChangeSpawnRate(PercentChange);
+                    break;
+
+                case ModifierType.RATS:
+                    for (int i = 0; i < PercentChange; i++)
+                    {
+                        SpawnManager.Instance.SpawnRat();
+                    }
                     break;
 
                 default:
