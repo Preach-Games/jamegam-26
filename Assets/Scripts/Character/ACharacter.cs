@@ -85,6 +85,11 @@ namespace DungeonDraws.Character
             }
         }
 
+        public void TakePercentDamage(int percent)
+        {
+            Hurt(Mathf.FloorToInt(_hpMax * percent / 100f));
+        }
+
         private void Die()
         {
             SpawnManager.Instance.Die(this);

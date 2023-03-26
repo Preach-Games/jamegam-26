@@ -1,5 +1,6 @@
 ﻿using DungeonDraws.Card;
 using DungeonDraws.SO;
+using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -46,6 +47,8 @@ namespace DungeonDraws.Game
             _upcomingExpenses = Enumerable.Repeat(0, 10).ToArray();
         }
 
+        public event EventHandler OnDayReset;
+
         private void Update()
         {
             if (!IsPaused)
@@ -54,10 +57,10 @@ namespace DungeonDraws.Game
                 if (_dayTimer < 0f)
                 {
                     _dayTimer = _info.DayDuration;
-                    CardsManager.Instance.ResetDay();
+                    OnDayReset.Invoke(this, new());
                     IsPaused = true;
                     _nextDayPanel.SetActive(true);
-                    _nextDayAdvice.text = $"Tip: {_advices[Random.Range(0, _advices.Length)]}";
+                    _nextDayAdvice.text = $"Tip: {_advices[UnityEngine.Random.Range(0, _advices.Length)]}";
 
                     Gold += _info.DailyIncome;
                     Gold += _upcomingExpenses[0];

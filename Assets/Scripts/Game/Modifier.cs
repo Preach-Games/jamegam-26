@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DungeonDraws.Character;
+using DungeonDraws.Spawn;
+using System;
 
 namespace DungeonDraws.Game
 {
@@ -42,6 +44,14 @@ namespace DungeonDraws.Game
 
                 case ModifierType.GOLD_IN_5_DAYS:
                     GameManager.Instance.AddExpenses(PercentChange, 5);
+                    break;
+
+                case ModifierType.GLOBAL_HEALTH:
+                    SpawnManager.Instance.TakePercentDamage(PercentChange, Faction.OVERLORD);
+                    break;
+
+                case ModifierType.HERO_SPAWN_RATE:
+                    SpawnManager.Instance.ChangeSpawnRate(PercentChange);
                     break;
 
                 default:
