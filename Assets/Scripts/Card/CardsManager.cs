@@ -122,15 +122,16 @@ namespace DungeonDraws.Card
                 var card = Instantiate(_info.CardPrefab, _cardContainer);
                 var cardInstance = card.GetComponent<CardInstance>();
                 var index = Random.Range(0, _deck.Count);
+                var info = _deck[index];
                 card.GetComponent<Button>().onClick.AddListener(new(() => {
-                    foreach (var m in _deck[index].Modifiers)
+                    foreach (var m in info.Modifiers)
                     {
                         m.Do();
                     }
                     _choosenCard = cardInstance;
                     EndCardSelection();
                 }));
-                cardInstance.Init(_deck[index]);
+                cardInstance.Init(info);
                 _deck.RemoveAt(index);
 
                 if (!_deck.Any())
