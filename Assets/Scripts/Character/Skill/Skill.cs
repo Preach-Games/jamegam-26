@@ -20,7 +20,11 @@ namespace DungeonDraws.Character
 
         public void Use(ACharacter caster, List<ACharacter> targets)
         {
-            ;
+            foreach (AEffect effect in _effects) {
+                foreach (ACharacter target in targets) {
+                    effect.Apply(caster, target);
+                }
+            }
         }
     }
 }
