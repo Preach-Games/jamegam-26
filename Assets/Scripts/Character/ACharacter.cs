@@ -11,6 +11,7 @@ namespace DungeonDraws.Character
         public int _physique;
         public int _agility;
         public int _mind;
+        public int _faction;
 
         private int _hp;
         private int _hpMax;
@@ -19,6 +20,8 @@ namespace DungeonDraws.Character
         private int _init;
 
         private int _status = 1;
+
+        private List<Skill> _skillList;
 
         private void Awake()
         {
@@ -29,11 +32,17 @@ namespace DungeonDraws.Character
             _physique = _info._physique;
             _agility = _info._agility;
             _mind = _info._mind;
+            _faction = Side();
             _hp = 10 + _physique * 2;
             _hpMax = _hp;
             _mp = 5 + _mind * 2;
             _mpMax = _mp;
             _init = _agility * 2;
+        }
+
+        public int Side()
+        {
+            return 0;
         }
 
         public void CheckStatus()
