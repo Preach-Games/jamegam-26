@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +6,13 @@ namespace DungeonDraws.Character
 {
     public class Skill : MonoBehaviour
     {
-        // 
-        // 0 = self only
-        // 1 = Enemy only
-        // 2 = Self or Ally only
-        // 3 = Self, Ally or Enemy
-        //
+        [Flags]
+        private enum TargetType
+        {
+            Self = 1,
+            Enemy = 2,
+            Ally = 4
+        }
         public int _targetType;
 
         public int range;
