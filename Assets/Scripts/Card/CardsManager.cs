@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -22,6 +24,12 @@ namespace DungeonDraws.Card
 
         [SerializeField]
         private GameInfo _info;
+
+        // Post processing
+        [SerializeField]
+        private Volume _globalVolume;
+        [SerializeField]
+        private float _vignetteIntensity;
 
         private List<CardInfo> _cards;
         private List<CardInfo> _deck;
@@ -77,6 +85,10 @@ namespace DungeonDraws.Card
         {
             HideTooltip();
             StartCoroutine(RemoveCards());
+            Vignette vignette;
+            if (_globalVolume.profile.TryGet<Vignette>(out vignette)) {
+                vignette.intensity.value = 0;
+            }
         }
 
         private IEnumerator RemoveCards()
@@ -125,6 +137,11 @@ namespace DungeonDraws.Card
             }
             _cardCanvas.SetActive(true);
             GameManager.Instance.IsPaused = true;
+            
+            Vignette vignette;
+            if (_globalVolume.profile.TryGet<Vignette>(out vignette)) {
+                vignette.intensity.value = _vignetteIntensity;
+            }
         }
 
         public void ShowTooltip(CardInfo card)

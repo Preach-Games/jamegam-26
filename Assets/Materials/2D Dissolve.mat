@@ -42,7 +42,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dissolve: 0.319
+    - _Dissolve: 1
     - _NoiseScale: 10
     - _OutlineTreshold: 0.02
     m_Colors:
