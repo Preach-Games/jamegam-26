@@ -1,4 +1,5 @@
 ﻿using DungeonDraws.SO;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,7 +13,14 @@ namespace DungeonDraws.Card
         private TMP_Text _titleText, _descriptionText;
 
         [SerializeField]
-        private Image _image;
+        private float _dissolveSpeed = 1f;
+        private float _dissolveAmount = 1f;
+
+        [SerializeField]
+        private Material _bgCardMat;
+
+        [SerializeField]
+        private Image _cardArt;
 
         private CardInfo _info;
 
@@ -21,7 +29,8 @@ namespace DungeonDraws.Card
             _info = info;
             _titleText.text = info.Name;
             _descriptionText.text = info.Description;
-            _image.sprite = null;
+            // _cardArt.sprite = null; // TODO:
+            _bgCardMat = Instantiate(GetComponent<Image>().material);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -32,6 +41,26 @@ namespace DungeonDraws.Card
         public void OnPointerExit(PointerEventData eventData)
         {
             CardsManager.Instance.HideTooltip();
+        }
+
+        public void Autodestroy(bool wasSelected = false)
+        {
+            if (wasSelected) Debug.Log("wasSelected");
+
+            StartCoroutine(DissolveThenDestroyCard());
+        }
+
+        private IEnumerator DissolveThenDestroyCard()
+        {
+            for (;;)
+            {
+                _dissolveAmount -= Time.deltaTime * _dissolveSpeed;
+                _bgCardMat.SetFloat("_Dissolve", _dissolveAmount);
+                GetComponent<Image>().material = _bgCardMat;
+                yield return null;
+
+                if (_dissolveAmount <= 0) Destroy(gameObject);
+            }
         }
     }
 }
