@@ -1,4 +1,5 @@
 ﻿using DungeonDraws.Card;
+using DungeonDraws.Effect;
 using DungeonDraws.SO;
 using System;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace DungeonDraws.Game
 
         [SerializeField]
         private TMP_Text _incomeText;
+
+        [SerializeField]
+        private GameObject _damageDisplayPrefab;
 
         private float _dayTimer;
 
@@ -91,6 +95,12 @@ namespace DungeonDraws.Game
         public void NextDay()
         {
             IsPaused = false;
+        }
+
+        public void DisplayDamage(Vector3 pos, int amount)
+        {
+            var go = Instantiate(_damageDisplayPrefab, pos, Quaternion.identity);
+            go.GetComponent<DamageDisplay>().Init(amount);
         }
     }
 }

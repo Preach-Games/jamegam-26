@@ -208,6 +208,7 @@ namespace DungeonDraws.Character
 
         public void Hurt(int dmg)
         {
+            GameManager.Instance.DisplayDamage(transform.position, dmg);
             _hp -= dmg;
             CheckStatus();
         }
