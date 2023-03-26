@@ -88,8 +88,8 @@ namespace DungeonDraws.Card
         {
             HideTooltip();
             StartCoroutine(RemoveCards());
-            Vignette vignette;
-            if (_globalVolume.profile.TryGet<Vignette>(out vignette)) {
+            if (_globalVolume.profile.TryGet(out Vignette vignette))
+            {
                 vignette.intensity.value = 0;
             }
         }
@@ -140,9 +140,9 @@ namespace DungeonDraws.Card
             }
             _cardCanvas.SetActive(true);
             GameManager.Instance.IsPaused = true;
-            
-            Vignette vignette;
-            if (_globalVolume.profile.TryGet<Vignette>(out vignette)) {
+
+            if (_globalVolume.profile.TryGet(out Vignette vignette))
+            {
                 vignette.intensity.value = _vignetteIntensity;
             }
         }

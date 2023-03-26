@@ -2210,8 +2210,8 @@ MonoBehaviour:
   _cardCanvas: {fileID: 3589651169041804606}
   _cardContainer: {fileID: 1370962014130089912}
   _info: {fileID: 11400000, guid: 9f9b98c44e5accf4f9a129f474d3d3e9, type: 2}
-  _globalVolume: {fileID: 0}
-  _vignetteIntensity: 0
+  _globalVolume: {fileID: 574098315}
+  _vignetteIntensity: 0.25
   _tooltip: {fileID: 1926882268133092590}
 --- !u!4 &2002116914
 Transform:
