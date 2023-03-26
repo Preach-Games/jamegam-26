@@ -25,7 +25,7 @@ namespace DungeonDraws.Character
 
         public void SetDynamicTarget(ACharacter t)
         {
-            _agent.SetDestination(t.position);
+            _agent.SetDestination(t.transform.position);
             _target = t;
         }
 
