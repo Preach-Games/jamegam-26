@@ -70,7 +70,15 @@ namespace DungeonDraws.Character
                 return;
             }
             _attackTimer -= Time.deltaTime;
-            _agent.isStopped = _target != null && Vector3.Distance(transform.position, _target.transform.position) < 2f;
+            try
+            {
+                _agent.isStopped = _target != null && Vector3.Distance(transform.position, _target.transform.position) < 2f;
+            }
+            catch (MissingReferenceException)
+            {
+                _agent.isStopped = true;
+                _target = null;
+            }
             if (_target != null)
             {
                 if (_agent.isStopped)
@@ -110,8 +118,8 @@ namespace DungeonDraws.Character
 
         public void Attack(ACharacter target)
         {
-            int rollA = Random.Range(1, 21);
-            int rollD = Random.Range(1, 21);
+            int rollA = UnityEngine.Random.Range(1, 21);
+            int rollD = UnityEngine.Random.Range(1, 21);
 
             //if (rollA + Agility > rollD + target.Agility)
             {
