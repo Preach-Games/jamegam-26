@@ -97,7 +97,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
                 float mapWidth = levelData._mapWidth * tileWidth;
                 float mapHeight = levelData._mapHeight * tileWidth;
                 Gizmos.color = Color.red;
-                GizmoExtensions.GridGizmo(mapWidth, mapHeight, levelData._mapWidth,
+                GridGizmo(mapWidth, mapHeight, levelData._mapWidth,
                     levelData._mapHeight,
                     new Vector3(transform.position.x, 0, transform.position.z));
 
@@ -105,6 +105,20 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
                 {
                     DrawTilesMap();
                 }
+            }
+        }
+        
+        public static void GridGizmo(float width, float height, int horizontalCellCount, int verticalCellCount,
+            Vector3 position)
+        {
+            for (float x = 0 + position.x; x <= width; x += width / horizontalCellCount)
+            {
+                Gizmos.DrawLine(new Vector3(x, position.y, position.z), new Vector3(x, 0, height));
+            }
+
+            for (float z = 0 + position.z; z <= height; z += height / verticalCellCount)
+            {
+                Gizmos.DrawLine(new Vector3(position.x, position.y, z), new Vector3(width, 0, z));
             }
         }
 
