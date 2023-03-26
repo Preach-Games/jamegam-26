@@ -451,8 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5211364533cd1044c9ee5477ef352299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toSpawn: {fileID: 6783460476637224718, guid: cf01dea74b1ca8d49bc81edfdc2dcf84,
-    type: 3}
+  _toSpawn: {fileID: 11400000, guid: 49b046de171ac964cad045ec3f85347e, type: 2}
   _target: {fileID: 405118506}
   _spawnTimeRef: 5
 --- !u!1 &574098314
@@ -1965,6 +1964,7 @@ GameObject:
   - component: {fileID: 2002116913}
   - component: {fileID: 2002116915}
   - component: {fileID: 2002116916}
+  - component: {fileID: 2002116917}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2034,6 +2034,20 @@ MonoBehaviour:
   _info: {fileID: 11400000, guid: 9f9b98c44e5accf4f9a129f474d3d3e9, type: 2}
   _buyButton: {fileID: 654138748}
   _shopPanel: {fileID: 1850137173}
+--- !u!114 &2002116917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002116912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50c77c65439c994285eab695d164e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 6783460476637224718, guid: cf01dea74b1ca8d49bc81edfdc2dcf84,
+    type: 3}
 --- !u!1 &284693544180555810
 GameObject:
   m_ObjectHideFlags: 0

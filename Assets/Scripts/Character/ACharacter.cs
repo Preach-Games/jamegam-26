@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
-using static UnityEngine.GraphicsBuffer;
 
 namespace DungeonDraws.Character
 {

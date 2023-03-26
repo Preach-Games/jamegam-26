@@ -8,5 +8,7 @@ namespace DungeonDraws.SO
         public int Physique;
         public int Agility;
         public int Mind;
+
+        public GameObject Prefab;
     }
 }

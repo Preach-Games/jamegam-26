@@ -7,7 +7,7 @@ namespace DungeonDraws.Spawn
     public class Spawner : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _toSpawn;
+        private SO.CharacterInfo _toSpawn;
 
         [SerializeField]
         private Transform _target;
@@ -22,7 +22,7 @@ namespace DungeonDraws.Spawn
 
         private IEnumerator Spawn()
         {
-            var hero = Instantiate(_toSpawn, transform.position, Quaternion.identity);
+            var hero = SpawnManager.Instance.Spawn(_toSpawn, transform.position);
             hero.GetComponent<ACharacter>().SetStaticTarget(_target.position);
             yield return new WaitForSeconds(_spawnTimeRef);
             yield return Spawn();
