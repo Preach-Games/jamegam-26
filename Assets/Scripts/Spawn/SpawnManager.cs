@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using DungeonDraws.Character;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace DungeonDraws.Spawn
 {
@@ -7,6 +9,8 @@ namespace DungeonDraws.Spawn
         public static SpawnManager Instance { private set; get; }
 
         private Transform _characterContainer;
+
+        private Dictionary<Faction, List<ACharacter>> _objects;
 
         [SerializeField]
         private GameObject _character;
@@ -21,8 +25,20 @@ namespace DungeonDraws.Spawn
         {
             var go = Instantiate(_character, _characterContainer);
             go.transform.position = pos;
-            var character = Instantiate(info.Prefab, go.transform);
+            Instantiate(info.Prefab, go.transform);
+            var charac = go.GetComponent<ACharacter>();
+            if (!_objects.ContainsKey(charac.FactionOverride))
+            {
+                _objects.Add(charac.FactionOverride, new());
+            }
+            _objects[charac.FactionOverride].Add(charac);
             return go;
+        }
+
+        public void Die(ACharacter c)
+        {
+            _objects[c.FactionOverride].Remove(c);
+            Destroy(c.gameObject);
         }
     }
 }

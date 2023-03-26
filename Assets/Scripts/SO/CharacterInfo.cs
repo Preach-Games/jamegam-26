@@ -1,3 +1,4 @@
+using DungeonDraws.Character;
 using UnityEngine;
 
 namespace DungeonDraws.SO
@@ -10,5 +11,6 @@ namespace DungeonDraws.SO
         public int Mind;
 
         public GameObject Prefab;
+        public Faction Faction;
     }
 }
