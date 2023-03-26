@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 3486447214060720705}
   - component: {fileID: 3144156985178310739}
   m_Layer: 5
-  m_Name: Art
+  m_Name: CardArt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4a8d5d86cc4587f46bccb06168e5534d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -486,6 +486,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleText: {fileID: 7271681594126468019}
   _descriptionText: {fileID: 2740298082537672998}
-  _dissolveSpeed: 0.3
+  _dissolveSpeed: 0.6
   _bgCardMat: {fileID: 2100000, guid: 5390cc7d77fe0714a9b72051fb36ce88, type: 2}
-  _cardArt: {fileID: 0}
+  _cardArt: {fileID: 3144156985178310739}

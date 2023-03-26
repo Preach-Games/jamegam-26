@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace DungeonDraws.Card
 {
@@ -14,10 +15,10 @@ namespace DungeonDraws.Card
 
         [SerializeField]
         private float _dissolveSpeed = 1f;
-        private float _dissolveAmount = 1f;
+        private float _dissolveAmount = .7f;
 
         [SerializeField]
-        private Material _bgCardMat;
+        private Material _dissolveMat;
 
         [SerializeField]
         private Image _cardArt;
@@ -29,8 +30,7 @@ namespace DungeonDraws.Card
             _info = info;
             _titleText.text = info.Name;
             _descriptionText.text = info.Description;
-            // _cardArt.sprite = null; // TODO:
-            _bgCardMat = Instantiate(GetComponent<Image>().material);
+            _dissolveMat = Instantiate(GetComponent<Image>().material);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -43,9 +43,12 @@ namespace DungeonDraws.Card
             CardsManager.Instance.HideTooltip();
         }
 
-        public IEnumerator Autodestroy(bool wasSelected = false)
+        public IEnumerator Autodestroy(bool isSelected = false)
         {
-            if (wasSelected) Debug.Log("wasSelected");
+            if (isSelected)
+            {
+                // TODO: Implements a different effect for the selected card
+            }
 
             yield return DissolveThenDestroyCard();
         }
@@ -54,9 +57,12 @@ namespace DungeonDraws.Card
         {
             while (_dissolveAmount > 0)
             {
+                _titleText.DOFade(0, .3f);
+                _descriptionText.DOFade(0, .3f);
                 _dissolveAmount -= Time.deltaTime * _dissolveSpeed;
-                _bgCardMat.SetFloat("_Dissolve", _dissolveAmount);
-                GetComponent<Image>().material = _bgCardMat;
+                _dissolveMat.SetFloat("_Dissolve", _dissolveAmount);
+                GetComponent<Image>().material = _dissolveMat;
+                _cardArt.GetComponent<Image>().material = _dissolveMat;
                 yield return null;
             }
             Destroy(gameObject);
