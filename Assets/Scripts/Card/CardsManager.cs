@@ -66,13 +66,13 @@ namespace DungeonDraws.Card
             EndCardSelection();
             _deck = new(_cards);
         }
+
         public void AddCard(CardInfo card)
         {
             _deck.Add(card);
             _cards.Add(card);
         }
         
-
         public void EndCardSelection()
         {
             HideTooltip();
@@ -131,7 +131,7 @@ namespace DungeonDraws.Card
         {
             _target = card;
             _tooltip.SetActive(true);
-            _tooltip.transform.position = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            _tooltip.transform.position = Mouse.current.position.ReadValue();
             _tooltipText.text = string.Join("\n", card.Modifiers.OrderBy(x => x.IsBonus).Select(x => x.ToString()));
             Cursor.visible = false;
         }
