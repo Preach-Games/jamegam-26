@@ -133,6 +133,10 @@ namespace DungeonDraws.Card
             _tooltip.SetActive(true);
             _tooltip.transform.position = Mouse.current.position.ReadValue();
             _tooltipText.text = string.Join("\n", card.Modifiers.OrderBy(x => x.IsBonus).Select(x => x.ToString()));
+            if (string.IsNullOrEmpty(_tooltipText.text))
+            {
+                _tooltipText.text = "<color=#222>No Effect</color>";
+            }
             Cursor.visible = false;
         }
 
