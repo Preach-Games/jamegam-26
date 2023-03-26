@@ -1,3 +1,4 @@
+using DungeonDraws.Game;
 using DungeonDraws.Spawn;
 using UnityEngine;
 using UnityEngine.AI;
@@ -59,6 +60,11 @@ namespace DungeonDraws.Character
 
         private void Update()
         {
+            if (GameManager.Instance.IsPaused)
+            {
+                _agent.isStopped = true;
+                return;
+            }
             _attackTimer -= Time.deltaTime;
             _agent.isStopped = _target != null && Vector3.Distance(transform.position, _target.transform.position) < 2f;
             if (_target != null)

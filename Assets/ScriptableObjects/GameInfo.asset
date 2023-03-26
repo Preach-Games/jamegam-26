@@ -24,12 +24,9 @@ MonoBehaviour:
   TimeBeforeCardDisplay: 2
   CardPrefab: {fileID: 8866023274045835825, guid: 850d652cb8f48d94086136f2813757fc,
     type: 3}
-  HeroSpawnDelay:
-    Min: 2
-    Max: 4
   BaseGold: 10
   DailyIncome: 5
-  DayDuration: 4
+  DayDuration: 10
   TimeBetweenSpawn: 3
   Enemies:
   - {fileID: 11400000, guid: 83a2ab697014e6b478b1079d93605ac0, type: 2}
