@@ -40,7 +40,7 @@ namespace DungeonDraws.Spawn
         private void Spawn()
         {
             var hero = SpawnManager.Instance.Spawn(_toSpawn, transform.position);
-            hero.GetComponent<ACharacter>().SetStaticTarget(_target.position);
+            hero.GetComponent<ACharacter>().SetGoal(_target);
         }
     }
 }

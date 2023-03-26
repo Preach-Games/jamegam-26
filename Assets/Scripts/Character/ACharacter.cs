@@ -2,7 +2,6 @@ using DungeonDraws.Game;
 using DungeonDraws.Spawn;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Assertions;
 
 namespace DungeonDraws.Character
 {
@@ -13,13 +12,16 @@ namespace DungeonDraws.Character
         private NavMeshAgent _agent;
 
         private ACharacter _target;
+        private Transform _goal;
+        private Vector3 _spawn;
 
         private float _attackTimerRef = 2f;
         private float _attackTimer;
 
-        public void SetStaticTarget(Vector3 pos)
+        public void SetGoal(Transform t)
         {
-            _agent.SetDestination(pos);
+            _agent.SetDestination(t.position);
+            _goal = t;
             _target = null;
         }
 
@@ -82,6 +84,24 @@ namespace DungeonDraws.Character
                     _agent.SetDestination(_target.transform.position);
                 }
             }
+            else
+            {
+                if (_goal == null)
+                {
+                    _agent.SetDestination(_spawn);
+                }
+                else
+                {
+                    if (Vector3.Distance(transform.position, _goal.position) < 2f)
+                    {
+                        _goal = null;
+                    }
+                    else
+                    {
+                        _agent.SetDestination(_goal.position);
+                    }
+                }
+            }
         }
 
         public void Attack(ACharacter target)
@@ -142,6 +162,7 @@ namespace DungeonDraws.Character
         {
             _agent = GetComponent<NavMeshAgent>();
             _attackTimer = _attackTimerRef;
+            _spawn = transform.position;
         }
 
         protected void StartInternal()
