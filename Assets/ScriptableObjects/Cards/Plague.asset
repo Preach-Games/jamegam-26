@@ -17,6 +17,7 @@ MonoBehaviour:
 
     Don''t pay too much attention to these black
     buboes growing on your monsters'
+  Image: {fileID: 21300000, guid: 4a8d5d86cc4587f46bccb06168e5534d, type: 3}
   Modifiers:
   - Type: 2
     PercentChange: 5

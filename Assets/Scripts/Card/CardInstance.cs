@@ -30,6 +30,7 @@ namespace DungeonDraws.Card
             _info = info;
             _titleText.text = info.Name;
             _descriptionText.text = info.Description;
+            _cardArt.sprite = info.Image;
             _dissolveMat = Instantiate(GetComponent<Image>().material);
         }
 

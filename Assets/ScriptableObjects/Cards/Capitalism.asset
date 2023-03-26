@@ -18,6 +18,7 @@ MonoBehaviour:
 
     It''s quick, easy and surely have nothing
     to do with that corpse under the table'
+  Image: {fileID: 21300000, guid: e7c9a649cc440e2448b031605dd5097e, type: 3}
   Modifiers:
   - Type: 4
     PercentChange: 100

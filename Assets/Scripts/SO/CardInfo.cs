@@ -9,6 +9,7 @@ namespace DungeonDraws.SO
         public string Name;
         [Multiline]
         public string Description;
+        public Sprite Image;
         public Modifier[] Modifiers;
     }
 }
