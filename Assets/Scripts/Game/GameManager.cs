@@ -99,7 +99,7 @@ namespace DungeonDraws.Game
 
         public void DisplayDamage(Vector3 pos, int amount)
         {
-            var go = Instantiate(_damageDisplayPrefab, pos, Quaternion.identity);
+            var go = Instantiate(_damageDisplayPrefab, pos + Vector3.up, Quaternion.identity);
             go.GetComponent<DamageDisplay>().Init(amount);
         }
     }
