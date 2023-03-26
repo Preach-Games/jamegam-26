@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DungeonDraws.Character
@@ -19,7 +21,7 @@ namespace DungeonDraws.Character
         private int _mpMax;
         private int _init;
 
-        private int _status = 1;
+        private int _status;
 
         private List<Skill> _skillList;
 
@@ -33,6 +35,7 @@ namespace DungeonDraws.Character
             _agility = _info._agility;
             _mind = _info._mind;
             _faction = Side();
+            _status = 1;
             _hp = 10 + _physique * 2;
             _hpMax = _hp;
             _mp = 5 + _mind * 2;
@@ -40,7 +43,7 @@ namespace DungeonDraws.Character
             _init = _agility * 2;
         }
 
-        public int Side()
+        public virtual int Side()
         {
             return 0;
         }
@@ -69,8 +72,8 @@ namespace DungeonDraws.Character
 
         public void Attack(ACharacter target) 
         {
-            int rollA = Random.Range(1, 21);
-            int rollD = Random.Range(1, 21);
+            int rollA = UnityEngine.Random.Range(1, 21);
+            int rollD = UnityEngine.Random.Range(1, 21);
 
             if (rollA + _agility > rollD + target._agility)
             {
