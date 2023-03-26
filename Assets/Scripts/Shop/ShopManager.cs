@@ -34,13 +34,13 @@ namespace DungeonDraws.Shop
         public void Show()
         {
             _shopPanel.SetActive(true);
-            _buyButton.interactable = GameManager.Instance.Gold >= _info.ShopCost && _shop.Any();
+            _buyButton.interactable = GameManager.Instance.Gold > _info.ShopCost && _shop.Any();
         }
 
         public void Buy()
         {
             GameManager.Instance.Gold -= _info.ShopCost;
-            _buyButton.interactable = GameManager.Instance.Gold >= _info.ShopCost && _shop.Any();
+            _buyButton.interactable = GameManager.Instance.Gold > _info.ShopCost && _shop.Any();
             var index = Random.Range(0, _shop.Count);
             CardsManager.Instance.AddCard(_shop[index]);
             _shop.RemoveAt(index);
