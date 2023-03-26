@@ -1,50 +1,140 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Assertions;
+using static UnityEngine.GraphicsBuffer;
 
 namespace DungeonDraws.Character
 {
     public abstract class ACharacter : MonoBehaviour
     {
-
         [SerializeField]
-        public DungeonDraws.SO.CharacterInfo _info = null;
+        private SO.CharacterInfo _info;
 
-        public int _physique = 0;
-        public int _agility = 0;
-        public int _mind = 0;
+        private NavMeshAgent _agent;
 
-        private int _hp = 0;
-        private int _hpMax = 0;
-        private int _mp = 0;
-        private int _mpMax = 0;
-        private int _init = 0;
+        private ACharacter _target;
 
-        private int _status = 1;
+        private float _attackTimerRef = 2f;
+        private float _attackTimer;
 
-        private void Awake()
+        public void SetStaticTarget(Vector3 pos)
         {
-            Initialise();
+            _agent.SetDestination(pos);
+            _target = null;
         }
 
-        private void Initialise()
+        public void SetDynamicTarget(ACharacter t)
         {
-            if (_info != null)
+            _agent.SetDestination(t.position);
+            _target = t;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
             {
-                _physique = _info._physique;
-                _agility = _info._agility;
-                _mind = _info._mind;
+                var p = other.GetComponent<ACharacter>();
+                //if (Faction != p.Faction) TODO: I don't really care rn
+                {
+                    SetDynamicTarget(p);
+                }
             }
-            else
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
             {
-                throw new System.ArgumentNullException();
+                var p = other.GetComponent<ACharacter>();
+                if (p == _target)
+                {
+                    _target = null;
+                }
             }
-            _hp = 10 + _physique * 2;
+        }
+
+        private void Update()
+        {
+            _attackTimer -= Time.deltaTime;
+            _agent.isStopped = _target != null && Vector3.Distance(transform.position, _target.transform.position) < 2f;
+            if (_target != null)
+            {
+                if (_agent.isStopped)
+                {
+                    if (_attackTimer <= 0f)
+                    {
+                        _attackTimer = _attackTimerRef;
+                        Attack(_target);
+                    }
+                }
+                else
+                {
+                    _agent.SetDestination(_target.transform.position);
+                }
+            }
+        }
+
+        public void Attack(ACharacter target)
+        {
+            int rollA = Random.Range(1, 21);
+            int rollD = Random.Range(1, 21);
+
+            if (rollA + Agility > rollD + target.Agility)
+            {
+                target.Hurt(Physique);
+            }
+        }
+
+        public static bool operator ==(ACharacter a, ACharacter b)
+        {
+            if (a is null) return b is null;
+            if (b is null) return false;
+            return a.GetInstanceID() == b.GetInstanceID();
+        }
+
+        public static bool operator !=(ACharacter a, ACharacter b)
+            => !(a == b);
+
+        public override bool Equals(object obj)
+        {
+            return obj is ACharacter character && this == character;
+        }
+
+        public override int GetHashCode()
+        {
+            return GetInstanceID().GetHashCode();
+        }
+
+        #region StatsStuffs
+
+        public int Physique { private set; get; }
+        public int Agility { private set; get; }
+        public int Mind { private set; get; }
+
+        private int _hp;
+        private int _hpMax;
+        private int _mp;
+        private int _mpMax;
+        private int _init;
+        private int _status;
+
+        protected void Init()
+        {
+            _agent = GetComponent<NavMeshAgent>();
+            _attackTimer = _attackTimerRef;
+
+            Assert.IsNotNull(_info);
+            Physique = _info.Physique;
+            Agility = _info.Agility;
+            Mind = _info.Mind;
+            _hp = 10 + Physique * 2;
             _hpMax = _hp;
-            _mp = 5 + _mind * 2;
+            _mp = 5 + Mind * 2;
             _mpMax = _mp;
-            _init = _agility * 2;
+            _init = Agility * 2;
         }
+
+        public abstract int Faction { get; }
 
         public void CheckStatus()
         {
@@ -52,7 +142,7 @@ namespace DungeonDraws.Character
             {
                 _status = 1;
             }
-            else if (_hp > (_hpMax/2) * -1)
+            else if (_hp > (_hpMax / 2) * -1)
             {
                 _status = 0;
             }
@@ -64,31 +154,9 @@ namespace DungeonDraws.Character
 
         public void Hurt(int dmg)
         {
-            _hp = _hp - dmg;
+            _hp -= dmg;
             CheckStatus();
         }
-
-        public void Attack(ACharacter target) 
-        {
-            int rollA = Random.Range(1, 21);
-            int rollD = Random.Range(1, 21);
-
-            if (rollA + _agility > rollD + target._agility)
-            {
-                target.Hurt(_physique);
-            }
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
+        #endregion
     }
 }

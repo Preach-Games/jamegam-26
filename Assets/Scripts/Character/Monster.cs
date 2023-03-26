@@ -1,21 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace DungeonDraws.Character
 {
     public class Monster : ACharacter
     {
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
-            
+            Init();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
+        public override int Faction => 2;
     }
 }
