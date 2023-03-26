@@ -21,7 +21,7 @@ namespace DungeonDraws.Character
 
         public void SetDynamicTarget(Transform t)
         {
-            _agent.SetDestination(_target.position);
+            _agent.SetDestination(t.position);
             _target = t;
         }
 
@@ -37,18 +37,30 @@ namespace DungeonDraws.Character
             }
         }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                var p = other.GetComponent<ACharacter>();
+                if (p.gameObject.GetInstanceID() == _target.gameObject.GetInstanceID())
+                {
+                    _target = null;
+                }
+            }
+        }
+
         private void Update()
         {
-            _agent.enabled = _target == null || Vector2.Distance(transform.position, _target.position) < 2f;
+            _agent.isStopped = _target != null && Vector3.Distance(transform.position, _target.position) < 2f;
             if (_target != null)
             {
-                if (_agent.enabled)
+                if (_agent.isStopped)
                 {
-                    _agent.SetDestination(_target.position);
+                    Debug.Log("We can attack");
                 }
                 else
                 {
-                    Debug.Log("We can attack");
+                    _agent.SetDestination(_target.position);
                 }
             }
         }
