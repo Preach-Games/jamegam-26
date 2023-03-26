@@ -6,5 +6,7 @@ namespace DungeonDraws.Character
         {
             Init();
         }
+
+        public override int Faction => 2;
     }
 }

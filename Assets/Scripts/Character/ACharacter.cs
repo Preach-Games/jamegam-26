@@ -1,6 +1,7 @@
-using ModestTree;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions;
 
 namespace DungeonDraws.Character
 {
@@ -32,7 +33,9 @@ namespace DungeonDraws.Character
         private int _mpMax;
         private int _init;
 
-        private int _status = 1;
+        private int _status;
+
+        private List<Skill> _skillList;
 
         protected void Init()
         {
@@ -48,6 +51,8 @@ namespace DungeonDraws.Character
             _mpMax = _mp;
             _init = Agility * 2;
         }
+
+        public abstract int Faction { get; }
 
         public void CheckStatus()
         {
@@ -73,8 +78,8 @@ namespace DungeonDraws.Character
 
         public void Attack(ACharacter target) 
         {
-            int rollA = Random.Range(1, 21);
-            int rollD = Random.Range(1, 21);
+            int rollA = UnityEngine.Random.Range(1, 21);
+            int rollD = UnityEngine.Random.Range(1, 21);
 
             if (rollA + Agility > rollD + target.Agility)
             {
