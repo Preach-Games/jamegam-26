@@ -25,15 +25,15 @@ namespace DungeonDraws.Character
             dmgRoll += _damageBonus;
             if (_modifier == Modifier.FORCE)
             {
-                dmgRoll += caster._physique;
+                dmgRoll += caster.Physique;
             }
             else if (_modifier == Modifier.AGILITY)
             {
-                dmgRoll += caster._agility;
+                dmgRoll += caster.Agility;
             }
             else if (_modifier == Modifier.MIND)
             {
-                dmgRoll += caster._mind;
+                dmgRoll += caster.Mind;
             }
             target.Hurt(dmgRoll);
         }

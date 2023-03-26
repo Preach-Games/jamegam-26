@@ -1,16 +1,30 @@
+using ModestTree;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace DungeonDraws.Character
 {
     public abstract class ACharacter : MonoBehaviour
     {
-
         [SerializeField]
-        public SO.CharacterInfo _info;
+        private SO.CharacterInfo _info;
 
-        public int _physique;
-        public int _agility;
-        public int _mind;
+        private NavMeshAgent _agent;
+
+        private Transform _target;
+        public Transform Target
+        {
+            set
+            {
+                _target = value;
+                _agent.SetDestination(_target.position);
+            }
+            get => _target;
+        }
+
+        public int Physique { private set; get; }
+        public int Agility { private set; get; }
+        public int Mind { private set; get; }
 
         private int _hp;
         private int _hpMax;
@@ -20,20 +34,19 @@ namespace DungeonDraws.Character
 
         private int _status = 1;
 
-        private void Awake()
+        protected void Init()
         {
-            if (_info == null)
-            {
-                throw new System.ArgumentNullException();
-            }
-            _physique = _info._physique;
-            _agility = _info._agility;
-            _mind = _info._mind;
-            _hp = 10 + _physique * 2;
+            _agent = GetComponent<NavMeshAgent>();
+
+            Assert.IsNotNull(_info);
+            Physique = _info.Physique;
+            Agility = _info.Agility;
+            Mind = _info.Mind;
+            _hp = 10 + Physique * 2;
             _hpMax = _hp;
-            _mp = 5 + _mind * 2;
+            _mp = 5 + Mind * 2;
             _mpMax = _mp;
-            _init = _agility * 2;
+            _init = Agility * 2;
         }
 
         public void CheckStatus()
@@ -63,9 +76,9 @@ namespace DungeonDraws.Character
             int rollA = Random.Range(1, 21);
             int rollD = Random.Range(1, 21);
 
-            if (rollA + _agility > rollD + target._agility)
+            if (rollA + Agility > rollD + target.Agility)
             {
-                target.Hurt(_physique);
+                target.Hurt(Physique);
             }
         }
     }
