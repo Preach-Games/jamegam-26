@@ -10,7 +10,7 @@ namespace DungeonDraws.Spawn
 
         private Transform _characterContainer;
 
-        private Dictionary<Faction, List<ACharacter>> _objects;
+        private readonly Dictionary<Faction, List<ACharacter>> _objects = new();
 
         [SerializeField]
         private GameObject _character;
