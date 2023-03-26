@@ -1,9 +1,12 @@
 using DungeonDraws.Game;
 using DungeonDraws.SO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -20,11 +23,15 @@ namespace DungeonDraws.Card
         private Transform _cardContainer;
 
         [SerializeField]
-        private CardInfo[] _cards;
-
-        [SerializeField]
         private GameInfo _info;
 
+        // Post processing
+        [SerializeField]
+        private Volume _globalVolume;
+        [SerializeField]
+        private float _vignetteIntensity;
+
+        private List<CardInfo> _cards;
         private List<CardInfo> _deck;
 
         // Tooltip
@@ -34,13 +41,24 @@ namespace DungeonDraws.Card
 
         private CardInfo _target;
         private float _cardTimer;
+        private CardInstance _choosenCard;
 
         private void Awake()
         {
             Instance = this;
-            _deck = _cards.ToList();
+            _cards = _info.BaseDeck.ToList();
+            _deck = new(_cards);
             _tooltipText = _tooltip.GetComponentInChildren<TMP_Text>();
             _cardTimer = _info.TimeBeforeCardDisplay;
+        }
+
+        private void Start()
+        {
+            GameManager.Instance.OnDayReset += (_sender, _e) =>
+            {
+                EndCardSelection();
+                _deck = new(_cards);
+            };
         }
 
         private void Update()
@@ -50,7 +68,7 @@ namespace DungeonDraws.Card
                 _cardTimer -= Time.deltaTime;
                 if (_cardTimer <= 0f)
                 {
-                    ShowCards();
+                    StartCardSelection();
                 }
             }
 
@@ -60,41 +78,74 @@ namespace DungeonDraws.Card
             }
         }
 
-        public void ResetDay()
+        public void AddCard(CardInfo card)
         {
-            HideCards();
-            _deck = _cards.ToList();
+            _deck.Add(card);
+            _cards.Add(card);
         }
-
-        public void HideCards()
+        
+        public void EndCardSelection()
         {
             HideTooltip();
-            for (int i = 0; i < _cardContainer.childCount; i++)
+            StartCoroutine(RemoveCards());
+            if (_globalVolume.profile.TryGet(out Vignette vignette))
             {
-                Destroy(_cardContainer.GetChild(i).gameObject);
+                vignette.intensity.value = 0;
+            }
+        }
+
+        private IEnumerator RemoveCards()
+        {
+            int childCount = _cardContainer.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                var card = _cardContainer.GetChild(i).GetComponent<CardInstance>();
+                if (card.GetInstanceID() != _choosenCard.GetInstanceID())
+                {
+                    Destroy(card.gameObject);
+                }
+            }
+            if (_choosenCard != null)
+            {
+                yield return _choosenCard.Autodestroy();
             }
             _cardCanvas.SetActive(false);
             _cardTimer = _info.TimeBeforeCardDisplay;
             GameManager.Instance.IsPaused = false;
+            _choosenCard = null;
         }
 
-        private void ShowCards()
+        private void StartCardSelection()
         {
             for (int i = 0; i < _info.CardCount; i++)
             {
                 var card = Instantiate(_info.CardPrefab, _cardContainer);
-                card.GetComponent<Button>().onClick.AddListener(new(HideCards));
+                var cardInstance = card.GetComponent<CardInstance>();
                 var index = Random.Range(0, _deck.Count);
-                card.GetComponent<CardInstance>().Init(_deck[index]);
+                var info = _deck[index];
+                card.GetComponent<Button>().onClick.AddListener(new(() => {
+                    foreach (var m in info.Modifiers)
+                    {
+                        m.Do();
+                    }
+                    _choosenCard = cardInstance;
+                    EndCardSelection();
+                }));
+                cardInstance.Init(info);
                 _deck.RemoveAt(index);
 
                 if (!_deck.Any())
                 {
-                    _deck = _cards.ToList();
+                    _deck = new(_cards);
                 }
             }
             _cardCanvas.SetActive(true);
             GameManager.Instance.IsPaused = true;
+
+            if (_globalVolume.profile.TryGet(out Vignette vignette))
+            {
+                vignette.intensity.value = _vignetteIntensity;
+            }
         }
 
         public void ShowTooltip(CardInfo card)
@@ -103,6 +154,10 @@ namespace DungeonDraws.Card
             _tooltip.SetActive(true);
             _tooltip.transform.position = Mouse.current.position.ReadValue();
             _tooltipText.text = string.Join("\n", card.Modifiers.OrderBy(x => x.IsBonus).Select(x => x.ToString()));
+            if (string.IsNullOrEmpty(_tooltipText.text))
+            {
+                _tooltipText.text = "<color=#222>No Effect</color>";
+            }
             Cursor.visible = false;
         }
 
