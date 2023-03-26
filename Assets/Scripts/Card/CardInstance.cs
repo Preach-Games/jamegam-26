@@ -43,24 +43,23 @@ namespace DungeonDraws.Card
             CardsManager.Instance.HideTooltip();
         }
 
-        public void Autodestroy(bool wasSelected = false)
+        public IEnumerator Autodestroy(bool wasSelected = false)
         {
             if (wasSelected) Debug.Log("wasSelected");
 
-            StartCoroutine(DissolveThenDestroyCard());
+            yield return DissolveThenDestroyCard();
         }
 
         private IEnumerator DissolveThenDestroyCard()
         {
-            for (;;)
+            while (_dissolveAmount > 0)
             {
                 _dissolveAmount -= Time.deltaTime * _dissolveSpeed;
                 _bgCardMat.SetFloat("_Dissolve", _dissolveAmount);
                 GetComponent<Image>().material = _bgCardMat;
                 yield return null;
-
-                if (_dissolveAmount <= 0) Destroy(gameObject);
             }
+            Destroy(gameObject);
         }
     }
 }

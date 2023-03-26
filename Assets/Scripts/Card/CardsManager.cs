@@ -79,22 +79,25 @@ namespace DungeonDraws.Card
             StartCoroutine(RemoveCards());
         }
 
-        public IEnumerator RemoveCards()
+        private IEnumerator RemoveCards()
         {
             int childCount = _cardContainer.childCount;
             for (int i = 0; i < childCount; i++)
             {
                 var card = _cardContainer.GetChild(i).GetComponent<CardInstance>();
-                card.Autodestroy();
-                if (childCount == i) 
+                if (card.GetInstanceID() != _choosenCard.GetInstanceID())
                 {
-                    _cardCanvas.SetActive(false);
-                    _cardTimer = _info.TimeBeforeCardDisplay;
-                    GameManager.Instance.IsPaused = false;
-                    _choosenCard = null;
+                    Destroy(card.gameObject);
                 }
             }
-            yield return null;
+            if (_choosenCard != null)
+            {
+                yield return _choosenCard.Autodestroy();
+            }
+            _cardCanvas.SetActive(false);
+            _cardTimer = _info.TimeBeforeCardDisplay;
+            GameManager.Instance.IsPaused = false;
+            _choosenCard = null;
         }
 
         private void StartCardSelection()
