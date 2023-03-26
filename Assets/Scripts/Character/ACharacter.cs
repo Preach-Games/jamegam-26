@@ -12,15 +12,79 @@ namespace DungeonDraws.Character
         private NavMeshAgent _agent;
 
         private Transform _target;
-        public Transform Target
+
+        public void SetStaticTarget(Vector3 pos)
         {
-            set
-            {
-                _target = value;
-                _agent.SetDestination(_target.position);
-            }
-            get => _target;
+            _agent.SetDestination(pos);
+            _target = null;
         }
+
+        public void SetDynamicTarget(Transform t)
+        {
+            _agent.SetDestination(_target.position);
+            _target = t;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                var p = other.GetComponent<ACharacter>();
+                //if (Faction != p.Faction) TODO: I don't really care rn
+                {
+                    SetDynamicTarget(other.transform);
+                }
+            }
+        }
+
+        private void Update()
+        {
+            _agent.enabled = _target == null || Vector2.Distance(transform.position, _target.position) < 2f;
+            if (_target != null)
+            {
+                if (_agent.enabled)
+                {
+                    _agent.SetDestination(_target.position);
+                }
+                else
+                {
+                    Debug.Log("We can attack");
+                }
+            }
+        }
+
+        public void Attack(ACharacter target)
+        {
+            int rollA = Random.Range(1, 21);
+            int rollD = Random.Range(1, 21);
+
+            if (rollA + Agility > rollD + target.Agility)
+            {
+                target.Hurt(Physique);
+            }
+        }
+
+        public static bool operator ==(ACharacter a, ACharacter b)
+        {
+            if (a is null) return b is null;
+            if (b is null) return false;
+            return a.GetInstanceID() == b.GetInstanceID();
+        }
+
+        public static bool operator !=(ACharacter a, ACharacter b)
+            => !(a == b);
+
+        public override bool Equals(object obj)
+        {
+            return obj is ACharacter character && this == character;
+        }
+
+        public override int GetHashCode()
+        {
+            return GetInstanceID().GetHashCode();
+        }
+
+        #region StatsStuffs
 
         public int Physique { private set; get; }
         public int Agility { private set; get; }
@@ -71,26 +135,6 @@ namespace DungeonDraws.Character
             _hp -= dmg;
             CheckStatus();
         }
-
-        public void Attack(ACharacter target) 
-        {
-            int rollA = Random.Range(1, 21);
-            int rollD = Random.Range(1, 21);
-
-            if (rollA + Agility > rollD + target.Agility)
-            {
-                target.Hurt(Physique);
-            }
-        }
-
-        public static bool operator ==(ACharacter a, ACharacter b)
-        {
-            if (a is null) return b is null;
-            if (b is null) return false;
-            return a.GetInstanceID() == b.GetInstanceID();
-        }
-
-        public static bool operator !=(ACharacter a, ACharacter b)
-            => !(a == b);
+        #endregion
     }
 }

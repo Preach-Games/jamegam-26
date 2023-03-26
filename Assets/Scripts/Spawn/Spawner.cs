@@ -23,7 +23,7 @@ namespace DungeonDraws.Spawn
         private IEnumerator Spawn()
         {
             var hero = Instantiate(_toSpawn, transform.position, Quaternion.identity);
-            hero.GetComponent<ACharacter>().Target = _target;
+            hero.GetComponent<ACharacter>().SetStaticTarget(_target.position);
             yield return new WaitForSeconds(_spawnTimeRef);
             yield return Spawn();
         }
