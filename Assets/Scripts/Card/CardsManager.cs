@@ -52,6 +52,15 @@ namespace DungeonDraws.Card
             _cardTimer = _info.TimeBeforeCardDisplay;
         }
 
+        private void Start()
+        {
+            GameManager.Instance.OnDayReset += (_sender, _e) =>
+            {
+                EndCardSelection();
+                _deck = new(_cards);
+            };
+        }
+
         private void Update()
         {
             if (_cardTimer > 0f && !GameManager.Instance.IsPaused)
@@ -67,12 +76,6 @@ namespace DungeonDraws.Card
             {
                 _tooltip.transform.position = Mouse.current.position.ReadValue();
             }
-        }
-
-        public void ResetDay()
-        {
-            EndCardSelection();
-            _deck = new(_cards);
         }
 
         public void AddCard(CardInfo card)

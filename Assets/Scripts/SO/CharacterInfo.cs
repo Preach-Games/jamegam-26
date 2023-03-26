@@ -1,3 +1,4 @@
+using DungeonDraws.Character;
 using UnityEngine;
 
 namespace DungeonDraws.SO
@@ -8,5 +9,9 @@ namespace DungeonDraws.SO
         public int Physique;
         public int Agility;
         public int Mind;
+
+        public GameObject Prefab;
+        public Faction Faction;
+        public Race Race;
     }
 }

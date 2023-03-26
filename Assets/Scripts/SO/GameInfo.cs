@@ -20,5 +20,9 @@ namespace DungeonDraws.SO
         public int BaseGold;
         public int DailyIncome;
         public float DayDuration;
+
+        [Header("Spawn")]
+        public float TimeBetweenSpawn;
+        public CharacterInfo[] Enemies;
     }
 }

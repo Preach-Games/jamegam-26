@@ -1,7 +1,7 @@
+using DungeonDraws.Spawn;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
-using static UnityEngine.GraphicsBuffer;
 
 namespace DungeonDraws.Character
 {
@@ -34,7 +34,7 @@ namespace DungeonDraws.Character
             if (other.CompareTag("Player"))
             {
                 var p = other.GetComponent<ACharacter>();
-                //if (Faction != p.Faction) TODO: I don't really care rn
+                if (FactionOverride != p.FactionOverride)
                 {
                     SetDynamicTarget(p);
                 }
@@ -83,6 +83,16 @@ namespace DungeonDraws.Character
             {
                 target.Hurt(Physique);
             }
+        }
+
+        public void TakePercentDamage(int percent)
+        {
+            Hurt(Mathf.FloorToInt(_hpMax * percent / 100f));
+        }
+
+        private void Die()
+        {
+            SpawnManager.Instance.Die(this);
         }
 
         public static bool operator ==(ACharacter a, ACharacter b)
@@ -134,10 +144,16 @@ namespace DungeonDraws.Character
             _init = Agility * 2;
         }
 
+        public Faction FactionOverride => _info.Faction; // TODO: Replace that with your things later on
         public abstract int Faction { get; }
 
         public void CheckStatus()
         {
+            if (_hp < 0)
+            {
+                Die();
+            }
+
             if (_hp > 0)
             {
                 _status = 1;

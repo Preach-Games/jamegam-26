@@ -18,10 +18,11 @@ MonoBehaviour:
 
     The angry heroes at your doorsteps are probably looking forward
     to decrease it'
+  Image: {fileID: 0}
   Modifiers:
   - Type: 0
     PercentChange: 15
     IsBonus: 1
   - Type: 1
-    PercentChange: 15
+    PercentChange: -15
     IsBonus: 0
