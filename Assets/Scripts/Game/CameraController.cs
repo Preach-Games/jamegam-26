@@ -12,7 +12,7 @@ namespace DungeonDraws.Game
 
         private void Update()
         {
-            transform.Translate(_mov * Time.deltaTime * _speed);
+            transform.Translate(new Vector3(_mov.x, 0f, _mov.y) * Time.deltaTime * _speed, Space.World);
         }
 
         public void OnMove(InputAction.CallbackContext value)
