@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameJamKit.Scripts.Utils.Logging
+namespace DungeonDraws.Scripts.Utils.Logging
 {
     public class UnityEngineLogger : IXLogger {
         public void warning(string v) {

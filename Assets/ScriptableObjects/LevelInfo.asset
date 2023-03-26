@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67735db68d924c67a35fed2dadff3620, type: 3}
   m_Name: LevelInfo
   m_EditorClassIdentifier: 
-  _mapHeight: 100
-  _mapWidth: 100
-  _roomsNumberMin: 5
-  _roomsNumberMax: 15
-  _roomSizeMin: 5
-  _roomSizeMax: 20
-  _corridorLengthMin: 2
-  _corridorLengthMax: 7
-  _corridorWidthMin: 3
+  _mapHeight: 30
+  _mapWidth: 30
+  _roomsNumberMin: 3
+  _roomsNumberMax: 5
+  _roomSizeMin: 8
+  _roomSizeMax: 15
+  _corridorLengthMin: 4
+  _corridorLengthMax: 11
+  _corridorWidthMin: 2
   _corridorWidthMax: 3
-  _seed: 1
+  _seed: 369

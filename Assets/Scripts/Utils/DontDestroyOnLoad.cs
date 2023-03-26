@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameJamKit.Scripts.Utils
+namespace DungeonDraws.Scripts.Utils
 {
     public class DontDestroyOnLoad : MonoBehaviour
     {

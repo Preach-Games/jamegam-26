@@ -1,5 +1,5 @@
 ﻿using System;
-using GameJamKit.Scripts.Utils.Logging;
+using DungeonDraws.Scripts.Utils.Logging;
 
 namespace DungeonDraws.Scripts.Systems.LevelGeneration.Pickers
 {

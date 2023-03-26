@@ -1,4 +1,4 @@
-﻿namespace GameJamKit.Scripts.Utils.Logging
+﻿namespace DungeonDraws.Scripts.Utils.Logging
 {
     public interface IXLogger {
         void warning(string v);
