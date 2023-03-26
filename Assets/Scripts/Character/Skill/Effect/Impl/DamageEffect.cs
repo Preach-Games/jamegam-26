@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DungeonDraws.Character
+namespace DungeonDraws.Character.Skill.Effect.Impl
 {
     public class DamageEffect : AEffect
     {
@@ -16,7 +16,7 @@ namespace DungeonDraws.Character
         int _diceFaces = 0;
         int _damageBonus = 0;
 
-        Modifier _modifier = 0;
+        Modifier _modifier = Modifier.FORCE;
 
         public override void Apply(ACharacter caster, ACharacter target)
         {

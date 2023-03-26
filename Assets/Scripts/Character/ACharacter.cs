@@ -35,8 +35,6 @@ namespace DungeonDraws.Character
 
         private int _status;
 
-        private List<Skill> _skillList;
-
         protected void Init()
         {
             _agent = GetComponent<NavMeshAgent>();
@@ -78,13 +76,23 @@ namespace DungeonDraws.Character
 
         public void Attack(ACharacter target) 
         {
-            int rollA = UnityEngine.Random.Range(1, 21);
-            int rollD = UnityEngine.Random.Range(1, 21);
+            int rollA = Random.Range(1, 21);
+            int rollD = Random.Range(1, 21);
 
             if (rollA + Agility > rollD + target.Agility)
             {
                 target.Hurt(Physique);
             }
         }
+
+        public static bool operator ==(ACharacter a, ACharacter b)
+        {
+            if (a is null) return b is null;
+            if (b is null) return false;
+            return a.GetInstanceID() == b.GetInstanceID();
+        }
+
+        public static bool operator !=(ACharacter a, ACharacter b)
+            => !(a == b);
     }
 }
