@@ -89,7 +89,7 @@ namespace DungeonDraws.Character
             int rollA = Random.Range(1, 21);
             int rollD = Random.Range(1, 21);
 
-            if (rollA + Agility > rollD + target.Agility)
+            //if (rollA + Agility > rollD + target.Agility)
             {
                 target.Hurt(Physique);
             }
