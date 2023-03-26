@@ -1,6 +1,8 @@
 ﻿Assets/TextMesh Pro/
 Assets/TextMesh Pro.meta
 .vsconfig
+.vscode/
+UpgradeLog.htm
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #

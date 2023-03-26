@@ -2,7 +2,9 @@
 
 ## Description
 
-This is a game made for a Game Jam. The theme of the Game Jam was "Time is your enemy". The game is made in Unity.
+This is a game made in Unity for Jame Gam #26. 
+Theme: "You are the monster"
+Special Object: "Card".
 
 ## How to Play
 

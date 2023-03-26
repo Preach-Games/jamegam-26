@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using GameJamKit.Scripts.Utils.Attributes;
+using DungeonDraws.Scripts.Utils.Attributes;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace GameJamKit.Scripts.Utils.Editor.CustomInspectors
+namespace DungeonDraws.Scripts.Utils.Editor.CustomInspectors
 {
     public class BehaviourButtonsHelper
     {
