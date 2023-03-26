@@ -2,7 +2,7 @@ namespace DungeonDraws.Character
 {
     public class Monster : ACharacter
     {
-        private void Awake()
+        private void Start()
         {
             Init();
         }

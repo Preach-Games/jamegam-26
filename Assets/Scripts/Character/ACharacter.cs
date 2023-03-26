@@ -7,8 +7,7 @@ namespace DungeonDraws.Character
 {
     public abstract class ACharacter : MonoBehaviour
     {
-        [SerializeField]
-        private SO.CharacterInfo _info;
+        public SO.CharacterInfo Info { set; private get; }
 
         private NavMeshAgent _agent;
 
@@ -133,10 +132,9 @@ namespace DungeonDraws.Character
             _agent = GetComponent<NavMeshAgent>();
             _attackTimer = _attackTimerRef;
 
-            Assert.IsNotNull(_info);
-            Physique = _info.Physique;
-            Agility = _info.Agility;
-            Mind = _info.Mind;
+            Physique = Info.Physique;
+            Agility = Info.Agility;
+            Mind = Info.Mind;
             _hp = 10 + Physique * 2;
             _hpMax = _hp;
             _mp = 5 + Mind * 2;
@@ -144,7 +142,7 @@ namespace DungeonDraws.Character
             _init = Agility * 2;
         }
 
-        public Faction FactionOverride => _info.Faction; // TODO: Replace that with your things later on
+        public Faction FactionOverride => Info.Faction; // TODO: Replace that with your things later on
         public abstract int Faction { get; }
 
         public void CheckStatus()

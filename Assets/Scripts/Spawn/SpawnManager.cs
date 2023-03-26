@@ -62,6 +62,7 @@ namespace DungeonDraws.Spawn
             go.transform.position = pos;
             Instantiate(info.Prefab, go.transform);
             var charac = go.GetComponent<ACharacter>();
+            charac.Info = info;
             if (!_objects.ContainsKey(charac.FactionOverride))
             {
                 _objects.Add(charac.FactionOverride, new());
