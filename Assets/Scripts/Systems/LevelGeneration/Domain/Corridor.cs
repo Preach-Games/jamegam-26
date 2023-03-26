@@ -162,27 +162,6 @@ public class Corridor : IShape {
         return "Corridor: " + topLeftVertex() + " " + _grid;
     }
 
-    // Javascript API
-    public Cell[] walkableCells(Boolean excludeCellNextToWall) {
-        Cell innerA = null;
-        Cell innerB = null;
-
-        int cellExclusion = 1;
-        if (excludeCellNextToWall) cellExclusion = 2;
-
-        if (isOrizontal()) {
-            innerA = topLeftVertex().plusCell(cellExclusion, 0);
-            innerB = bottomRightVertex().minusCell(cellExclusion, 0);
-        } else {
-            innerA = topLeftVertex().plusCell(0, cellExclusion);
-            innerB = bottomRightVertex().minusCell(0, cellExclusion);
-        }
-
-        if (innerA.isGreatherThan(innerB)) return new Cell[0];
-
-        return innerA.cells(innerB);
-    }
-
     public Grid grid() {
         return _grid;
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameJamKit.Scripts.Utils.Logging
+namespace DungeonDraws.Scripts.Utils.Logging
 {
     public class ConsoleLogger : IXLogger {
         public void error(string v) {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameJamKit.Scripts.Utils.Extensions
+namespace DungeonDraws.Scripts.Utils.Extensions
 {
     public static class Vector3Extensions
     {

@@ -23,8 +23,8 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Plotters
                     else if (pos.isEqual(corridor.topRightVertex()))
                     {
                         map[rowPos, colPos] = corridor.isVertical()
-                            ? (int)DetailedTileType.Corner_OUT_NE
-                            : (int)DetailedTileType.Corner_OUT_SW;
+                            ? (int)DetailedTileType.Corner_OUT_SW
+                            : (int)DetailedTileType.Corner_OUT_NE;
                     }
                     else if (pos.isEqual(corridor.bottomRightVertex()))
                     {
@@ -35,8 +35,8 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Plotters
                     else if (pos.isEqual(corridor.bottomLeftVertex()))
                     {
                         map[rowPos, colPos] = corridor.isVertical()
-                            ? (int)DetailedTileType.Corner_OUT_SW
-                            : (int)DetailedTileType.Corner_OUT_NE;
+                            ? (int)DetailedTileType.Corner_OUT_NE
+                            : (int)DetailedTileType.Corner_OUT_SW;
                     }
                     else if (pos.isWithin(corridor.topLeftVertex(), corridor.topRightVertex()) &&
                              corridor.isOrizontal())
@@ -136,19 +136,19 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Plotters
 
                     if (pos.isEqual(room.topLeftVertex()))
                     {
-                        map[rowPos, colPos] = (int)DetailedTileType.Empty;
+                        map[rowPos, colPos] = (int)DetailedTileType.Corner_INN_SW;
                     }
                     else if (pos.isEqual(room.topRightVertex()))
                     {
-                        map[rowPos, colPos] = (int)DetailedTileType.Empty;
+                        map[rowPos, colPos] = (int)DetailedTileType.Corner_INN_SE;
                     }
                     else if (pos.isEqual(room.bottomRightVertex()))
                     {
-                        map[rowPos, colPos] = (int)DetailedTileType.Empty;
+                        map[rowPos, colPos] = (int)DetailedTileType.Corner_INN_NE;
                     }
                     else if (pos.isEqual(room.bottomLeftVertex()))
                     {
-                        map[rowPos, colPos] = (int)DetailedTileType.Empty;
+                        map[rowPos, colPos] = (int)DetailedTileType.Corner_INN_NW;
                     }
                     else if (pos.isWithin(room.topLeftVertex(), room.topRightVertex()))
                     {
@@ -171,53 +171,6 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Plotters
                         map[rowPos, colPos] = (int)DetailedTileType.Floor;
                     }
                 }
-            }
-
-            joinWithCorridors(room, map);
-        }
-
-        private void joinWithCorridors(Room room, int[,] map)
-        {
-            int xPosC;
-            int yPosC;
-
-            //TOP LEFT VERTEX
-            if (!room.hasCorridorSharingVertex(room.topLeftVertex()))
-            {
-                xPosC = room.topLeftVertex().row();
-                yPosC = room.topLeftVertex().col();
-                map[xPosC, yPosC] = (int)DetailedTileType.Corner_INN_NW;
-                map[xPosC, yPosC + 1] = (int)DetailedTileType.Empty;
-                map[xPosC + 1, yPosC] = (int)DetailedTileType.Empty;
-            }
-
-            //TOP RIGHT VERTEX
-            if (!room.hasCorridorSharingVertex(room.topRightVertex()))
-            {
-                xPosC = room.topRightVertex().row();
-                yPosC = room.topRightVertex().col();
-                map[xPosC, yPosC] = (int)DetailedTileType.Corner_INN_NE;
-                map[xPosC, yPosC - 1] = (int)DetailedTileType.Empty;
-                map[xPosC + 1, yPosC] = (int)DetailedTileType.Empty;
-            }
-
-            //BOTTOM RIGHT VERTEX
-            if (!room.hasCorridorSharingVertex(room.bottomRightVertex()))
-            {
-                xPosC = room.bottomRightVertex().row();
-                yPosC = room.bottomRightVertex().col();
-                map[xPosC, yPosC] = (int)DetailedTileType.Corner_INN_SE;
-                map[xPosC, yPosC - 1] = (int)DetailedTileType.Empty;
-                map[xPosC - 1, yPosC] = (int)DetailedTileType.Empty;
-            }
-
-            if (!room.hasCorridorSharingVertex(room.bottomLeftVertex()))
-            {
-                xPosC = room.bottomLeftVertex().row();
-                yPosC = room.bottomLeftVertex().col();
-                map[xPosC, yPosC] = (int)DetailedTileType.Corner_INN_SW;
-                map[xPosC, yPosC + 1] = (int)DetailedTileType.Empty;
-                map[xPosC - 1, yPosC] = (int)DetailedTileType.Empty;
             }
         }
     }

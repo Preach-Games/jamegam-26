@@ -2,7 +2,7 @@ using System;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Domain;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Plotters;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Pickers;
-using GameJamKit.Scripts.Utils.Logging;
+using DungeonDraws.Scripts.Utils.Logging;
 
 namespace DungeonDraws.Scripts.Systems.LevelGeneration
 {

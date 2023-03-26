@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameJamKit.Scripts.Utils.Singleton
+namespace DungeonDraws.Scripts.Utils.Singleton
 {
     /// <summary>
     ///     Be aware this will not prevent a non singleton constructor

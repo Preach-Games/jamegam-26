@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
-namespace GameJamKit.Scripts.Utils.Extensions
+namespace DungeonDraws.Scripts.Utils.Extensions
 {
     public static class ListExtensions
     {
