@@ -18,6 +18,8 @@ namespace DungeonDraws.Character
         private float _attackTimerRef = 2f;
         private float _attackTimer;
 
+        private int _gold;
+
         public void SetGoal(Transform t)
         {
             _agent.SetDestination(t.position);
@@ -95,6 +97,8 @@ namespace DungeonDraws.Character
                     if (Vector3.Distance(transform.position, _goal.position) < 2f)
                     {
                         _goal = null;
+                        _gold = 10;
+                        GameManager.Instance.AddExpenses(_gold, 0);
                     }
                     else
                     {
@@ -122,6 +126,7 @@ namespace DungeonDraws.Character
 
         private void Die()
         {
+            GameManager.Instance.AddExpenses(-_gold, 0);
             SpawnManager.Instance.Die(this);
         }
 

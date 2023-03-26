@@ -63,8 +63,8 @@ namespace DungeonDraws.Game
                     _nextDayAdvice.text = $"Tip: {_advices[UnityEngine.Random.Range(0, _advices.Length)]}";
 
                     Gold += _info.DailyIncome;
-                    Gold += _upcomingExpenses[0];
-                    _incomeText.text = $"Net Income: {_info.DailyIncome + _upcomingExpenses[0]} Gold Coin\nTotal Gold: {Gold}";
+                    Gold -= _upcomingExpenses[0];
+                    _incomeText.text = $"Net Income: {_info.DailyIncome - _upcomingExpenses[0]} Gold Coin\nTotal Gold: {Gold}";
                     for (int i = 0; i < _upcomingExpenses.Length - 1; i++)
                     {
                         _upcomingExpenses[i] = _upcomingExpenses[i + 1];
