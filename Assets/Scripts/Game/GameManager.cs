@@ -50,7 +50,7 @@ namespace DungeonDraws.Game
             Gold = _info.BaseGold;
             _upcomingExpenses = Enumerable.Repeat(0, 10).ToArray();
         }
-
+        
         public event EventHandler OnDayReset;
 
         private void Update()
@@ -61,7 +61,7 @@ namespace DungeonDraws.Game
                 if (_dayTimer < 0f)
                 {
                     _dayTimer = _info.DayDuration;
-                    OnDayReset.Invoke(this, new());
+                    OnDayReset?.Invoke(this, new());
                     IsPaused = true;
                     _nextDayPanel.SetActive(true);
                     _nextDayAdvice.text = $"Tip: {_advices[UnityEngine.Random.Range(0, _advices.Length)]}";

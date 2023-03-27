@@ -29,6 +29,13 @@ namespace DungeonDraws.Level
             _logger = devLog ? new UnityEngineLogger() : new NullLogger();
             _logger.setLogLimit(logLevel);
         }
+
+        // TODO: Implement method that returns a map texture of the generated dungeon
+        // public Texture2D GetMap(int width, int height)
+        // {
+        //     return new Texture2D(width, height);
+        // }
+        
         
     }
 }
