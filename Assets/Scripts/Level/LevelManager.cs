@@ -48,7 +48,9 @@ namespace DungeonDraws.Level
 
         private void LoadLevel()
         {
-            
+            _logger.info("Generating new level with seed: " + _levelData._seed);
+            GenerateDungeon();
+            // TODO: Sort out load complete and placement of dungeon assets etc.
         }
         
         private void OnValidate()
@@ -65,17 +67,17 @@ namespace DungeonDraws.Level
             _seed = _levelData._seed;
         }
         
-        private void generateSeed()
+        private void GenerateSeed()
         {
             _seed = Time.time.ToString().GetHashCode();
         }
         
         [Button]
-        private void generateDungeon()
+        private void GenerateDungeon()
         {
             if (_randomSeed)
             {
-                generateSeed();
+                GenerateSeed();
             }
 
             transform.rotation = Quaternion.Euler(0, 0, 0);

@@ -49,6 +49,7 @@ namespace DungeonDraws.Game
             _dayTimer = _info.DayDuration;
             Gold = _info.BaseGold;
             _upcomingExpenses = Enumerable.Repeat(0, 10).ToArray();
+            _gameStatusHandler.Load(this, new EventArgs());
         }
         
         private GameStatusHandler _gameStatusHandler = GameStatusHandler.Instance;
