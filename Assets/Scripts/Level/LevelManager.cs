@@ -97,7 +97,7 @@ namespace DungeonDraws.Level
 
         public void OnDrawGizmos()
         {
-            if (levelStyle._floorPrefab && _drawGrid)
+            if (levelStyle?._floorPrefab && _drawGrid)
             {
                 float tileWidth = levelStyle._floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
                 float mapWidth = _levelData._mapWidth * tileWidth;
