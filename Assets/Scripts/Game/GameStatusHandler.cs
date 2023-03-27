@@ -17,7 +17,7 @@ namespace DungeonDraws.Game
         private static GameStatusHandler instance = null;
         private static readonly object padlock = new object();
         
-        public event EventHandler Loading
+        public event EventHandler OnLoading
         {
             add
             {
@@ -29,7 +29,7 @@ namespace DungeonDraws.Game
             }
         }
         
-        public event EventHandler Paused
+        public event EventHandler OnPaused
         {
             add
             {
@@ -41,7 +41,7 @@ namespace DungeonDraws.Game
             }
         }
         
-        public event EventHandler DayStart
+        public event EventHandler OnDayStart
         {
             add
             {
@@ -53,7 +53,7 @@ namespace DungeonDraws.Game
             }
         }
         
-        public event EventHandler DayReset
+        public event EventHandler OnDayReset
         {
             add
             {
@@ -65,22 +65,22 @@ namespace DungeonDraws.Game
             }
         }
 
-        public void OnLoading(EventArgs e)
+        public void Load(EventArgs e)
         {
             ProcessEvent(e, GameStatus.Loading);
         }
         
-        public void OnPaused(EventArgs e)
+        public void Pause(EventArgs e)
         {
             ProcessEvent(e, GameStatus.Paused);
         }
 
-        public void OnDayStart(EventArgs e)
+        public void DayStart(EventArgs e)
         {
             ProcessEvent(e, GameStatus.DayStart);
         }
 
-        public void OnDayReset(EventArgs e)
+        public void DayReset(EventArgs e)
         {
             ProcessEvent(e, GameStatus.DayReset);
         }
