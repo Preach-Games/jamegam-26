@@ -104,16 +104,22 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
             }
         }
 
-        public static LevelRenderer newInstance(LevelManager levelManager)
+        public static LevelRenderer newInstance(LevelManager levelManager, GameObject boardHolder)
         {
             LevelRenderer renderer = ScriptableObject.CreateInstance<LevelRenderer>();
             renderer.setManager(levelManager);
+            renderer.setBoard(boardHolder);
             return renderer;
         }
 
         private void setManager(LevelManager levelManager)
         {
             _manager = levelManager;
+        }
+        
+        private void setBoard(GameObject boardHolder)
+        {
+            _boardHolder = boardHolder;
         }
 
         private void overlapWallSerators(GameObject boardHolder, int[,] map)

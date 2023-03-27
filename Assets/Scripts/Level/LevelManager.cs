@@ -14,11 +14,12 @@ namespace DungeonDraws.Level
     {
         [Header("Required")] 
         [SerializeField] private LevelData _levelData;
-        [SerializeField] public GameObject _floorPrefab;
-        [SerializeField] public GameObject _wallPrefab;
-        [SerializeField] public GameObject _wallSeparatorPrefab;
-        [SerializeField] public GameObject _cornerInPrefab;
-        [SerializeField] public GameObject _cornerOutPrefab;
+        public GameObject _floorPrefab;
+        public GameObject _wallPrefab;
+        public GameObject _wallSeparatorPrefab;
+        public GameObject _cornerInPrefab;
+        public GameObject _cornerOutPrefab;
+        public GameObject _boardHolder;
         
 
         [Header("Dev Options")]
@@ -67,7 +68,7 @@ namespace DungeonDraws.Level
             _logger = _devLog ? new UnityEngineLogger() : new NullLogger();
             _logger.setLogLimit(_logLevel);
             _generator = new LevelGenerator(10);
-            _renderer = LevelRenderer.newInstance(this);
+            _renderer = LevelRenderer.newInstance(this, _boardHolder);
             _seed = _levelData._seed;
         }
         
