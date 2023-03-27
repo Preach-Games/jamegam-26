@@ -49,6 +49,7 @@ namespace DungeonDraws.Level
             {
                 LoadLevel();
             };
+            _logger.info("Registered event to trigger on game load");
         }
 
         private void LoadLevel()

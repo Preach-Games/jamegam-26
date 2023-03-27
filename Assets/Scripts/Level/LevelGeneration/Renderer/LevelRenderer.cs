@@ -19,7 +19,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
         public void convertToMeshes(int[,] map)
         {
 
-            Destroy(_boardHolder.transform.GetChild(0));
+            Destroy(GameObject.Find("TileParent"));
             GameObject tileParent = new GameObject("TileParent");
             tileParent.transform.parent = _manager.transform;
 

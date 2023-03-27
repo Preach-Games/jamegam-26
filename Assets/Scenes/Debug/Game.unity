@@ -453,6 +453,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toSpawn: {fileID: 11400000, guid: 49b046de171ac964cad045ec3f85347e, type: 2}
   _target: {fileID: 405118506}
+--- !u!1 &528940238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 528940239}
+  m_Layer: 0
+  m_Name: GameBoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &528940239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528940238}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.4543107, y: -48.91268, z: 47.609627}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &532877737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,11 +2354,12 @@ MonoBehaviour:
     type: 3}
   _cornerOutPrefab: {fileID: 9140526481582535184, guid: aa356141d71ed5549bbb2a6fc9dd4bf3,
     type: 3}
+  _boardHolder: {fileID: 528940238}
   _randomSeed: 0
-  _devLog: 0
+  _devLog: 1
   _drawGrid: 0
   _drawTiles: 0
-  _logLevel: 0
+  _logLevel: 2
 --- !u!1 &284693544180555810
 GameObject:
   m_ObjectHideFlags: 0
