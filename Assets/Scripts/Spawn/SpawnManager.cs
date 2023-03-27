@@ -3,6 +3,7 @@ using DungeonDraws.Game;
 using DungeonDraws.SO;
 using System.Collections.Generic;
 using System.Linq;
+using DungeonDraws.Level;
 using UnityEngine;
 
 namespace DungeonDraws.Spawn
@@ -63,7 +64,9 @@ namespace DungeonDraws.Spawn
 
         private void SpawnAtRandom(SO.CharacterInfo info)
         {
-            Spawn(info, _enemySpawns[Random.Range(0, _enemySpawns.Length)].position);
+            Vector3 pos = LevelManager.Instance.PickRandomLocation();
+            Debug.Log(pos);
+            Spawn(info, pos);
         }
 
         public GameObject Spawn(SO.CharacterInfo info, Vector3 pos)

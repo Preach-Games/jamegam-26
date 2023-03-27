@@ -2404,7 +2404,7 @@ MonoBehaviour:
     type: 3}
   _boardHolder: {fileID: 528940238}
   _randomSeed: 1
-  _devLog: 1
+  _devLog: 0
   _drawGrid: 0
   _drawTiles: 0
   _logLevel: 2
