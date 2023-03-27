@@ -20,6 +20,8 @@ namespace DungeonDraws.Character
 
         private int _gold;
 
+        public int AttackModifier { get; set; }
+
         public void SetGoal(Transform t)
         {
             _agent.SetDestination(t.position);
@@ -118,12 +120,12 @@ namespace DungeonDraws.Character
 
         public void Attack(ACharacter target)
         {
-            int rollA = UnityEngine.Random.Range(1, 21);
-            int rollD = UnityEngine.Random.Range(1, 21);
+            int rollA = Random.Range(1, 21);
+            int rollD = Random.Range(1, 21);
 
             //if (rollA + Agility > rollD + target.Agility)
             {
-                target.Hurt(Physique);
+                target.Hurt(Mathf.FloorToInt(Physique * AttackModifier / 100f));
             }
         }
 
@@ -218,6 +220,10 @@ namespace DungeonDraws.Character
         {
             GameManager.Instance.DisplayDamage(transform.position, dmg);
             _hp -= dmg;
+            if (_hp > _hpMax)
+            {
+                _hp = _hpMax;
+            }
             CheckStatus();
         }
         #endregion
