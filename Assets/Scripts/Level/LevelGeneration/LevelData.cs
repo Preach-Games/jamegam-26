@@ -2,7 +2,7 @@
 
 namespace DungeonDraws.Scripts.Systems.LevelGeneration
 {
-    [CreateAssetMenu(fileName = "New Level", menuName = "ScriptableObjects/LevelData")]
+    [CreateAssetMenu(fileName = "New Level", menuName = "ScriptableObject/LevelData")]
     public class LevelData: ScriptableObject
     {
         public int _mapHeight = 100;
