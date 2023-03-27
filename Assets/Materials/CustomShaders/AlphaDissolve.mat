@@ -56,9 +56,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 1.39
+    - _AlphaBoost: 1.2
     - _Density: 1
+    - _NoiseDensity: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scroll: 0.71
+    - _ScrollSpeed: 1.5
     m_Colors: []
   m_BuildTextureStacks: []
