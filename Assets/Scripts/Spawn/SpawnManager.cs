@@ -99,6 +99,18 @@ namespace DungeonDraws.Spawn
             }
         }
 
+        public void TakePercentAttack(int value, Faction faction)
+        {
+            if (!_objects.ContainsKey(faction))
+            {
+                return;
+            }
+            foreach (var elem in _objects[faction])
+            {
+                elem.AttackModifier += value;
+            }
+        }
+
         public void ChangeSpawnRate(int percent)
         {
             SpawnRate += (_info.TimeBetweenSpawn * percent / 100f);
