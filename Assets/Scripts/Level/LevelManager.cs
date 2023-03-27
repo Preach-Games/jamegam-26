@@ -14,8 +14,12 @@ namespace DungeonDraws.Level
     {
         [Header("Required")] 
         [SerializeField] private LevelData _levelData;
-        [SerializeField] public LevelStyle levelStyle;
-
+        [SerializeField] public GameObject _floorPrefab;
+        [SerializeField] public GameObject _wallPrefab;
+        [SerializeField] public GameObject _wallSeparatorPrefab;
+        [SerializeField] public GameObject _cornerInPrefab;
+        [SerializeField] public GameObject _cornerOutPrefab;
+        
 
         [Header("Dev Options")]
         [SerializeField] 
@@ -97,9 +101,9 @@ namespace DungeonDraws.Level
 
         public void OnDrawGizmos()
         {
-            if (levelStyle?._floorPrefab && _drawGrid)
+            if (_floorPrefab && _drawGrid)
             {
-                float tileWidth = levelStyle._floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
+                float tileWidth = _floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
                 float mapWidth = _levelData._mapWidth * tileWidth;
                 float mapHeight = _levelData._mapHeight * tileWidth;
                 Gizmos.color = Color.red;
@@ -130,7 +134,7 @@ namespace DungeonDraws.Level
 
         public void DrawTilesMap()
         {
-            float floorSpan = levelStyle._floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
+            float floorSpan = _floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
             for (int row = 0; row < _tilesMap.GetLength(0); row++)
             {
                 for (int col = 0; col < _tilesMap.GetLength(1); col++)
