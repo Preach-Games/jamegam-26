@@ -54,7 +54,7 @@ namespace DungeonDraws.Card
 
         private void Start()
         {
-            GameManager.Instance.OnDayReset += (_sender, _e) =>
+            GameStatusHandler.Instance.OnDayReset += (_sender, _e) =>
             {
                 EndCardSelection();
                 _deck = new(_cards);

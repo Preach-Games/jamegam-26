@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using UnityEngine;
-using Object = System.Object;
 
 namespace DungeonDraws.Game
 {
