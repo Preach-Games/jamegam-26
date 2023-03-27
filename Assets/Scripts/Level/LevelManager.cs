@@ -1,86 +1,98 @@
-using System;
+﻿using DungeonDraws.Game;
+using DungeonDraws.Scripts.Systems.LevelGeneration;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Plotters;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Renderer;
-using DungeonDraws.Scripts.Utils;
 using DungeonDraws.Scripts.Utils.Attributes;
 using DungeonDraws.Scripts.Utils.Logging;
+using DungeonDraws.Scripts.Utils.Singleton;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace DungeonDraws.Scripts.Systems.LevelGeneration
+namespace DungeonDraws.Level
 {
-    public class LevelGeneratorBehaviour : MonoBehaviour
+    public class LevelManager: Singleton<LevelManager>
     {
-        public LevelData levelData;
-
-        public bool _devMode = false;
-        public bool _devLog = false;
-        public bool _randomSeed = false;
-        public bool _drawGrid = false;
-        public bool _drawTiles = false;
-
+        [Header("Required")] 
+        [SerializeField] private LevelData _levelData;
         public GameObject _floorPrefab;
         public GameObject _wallPrefab;
         public GameObject _wallSeparatorPrefab;
         public GameObject _cornerInPrefab;
         public GameObject _cornerOutPrefab;
+        public GameObject _boardHolder;
+        
 
-        [SerializeField] private int[,] _tilesMap;
-
+        [Header("Dev Options")]
+        [SerializeField] 
+        private bool _randomSeed; 
+        [SerializeField]
+        private bool _devLog;
+        [SerializeField]
+        private bool _drawGrid = false;
+        [SerializeField]
+        private bool _drawTiles = false;
+        [SerializeField]
+        private Loglevel _logLevel;
+        private IXLogger _logger;
         private int _seed;
 
-        // TODO: Implement renderer
+        [Header("Generated Data")]
+        [SerializeField] private int[,] _tilesMap;
+        
         private LevelGenerator _generator;
         private LevelRenderer _renderer;
 
-        void Awake()
+        private void Awake()
         {
-            _generator = new LevelGenerator(10);
-            _renderer = LevelRenderer.newInstance(this);
-            _seed = levelData._seed;
-        }
-
-        void Start()
-        {
-            if (_devMode)
+            SetParams();
+            GameStatusHandler.Instance.OnLoading += (sender, eventArgs) =>
             {
-                devMode();
-                return;
-            }
+                LoadLevel();
+            };
+            _logger.info("Registered event to trigger on game load");
         }
 
-        private void devMode()
+        private void LoadLevel()
         {
-            generateDungeon();
+            _logger.info("Generating new level with seed: " + _levelData._seed);
+            GenerateDungeon();
+            // TODO: Sort out load complete and placement of dungeon assets etc.
+        }
+        
+        private void OnValidate()
+        {
+            SetParams();
         }
 
-        private void generateSeed()
+        private void SetParams()
+        {
+            _logger = _devLog ? new UnityEngineLogger() : new NullLogger();
+            _logger.setLogLimit(_logLevel);
+            _generator = new LevelGenerator(10);
+            _renderer = LevelRenderer.newInstance(this, _boardHolder);
+            _seed = _levelData._seed;
+        }
+        
+        private void GenerateSeed()
         {
             _seed = Time.time.ToString().GetHashCode();
         }
-
-        void Update()
-        {
-            if (_devMode && Input.GetMouseButtonDown(0))
-            {
-                devMode();
-            }
-        }
-
+        
         [Button]
-        private void generateDungeon()
+        private void GenerateDungeon()
         {
             if (_randomSeed)
             {
-                generateSeed();
+                GenerateSeed();
             }
 
             transform.rotation = Quaternion.Euler(0, 0, 0);
             transform.localScale = Vector3.one;
-            _generator.SetMapSize(levelData._mapHeight, levelData._mapWidth);
-            _generator.SetRoomsNumberRange(levelData._roomsNumberMin, levelData._roomsNumberMax);
-            _generator.SetRoomSizeRange(levelData._roomSizeMin, levelData._roomSizeMax);
-            _generator.SetCorridorLengthRange(levelData._corridorLengthMin, levelData._corridorLengthMax);
-            _generator.SetCorridorWidthRange(levelData._corridorWidthMin, levelData._corridorWidthMax);
+            _generator.SetMapSize(_levelData._mapHeight, _levelData._mapWidth);
+            _generator.SetRoomsNumberRange(_levelData._roomsNumberMin, _levelData._roomsNumberMax);
+            _generator.SetRoomSizeRange(_levelData._roomSizeMin, _levelData._roomSizeMax);
+            _generator.SetCorridorLengthRange(_levelData._corridorLengthMin, _levelData._corridorLengthMax);
+            _generator.SetCorridorWidthRange(_levelData._corridorWidthMin, _levelData._corridorWidthMax);
             _generator.SetPlotter(new DetailedTilesPlotter());
             if (_devLog) _generator.SetLogger(new UnityEngineLogger());
             _generator.SetSeed(_seed);
@@ -94,11 +106,11 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
             if (_floorPrefab && _drawGrid)
             {
                 float tileWidth = _floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
-                float mapWidth = levelData._mapWidth * tileWidth;
-                float mapHeight = levelData._mapHeight * tileWidth;
+                float mapWidth = _levelData._mapWidth * tileWidth;
+                float mapHeight = _levelData._mapHeight * tileWidth;
                 Gizmos.color = Color.red;
-                GridGizmo(mapWidth, mapHeight, levelData._mapWidth,
-                    levelData._mapHeight,
+                GridGizmo(mapWidth, mapHeight, _levelData._mapWidth,
+                    _levelData._mapHeight,
                     new Vector3(transform.position.x, 0, transform.position.z));
 
                 if (_tilesMap != null && _drawTiles)
@@ -167,5 +179,11 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration
                 }
             }
         }
+
+        // TODO: Implement method that returns a map texture of the generated dungeon
+        // public Texture2D GetMap(int width, int height)
+        // {
+        //     return new Texture2D(width, height);
+        // }
     }
 }

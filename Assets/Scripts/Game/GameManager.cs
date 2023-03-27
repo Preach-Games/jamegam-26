@@ -51,7 +51,12 @@ namespace DungeonDraws.Game
             _upcomingExpenses = Enumerable.Repeat(0, 10).ToArray();
         }
 
-        public event EventHandler OnDayReset;
+        private void Start()
+        {
+            _gameStatusHandler.Load(this, new EventArgs());
+        }
+        
+        private GameStatusHandler _gameStatusHandler = GameStatusHandler.Instance;
 
         private void Update()
         {
@@ -61,7 +66,7 @@ namespace DungeonDraws.Game
                 if (_dayTimer < 0f)
                 {
                     _dayTimer = _info.DayDuration;
-                    OnDayReset.Invoke(this, new());
+                    _gameStatusHandler.DayReset(this, new EventArgs());
                     IsPaused = true;
                     _nextDayPanel.SetActive(true);
                     _nextDayAdvice.text = $"Tip: {_advices[UnityEngine.Random.Range(0, _advices.Length)]}";

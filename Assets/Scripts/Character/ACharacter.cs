@@ -136,7 +136,7 @@ namespace DungeonDraws.Character
         {
             GameManager.Instance.AddExpenses(-_gold, 0);
             SpawnManager.Instance.Die(this);
-        }
+        }           
 
         public static bool operator ==(ACharacter a, ACharacter b)
         {
