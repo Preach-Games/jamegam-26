@@ -65,30 +65,30 @@ namespace DungeonDraws.Game
             }
         }
 
-        public void Load(EventArgs e)
+        public void Load(Object sender, EventArgs e)
         {
-            ProcessEvent(e, GameStatus.Loading);
+            ProcessEvent(sender, e, GameStatus.Loading);
         }
         
-        public void Pause(EventArgs e)
+        public void Pause(Object sender, EventArgs e)
         {
-            ProcessEvent(e, GameStatus.Paused);
+            ProcessEvent(sender, e, GameStatus.Paused);
         }
 
-        public void DayStart(EventArgs e)
+        public void DayStart(Object sender, EventArgs e)
         {
-            ProcessEvent(e, GameStatus.DayStart);
+            ProcessEvent(sender, e, GameStatus.DayStart);
         }
 
-        public void DayReset(EventArgs e)
+        public void DayReset(Object sender, EventArgs e)
         {
-            ProcessEvent(e, GameStatus.DayReset);
+            ProcessEvent(sender, e, GameStatus.DayReset);
         }
 
-        private void ProcessEvent(EventArgs e, GameStatus gs)
+        private void ProcessEvent(Object sender, EventArgs e, GameStatus gs)
         {
             EventHandler gameEventDelegate = (EventHandler)_gameStatusEvents[gs];
-            gameEventDelegate(this, e);
+            gameEventDelegate(sender, e);
         }
         
         private GameStatusHandler()
