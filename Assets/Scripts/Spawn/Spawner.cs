@@ -18,7 +18,7 @@ namespace DungeonDraws.Spawn
         private void Start()
         {
             _spawnTime = SpawnManager.Instance.SpawnRate;
-            GameManager.Instance.OnDayReset += (_sender, _e) =>
+            GameStatusHandler.Instance.OnDayReset += (_sender, _e) =>
             {
                 _spawnTime = SpawnManager.Instance.SpawnRate;
             };

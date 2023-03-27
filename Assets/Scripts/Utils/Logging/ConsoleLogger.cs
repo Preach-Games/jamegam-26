@@ -2,17 +2,21 @@
 
 namespace DungeonDraws.Scripts.Utils.Logging
 {
-    public class ConsoleLogger : IXLogger {
-        public void error(string v) {
-            Console.WriteLine("[ERRO]: " + v);
-        }
-
-        public void info(string v) {
-            Console.WriteLine("[INFO]: " + v);
-        }
-
-        public void warning(string v) {
-            Console.WriteLine("[WARN]: " + v);
+    public class ConsoleLogger : Logger {
+        public override void output(string v)
+        {
+            switch (_logLevel)
+            {
+                case Loglevel.Error:
+                    Console.WriteLine("[ERRO]: " + v);
+                    break;
+                case Loglevel.Warn:
+                    Console.WriteLine("[WARN]: " + v);
+                    break;
+                case Loglevel.Info:
+                    Console.WriteLine("[INFO]: " + v);
+                    break;
+            }
         }
     }
 }

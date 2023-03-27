@@ -32,7 +32,7 @@ namespace DungeonDraws.Spawn
             _characterContainer = new GameObject("Characters").transform;
             SpawnRate = _info.TimeBetweenSpawn;
 
-            GameManager.Instance.OnDayReset += (_sender, _e) =>
+            GameStatusHandler.Instance.OnDayReset += (_sender, _e) =>
             {
                 // Remove all heroes
                 if (_objects.ContainsKey(Faction.OVERLORD))
