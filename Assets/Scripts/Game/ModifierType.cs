@@ -5,8 +5,10 @@
         INCOME,
         HERO_SPAWN_RATE,
         RATS,
-        GLOBAL_HEALTH,
+        HERO_HEALTH,
+        MONSTER_HEALTH,
         GOLD,
-        GOLD_IN_5_DAYS
+        GOLD_IN_5_DAYS,
+        MONSTER_ATTACK
     }
 }

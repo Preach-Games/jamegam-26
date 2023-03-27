@@ -2356,6 +2356,7 @@ MonoBehaviour:
   _cornerOutPrefab: {fileID: 9140526481582535184, guid: d94c19e79d91f584a9ca36ccb8c07bfb,
     type: 3}
   _boardHolder: {fileID: 1719733332}
+  _nav: {fileID: 1370523683}
   _randomSeed: 0
   _devLog: 0
   _drawGrid: 0

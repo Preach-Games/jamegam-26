@@ -7,6 +7,7 @@ using DungeonDraws.Scripts.Systems.LevelGeneration.Renderer;
 using DungeonDraws.Scripts.Utils.Attributes;
 using DungeonDraws.Scripts.Utils.Logging;
 using DungeonDraws.Scripts.Utils.Singleton;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -23,6 +24,8 @@ namespace DungeonDraws.Level
         public GameObject _cornerOutPrefab;
         public GameObject _boardHolder;
 
+        [SerializeField]
+        private NavMeshSurface _nav;
 
         [Header("Dev Options")] [SerializeField]
         private bool _randomSeed;
@@ -31,6 +34,7 @@ namespace DungeonDraws.Level
         [SerializeField] private bool _drawGrid = false;
         [SerializeField] private bool _drawTiles = false;
         [SerializeField] private Loglevel _logLevel;
+
         private IXLogger _logger;
         private int _seed;
 
@@ -52,7 +56,10 @@ namespace DungeonDraws.Level
             _logger.info("Generating new level with seed: " + _levelData._seed);
             GenerateDungeon();
             // TODO: Sort out load complete and placement of dungeon assets etc.
+            _nav.BuildNavMesh();
+
             DungeonDraws.Game.GameStatusHandler.Instance.WorldBuilt(this, new EventArgs());
+
         }
 
         private void OnValidate()

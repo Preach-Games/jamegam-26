@@ -164,23 +164,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 39397921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4f26098f13451748a56c890bdddfa36, type: 3}
+  m_Script: {fileID: 11500000, guid: dbd25a8651bc4cf69131c2703599249c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 11400000, guid: ed69cf28cbcc2e445a928038fd36290f, type: 2}
-  _devMode: 0
-  _devLog: 1
-  _randomSeed: 1
-  _floorPrefab: {fileID: 9140526481582535184, guid: 7be2771040324564ea65c24b07d811df,
+  _levelData: {fileID: 11400000, guid: ed69cf28cbcc2e445a928038fd36290f, type: 2}
+  _floorPrefab: {fileID: 9140526481582535184, guid: 28268fa21eca94749bee9f2c9e520ff9,
     type: 3}
-  _wallPrefab: {fileID: 9140526481582535184, guid: fa7194b414fdbee428d2d0b2d043a39d,
+  _wallPrefab: {fileID: 9140526481582535184, guid: 824f030bc0ec7fe4aaa9d68f08e36f61,
     type: 3}
-  _wallSeparatorPrefab: {fileID: 9140526481582535184, guid: 9b0220d5b76baa244b57eb43bad8aa58,
+  _wallSeparatorPrefab: {fileID: 9140526481582535184, guid: 6d928fd088b96dc438b75b791f908aa3,
     type: 3}
-  _cornerInPrefab: {fileID: 9140526481582535184, guid: 24a6747e4deecf94dbb56360fa3ec216,
+  _cornerInPrefab: {fileID: 9140526481582535184, guid: 247495f1be8aa524f9dc27a23b3f18c4,
     type: 3}
-  _cornerOutPrefab: {fileID: 9140526481582535184, guid: aa356141d71ed5549bbb2a6fc9dd4bf3,
+  _cornerOutPrefab: {fileID: 9140526481582535184, guid: d94c19e79d91f584a9ca36ccb8c07bfb,
     type: 3}
+  _boardHolder: {fileID: 39397921}
+  _randomSeed: 0
+  _devLog: 0
+  _drawGrid: 0
+  _drawTiles: 0
+  _logLevel: 0
 --- !u!1 &385131943
 GameObject:
   m_ObjectHideFlags: 0
