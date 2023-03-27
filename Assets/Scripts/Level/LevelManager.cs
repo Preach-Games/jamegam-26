@@ -1,4 +1,5 @@
-﻿using DungeonDraws.Game;
+﻿using System;
+using DungeonDraws.Game;
 using DungeonDraws.Scripts.Systems.LevelGeneration;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Plotters;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Renderer;
@@ -57,6 +58,7 @@ namespace DungeonDraws.Level
             _logger.info("Generating new level with seed: " + _levelData._seed);
             GenerateDungeon();
             // TODO: Sort out load complete and placement of dungeon assets etc.
+            DungeonDraws.Game.GameStatusHandler.Instance.WorldBuilt(this, new EventArgs());
         }
         
         private void OnValidate()
@@ -178,6 +180,61 @@ namespace DungeonDraws.Level
                     }
                 }
             }
+        }
+
+        public Vector3 GetCameraMapGridLocation()
+        {
+            
+            if (_tilesMap != null)
+            {
+                int width = _tilesMap.GetLength((0));
+                int height = _tilesMap.GetLength(1);
+                for (int x = 0; x < width; x++)
+                {
+                    for (int y = 0; y < height; y++)
+                    {
+                        int xPos = (int)Mathf.Round(width / 2);
+                        int yPos = (int)Mathf.Round(height / 2);
+                        xPos = xPos + x >= width ? x - xPos : xPos + x;
+                        yPos = yPos + x >= height ? y - yPos : yPos + y;
+
+                        if ((DetailedTileType)_tilesMap[xPos,yPos] == DetailedTileType.Floor)
+                        {
+                            Vector2 returnPos = GetTileCoordinates(xPos, yPos);
+                            return new Vector3(returnPos.x, 2, returnPos.y);
+                        }
+                    }
+                }
+                
+            }
+            _logger.error("_tilemap is null");
+            return new Vector3(0, 0, 0);
+        }
+
+        Vector2 GetTileCoordinates(int x, int z)
+        {
+            if (_tilesMap != null && _boardHolder != null && _floorPrefab != null)
+            {
+                float tileSize = _floorPrefab.transform.GetComponent<MeshRenderer>().bounds.size.x;
+                return new Vector2(
+                    tileSize * x - tileSize / 2 + _boardHolder.transform.position.x,
+                    tileSize * z - tileSize / 2 + _boardHolder.transform.position.z
+                );
+            }
+            _logger.error("_tilemap, _boardHolder and/or _floorPrefab are null");
+            return new Vector2(0, 0);
+        }
+
+        public Vector4 GetBounds()
+        {
+            if (_tilesMap != null)
+            {
+                Vector2 min = GetTileCoordinates(0, 0);
+                Vector2 max = GetTileCoordinates(_tilesMap.GetLength(0), _tilesMap.GetLength(1));
+                return new Vector4(min.x, min.y,max.x, max.y);
+            }
+            _logger.error("_tilemap is null");
+            return new Vector4(0, 0, 0, 0);
         }
 
         // TODO: Implement method that returns a map texture of the generated dungeon
