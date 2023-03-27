@@ -7,7 +7,6 @@ using DungeonDraws.Scripts.Utils.Logging;
 using DungeonDraws.Scripts.Utils.Singleton;
 using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace DungeonDraws.Level
 {
@@ -50,15 +49,18 @@ namespace DungeonDraws.Level
             SetParams();
             GameStatusHandler.Instance.OnLoading += (sender, eventArgs) =>
             {
-                LoadLevel();
+                for (var i = -1; i < 2; i += 1)
+                {
+                    LoadLevel(new(i * 1000f, 0f, 0f));
+                }
             };
             _logger.info("Registered event to trigger on game load");
         }
 
-        private void LoadLevel()
+        private void LoadLevel(Vector3 pos)
         {
             _logger.info("Generating new level with seed: " + _levelData._seed);
-            GenerateDungeon();
+            GenerateDungeon(pos);
             // TODO: Sort out load complete and placement of dungeon assets etc.
 
             _nav.BuildNavMesh();
@@ -84,7 +86,7 @@ namespace DungeonDraws.Level
         }
         
         [Button]
-        private void GenerateDungeon()
+        private void GenerateDungeon(Vector3 pos)
         {
             if (_randomSeed)
             {
@@ -103,7 +105,7 @@ namespace DungeonDraws.Level
             _generator.SetSeed(_seed);
 
             _tilesMap = _generator.AsMatrix();
-            _renderer.convertToMeshes(_tilesMap);
+            _renderer.convertToMeshes(_tilesMap, pos);
         }
 
         public void OnDrawGizmos()

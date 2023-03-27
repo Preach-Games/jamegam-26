@@ -16,7 +16,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
             _boardHolder = boardHolder;
         }
 
-        public void convertToMeshes(int[,] map)
+        public void convertToMeshes(int[,] map, Vector3 offset)
         {
             GameObject oldTileParent = _boardHolder.transform.childCount > 0
                 ? _boardHolder.transform.GetChild(0).gameObject
@@ -28,12 +28,12 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
 
             GameObject tileParent = new GameObject("TileParent");
             tileParent.transform.parent = _boardHolder.transform;
-            addMainMashes(tileParent, map);
+            addMainMashes(tileParent, map, offset);
             Debug.Log(oldTileParent);
             //overlapWallSerators(boardHolder, map);
         }
 
-        private void addMainMashes(GameObject boardHolder, int[,] map)
+        private void addMainMashes(GameObject boardHolder, int[,] map, Vector3 offset)
         {
             Vector3 floorSize = _manager._floorPrefab.GetComponentInChildren<MeshRenderer>().bounds.size;
             float floorSpan = floorSize.x;
@@ -45,8 +45,8 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
                 {
                     int value = map[row, col];
                     DetailedTileType type = (DetailedTileType)value;
-                    float xPos = col * floorSpan + halfFloorSpan;
-                    float zPos = row * floorSpan + halfFloorSpan;
+                    float xPos = col * floorSpan + halfFloorSpan + offset.x;
+                    float zPos = row * floorSpan + halfFloorSpan + offset.z;
 
                     if (type == DetailedTileType.Floor)
                     {

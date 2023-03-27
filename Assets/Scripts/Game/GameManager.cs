@@ -29,7 +29,7 @@ namespace DungeonDraws.Game
 
         private float _dayTimer;
 
-        public bool IsPaused { set; get; }
+        public bool IsPaused { set; get; } = true;
 
         public int Gold { set; get; }
 
