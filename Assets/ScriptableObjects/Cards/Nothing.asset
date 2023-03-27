@@ -15,4 +15,5 @@ MonoBehaviour:
   Name: Nothing!
   Description: Sit on the sofa, grab some potato chips and wonder if you should buy
     more cards in the shop
+  Image: {fileID: 21300000, guid: ded493e1e36d45c4a80210b436f7afd6, type: 3}
   Modifiers: []
