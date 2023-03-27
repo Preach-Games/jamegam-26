@@ -924,10 +924,10 @@ GameObject:
   m_Component:
   - component: {fileID: 714695330}
   - component: {fileID: 714695329}
-  - component: {fileID: 714695328}
   - component: {fileID: 714695331}
   - component: {fileID: 714695332}
   - component: {fileID: 714695333}
+  - component: {fileID: 714695334}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -935,14 +935,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &714695328
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 714695327}
-  m_Enabled: 1
 --- !u!20 &714695329
 Camera:
   m_ObjectHideFlags: 0
@@ -1162,6 +1154,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
+--- !u!114 &714695334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714695327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &787956659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2345,18 +2350,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelData: {fileID: 11400000, guid: ed69cf28cbcc2e445a928038fd36290f, type: 2}
-  _floorPrefab: {fileID: 9140526481582535184, guid: 7be2771040324564ea65c24b07d811df,
+  _floorPrefab: {fileID: 9140526481582535184, guid: 28268fa21eca94749bee9f2c9e520ff9,
     type: 3}
-  _wallPrefab: {fileID: 9140526481582535184, guid: fa7194b414fdbee428d2d0b2d043a39d,
+  _wallPrefab: {fileID: 9140526481582535184, guid: 824f030bc0ec7fe4aaa9d68f08e36f61,
     type: 3}
-  _wallSeparatorPrefab: {fileID: 9140526481582535184, guid: 9b0220d5b76baa244b57eb43bad8aa58,
+  _wallSeparatorPrefab: {fileID: 9140526481582535184, guid: 6d928fd088b96dc438b75b791f908aa3,
     type: 3}
-  _cornerInPrefab: {fileID: 9140526481582535184, guid: 24a6747e4deecf94dbb56360fa3ec216,
+  _cornerInPrefab: {fileID: 9140526481582535184, guid: 247495f1be8aa524f9dc27a23b3f18c4,
     type: 3}
-  _cornerOutPrefab: {fileID: 9140526481582535184, guid: aa356141d71ed5549bbb2a6fc9dd4bf3,
+  _cornerOutPrefab: {fileID: 9140526481582535184, guid: d94c19e79d91f584a9ca36ccb8c07bfb,
     type: 3}
   _boardHolder: {fileID: 528940238}
-  _randomSeed: 0
+  _randomSeed: 1
   _devLog: 1
   _drawGrid: 0
   _drawTiles: 0

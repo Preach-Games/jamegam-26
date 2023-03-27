@@ -86,8 +86,8 @@ namespace DungeonDraws.Level
                 GenerateSeed();
             }
 
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            transform.localScale = Vector3.one;
+            _boardHolder.transform.rotation = Quaternion.Euler(0, 0, 0);
+            _boardHolder.transform.localScale = Vector3.one;
             _generator.SetMapSize(_levelData._mapHeight, _levelData._mapWidth);
             _generator.SetRoomsNumberRange(_levelData._roomsNumberMin, _levelData._roomsNumberMax);
             _generator.SetRoomSizeRange(_levelData._roomSizeMin, _levelData._roomSizeMax);
