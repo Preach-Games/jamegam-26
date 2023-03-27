@@ -18,12 +18,18 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
 
         public void convertToMeshes(int[,] map)
         {
+            GameObject oldTileParent = _boardHolder.transform.childCount > 0
+                ? _boardHolder.transform.GetChild(0).gameObject
+                : null;
+            if (oldTileParent != null)
+            {
+                Destroy(oldTileParent);
+            }
 
-            Destroy(GameObject.Find("TileParent"));
             GameObject tileParent = new GameObject("TileParent");
-            tileParent.transform.parent = _manager.transform;
-
+            tileParent.transform.parent = _boardHolder.transform;
             addMainMashes(tileParent, map);
+            Debug.Log(oldTileParent);
             //overlapWallSerators(boardHolder, map);
         }
 
@@ -33,69 +39,96 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
             float floorSpan = floorSize.x;
             float halfFloorSpan = floorSpan * 0.5f;
 
-            for (int row = 0; row < map.GetLength(0); row++) {
-                for (int col = 0; col < map.GetLength(1); col++) {
+            for (int row = 0; row < map.GetLength(0); row++)
+            {
+                for (int col = 0; col < map.GetLength(1); col++)
+                {
                     int value = map[row, col];
                     DetailedTileType type = (DetailedTileType)value;
                     float xPos = col * floorSpan + halfFloorSpan;
                     float zPos = row * floorSpan + halfFloorSpan;
 
-                    if (type == DetailedTileType.Floor) {
+                    if (type == DetailedTileType.Floor)
+                    {
                         GameObject prefab = _manager._floorPrefab;
                         float yRot = 0f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Wall_N) {
+                    }
+                    else if (type == DetailedTileType.Wall_N)
+                    {
                         GameObject prefab = _manager._wallPrefab;
                         // zPos += floorSpan;
                         float yRot = 0f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Wall_E) {
+                    }
+                    else if (type == DetailedTileType.Wall_E)
+                    {
                         GameObject prefab = _manager._wallPrefab;
                         // xPos += floorSpan;
                         // Wall cell need to be shifted to cover floor
                         float yRot = 270f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Wall_S) {
+                    }
+                    else if (type == DetailedTileType.Wall_S)
+                    {
                         GameObject prefab = _manager._wallPrefab;
                         // Wall cell need to be shifted to cover floor
                         float yRot = 180f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Wall_W) {
+                    }
+                    else if (type == DetailedTileType.Wall_W)
+                    {
                         GameObject prefab = _manager._wallPrefab;
                         // Wall cell need to be shifted to cover floor
                         float yRot = 90f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Corner_INN_NW) {
+                    }
+                    else if (type == DetailedTileType.Corner_INN_NW)
+                    {
                         GameObject prefab = _manager._cornerInPrefab;
                         float yRot = 180f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Corner_INN_NE) {
+                    }
+                    else if (type == DetailedTileType.Corner_INN_NE)
+                    {
                         GameObject prefab = _manager._cornerInPrefab;
                         // xPos -= floorSpan;
                         // zPos += floorSpan;
                         float yRot = 270f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Corner_INN_SE) {
+                    }
+                    else if (type == DetailedTileType.Corner_INN_SE)
+                    {
                         GameObject prefab = _manager._cornerInPrefab;
                         float yRot = 0f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Corner_INN_SW) {
+                    }
+                    else if (type == DetailedTileType.Corner_INN_SW)
+                    {
                         GameObject prefab = _manager._cornerInPrefab;
                         float yRot = 90f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Corner_OUT_NW) {
+                    }
+                    else if (type == DetailedTileType.Corner_OUT_NW)
+                    {
                         GameObject prefab = _manager._cornerOutPrefab;
                         float yRot = 180f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Corner_OUT_NE) {
+                    }
+                    else if (type == DetailedTileType.Corner_OUT_NE)
+                    {
                         GameObject prefab = _manager._cornerOutPrefab;
                         float yRot = 90f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Corner_OUT_SW) {
+                    }
+                    else if (type == DetailedTileType.Corner_OUT_SW)
+                    {
                         GameObject prefab = _manager._cornerOutPrefab;
                         float yRot = 270f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
-                    } else if (type == DetailedTileType.Corner_OUT_SE) {
+                    }
+                    else if (type == DetailedTileType.Corner_OUT_SE)
+                    {
                         GameObject prefab = _manager._cornerOutPrefab;
                         float yRot = 0f;
                         _instantiate(prefab, xPos, zPos, yRot, boardHolder, row, col, type.ToString());
@@ -116,7 +149,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
         {
             _manager = levelManager;
         }
-        
+
         private void setBoard(GameObject boardHolder)
         {
             _boardHolder = boardHolder;
