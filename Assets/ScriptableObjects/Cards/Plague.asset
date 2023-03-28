@@ -23,5 +23,5 @@ MonoBehaviour:
     PercentChange: 5
     IsBonus: 1
   - Type: 3
-    PercentChange: -15
+    PercentChange: -10
     IsBonus: 0

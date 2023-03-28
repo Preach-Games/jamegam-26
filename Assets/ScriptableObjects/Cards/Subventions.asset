@@ -13,16 +13,10 @@ MonoBehaviour:
   m_Name: Subventions
   m_EditorClassIdentifier: 
   Name: Smelly Deal
-  Description: 'The ASS (Association of Sinful Seigneurs) decided to increase your
+  Description: The ASS (Association of Sinful Seigneurs) decided to increase your
     funding!
-
-    The angry heroes at your doorsteps are probably looking forward
-    to decrease it'
   Image: {fileID: 21300000, guid: 0e20fc6ce67bc61489112803558adc15, type: 3}
   Modifiers:
   - Type: 0
     PercentChange: 15
     IsBonus: 1
-  - Type: 1
-    PercentChange: -15
-    IsBonus: 0

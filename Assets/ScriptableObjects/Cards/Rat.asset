@@ -13,13 +13,10 @@ MonoBehaviour:
   m_Name: Rat
   m_EditorClassIdentifier: 
   Name: Pet Rat
-  Description: The pet shop agreed to sell you yet another rat without asking what
+  Description: The pet shop agreed to give you yet another rat without asking what
     happened to the 314 others
   Image: {fileID: 21300000, guid: fdf995eae279ef24bac64613198f1ee9, type: 3}
   Modifiers:
   - Type: 2
     PercentChange: 1
     IsBonus: 1
-  - Type: 4
-    PercentChange: 10
-    IsBonus: 0
