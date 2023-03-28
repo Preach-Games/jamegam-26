@@ -15,7 +15,7 @@ namespace DungeonDraws.Character
         private Transform _goal;
         private Vector3 _spawn;
 
-        private Rigidbody2D _rb;
+        private Rigidbody _rb;
 
         private float _attackTimerRef = 2f;
         private float _attackTimer;
@@ -71,7 +71,7 @@ namespace DungeonDraws.Character
             if (GameManager.Instance.IsPaused)
             {
                 _agent.isStopped = true;
-                _rb.velocity = Vector2.zero;
+                _rb.velocity = Vector3.zero;
                 return;
             }
             _attackTimer -= Time.deltaTime;
@@ -86,7 +86,7 @@ namespace DungeonDraws.Character
             }
             if (_agent.isStopped)
             {
-                _rb.velocity = Vector2.zero;
+                _rb.velocity = Vector3.zero;
             }
             if (_target != null)
             {
@@ -183,7 +183,7 @@ namespace DungeonDraws.Character
         protected void AwakeInternal()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody>();
             _attackTimer = _attackTimerRef;
             _spawn = transform.position;
         }
