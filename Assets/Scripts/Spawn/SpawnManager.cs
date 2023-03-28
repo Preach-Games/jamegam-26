@@ -4,10 +4,17 @@ using DungeonDraws.SO;
 using System.Collections.Generic;
 using System.Linq;
 using DungeonDraws.Level;
+using ModestTree;
 using UnityEngine;
 
 namespace DungeonDraws.Spawn
 {
+    public enum SpawnMethod
+    {
+        Random,
+        CentreOfRoom,
+        FurthestWallFromPoint
+    }
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField]
@@ -21,9 +28,6 @@ namespace DungeonDraws.Spawn
 
         [SerializeField]
         private GameObject _character;
-
-        [SerializeField]
-        private Transform[] _enemySpawns;
 
         public float SpawnRate { private set; get; }
 
@@ -57,15 +61,23 @@ namespace DungeonDraws.Spawn
             };
         }
 
-        public void SpawnRat()
+        public void Spawn(Race race, SpawnMethod spawnMethod)
         {
-            SpawnAtRandom(_info.Enemies.FirstOrDefault(x => x.Race == Race.RAT));
+            switch (spawnMethod)
+            {
+                case SpawnMethod.Random:
+                    SpawnAtRandom(_info.Enemies.FirstOrDefault(x => x.Race == race));
+                    break;
+                default:
+                    Debug.LogError("Spawn method not implemented: " + spawnMethod);
+                    break;
+            }
         }
 
         private void SpawnAtRandom(SO.CharacterInfo info)
         {
-            Vector3 pos = LevelManager.Instance.PickRandomLocation();
-            Spawn(info, pos);
+            Vector2 pos = LevelManager.Instance.PickRandomLocation();
+            Spawn(info, new Vector3(pos.x, 0.5f, pos.y));
         }
 
         public GameObject Spawn(SO.CharacterInfo info, Vector3 pos)
