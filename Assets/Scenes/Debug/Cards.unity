@@ -1130,7 +1130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec15e783c7a6e91489831cd4d2592483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
 --- !u!1 &787956659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,6 +1653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1370523682}
   - component: {fileID: 1370523683}
+  - component: {fileID: 1370523684}
   m_Layer: 0
   m_Name: Navigation
   m_TagString: Untagged
@@ -1703,10 +1703,22 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.1
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 887524667146ff44e895aff77a6e9c75, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
+--- !u!114 &1370523684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370523681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed2d314b52035f46aa656dff27fbab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1719733332
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,9 +2341,6 @@ MonoBehaviour:
   _info: {fileID: 11400000, guid: 9f9b98c44e5accf4f9a129f474d3d3e9, type: 2}
   _character: {fileID: 6783460476637224718, guid: cf01dea74b1ca8d49bc81edfdc2dcf84,
     type: 3}
-  _enemySpawns:
-  - {fileID: 532877738}
-  - {fileID: 1296493048}
 --- !u!114 &2002116918
 MonoBehaviour:
   m_ObjectHideFlags: 0

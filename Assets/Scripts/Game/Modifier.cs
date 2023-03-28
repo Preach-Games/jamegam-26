@@ -1,6 +1,7 @@
 ﻿using DungeonDraws.Character;
 using DungeonDraws.Spawn;
 using System;
+using DungeonDraws.SO;
 using UnityEngine;
 
 namespace DungeonDraws.Game
@@ -68,7 +69,7 @@ namespace DungeonDraws.Game
                 case ModifierType.RATS:
                     for (int i = 0; i < PercentChange; i++)
                     {
-                        SpawnManager.Instance.SpawnRat();
+                        SpawnManager.Instance.Spawn(Race.RAT, SpawnMethod.Random);
                     }
                     break;
 

@@ -20,6 +20,6 @@ MonoBehaviour:
   _roomSizeMax: 15
   _corridorLengthMin: 4
   _corridorLengthMax: 11
-  _corridorWidthMin: 2
-  _corridorWidthMax: 3
+  _corridorWidthMin: 3
+  _corridorWidthMax: 4
   _seed: 369
