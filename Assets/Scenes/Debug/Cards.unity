@@ -47529,6 +47529,9 @@ MonoBehaviour:
   _info: {fileID: 11400000, guid: 9f9b98c44e5accf4f9a129f474d3d3e9, type: 2}
   _character: {fileID: 6783460476637224718, guid: cf01dea74b1ca8d49bc81edfdc2dcf84,
     type: 3}
+  _spawns:
+  - {fileID: 532877738}
+  - {fileID: 1296493048}
 --- !u!114 &2002116918
 MonoBehaviour:
   m_ObjectHideFlags: 0
