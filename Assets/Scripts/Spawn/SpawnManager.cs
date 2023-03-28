@@ -4,7 +4,6 @@ using DungeonDraws.SO;
 using System.Collections.Generic;
 using System.Linq;
 using DungeonDraws.Level;
-using ModestTree;
 using UnityEngine;
 
 namespace DungeonDraws.Spawn
@@ -85,7 +84,8 @@ namespace DungeonDraws.Spawn
         {
             var go = Instantiate(_character, _characterContainer);
             go.transform.position = pos;
-            Instantiate(info.Prefab, go.transform);
+            var sub = Instantiate(info.Prefab, go.transform);
+            sub.transform.rotation = info.Prefab.transform.rotation;
             var charac = go.GetComponent<ACharacter>();
             charac.Info = info;
             if (!_objects.ContainsKey(charac.FactionOverride))

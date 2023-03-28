@@ -15,6 +15,6 @@ MonoBehaviour:
   Physique: 5
   Agility: 5
   Mind: 5
-  Prefab: {fileID: 919132149155446097, guid: 3e5db16216350b3408e0d74a17818754, type: 3}
+  Prefab: {fileID: 6194371884765523062, guid: 9b224353b43b22e4eb8ca1b71075f32a, type: 3}
   Faction: 0
   Race: 2
