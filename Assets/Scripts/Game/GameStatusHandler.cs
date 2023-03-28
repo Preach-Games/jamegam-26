@@ -15,6 +15,8 @@ namespace DungeonDraws.Game
 
         public event EventHandler OnDayReset;
 
+        public event EventHandler OnWorldBuilt;
+
         public void Load(Object sender, EventArgs e)
         {
             OnLoading?.Invoke(sender, e);
@@ -33,6 +35,11 @@ namespace DungeonDraws.Game
         public void DayReset(Object sender, EventArgs e)
         {
             OnDayReset?.Invoke(sender, e);
+        }
+
+        public void WorldBuilt(Object sender, EventArgs e)
+        {
+            OnWorldBuilt?.Invoke(sender, e);
         }
 
         private GameStatusHandler()
