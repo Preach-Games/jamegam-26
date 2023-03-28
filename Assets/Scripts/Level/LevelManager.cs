@@ -44,6 +44,10 @@ namespace DungeonDraws.Level
         private LevelGenerator _generator;
         private LevelRenderer _renderer;
 
+        private Vector3 _lastSpawn;
+        private int _lastSpawnX;
+        private int _lastSpawnZ;
+
         private void Awake()
         {
             SetParams();
@@ -105,6 +109,18 @@ namespace DungeonDraws.Level
 
         public void OnDrawGizmos()
         {
+            if (_lastSpawn != null)
+            {
+                float tileWidth = _floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
+                float xPos = _lastSpawnX * tileWidth;
+                float zPos = _lastSpawnZ * tileWidth;
+                Gizmos.color = Color.cyan;
+                /// Why is this negative X to render last spawn??
+                Gizmos.DrawWireSphere(new Vector3(-_lastSpawn.x, 0.5f, _lastSpawn.z), 1f);
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawCube(new Vector3(xPos + tileWidth / 2, 0, zPos + tileWidth / 2),
+                    new Vector3(tileWidth, 1, tileWidth));
+            }
             if (_floorPrefab && _drawGrid)
             {
                 float tileWidth = _floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
@@ -215,9 +231,12 @@ namespace DungeonDraws.Level
             if (_tilesMap != null && _boardHolder != null && _floorPrefab != null)
             {
                 float tileSize = _floorPrefab.transform.GetComponent<MeshRenderer>().bounds.size.x;
+                float xPos = x * tileSize;
+                float zPos = z * tileSize;
+
                 return new Vector2(
-                    tileSize * x - tileSize / 2 + _boardHolder.transform.position.x,
-                    tileSize * z - tileSize / 2 + _boardHolder.transform.position.z
+                    xPos + tileSize / 2,
+                    zPos + tileSize / 2
                 );
             }
 
@@ -237,7 +256,10 @@ namespace DungeonDraws.Level
                     DetailedTileType value = (DetailedTileType)_tilesMap[x, z];
                     if (value == DetailedTileType.Floor)
                     {
-                        return GetTileCoordinates(x, z);
+                        _lastSpawnX = x;
+                        _lastSpawnZ = z;
+                        _lastSpawn = GetTileCoordinates(x, z);
+                        return _lastSpawn;
                     }
                 }
             }
