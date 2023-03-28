@@ -67,7 +67,7 @@ namespace DungeonDraws.Level
                 for (var i = 0; i < rects.Length; i++)
                 {
                     LoadLevel(new(i * 1000f, 0f, 0f));
-                    var cam = Instantiate(_camera, new(i * 1000f, -10f, 0f), _camera.transform.rotation);
+                    var cam = Instantiate(_camera, new(i * 1000f + 50f, -10f, 50f), _camera.transform.rotation);
                     var camera = cam.GetComponent<Camera>();
                     camera.rect = rects[i];
                 }
