@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace GameJamKit.Scripts.Utils.Singleton
+namespace DungeonDraws.Scripts.Utils.Singleton
 {
     /**
  * Utility class for handling singleton ScriptableObjects for data management

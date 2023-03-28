@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DungeonDraws.Character;
+using DungeonDraws.Spawn;
+using System;
+using UnityEngine;
 
 namespace DungeonDraws.Game
 {
@@ -23,7 +26,9 @@ namespace DungeonDraws.Game
                 ModifierType.GOLD => $"Gold Earned: {PTS()}",
                 ModifierType.GOLD_IN_5_DAYS => $"Gold Earned in 5 Days: {PTS()}",
                 ModifierType.RATS => $"Rats Gained: {PTS()}",
-                ModifierType.GLOBAL_HEALTH => $"All Monsters Health: {PTS()}%",
+                ModifierType.HERO_HEALTH => $"All Heros Health: {PTS()}%",
+                ModifierType.MONSTER_HEALTH => $"All Monsters Health: {PTS()}%",
+                ModifierType.MONSTER_ATTACK => $"All Monster Attack: {PTS()}%",
                 _ => throw new NotImplementedException()
             };
         }
@@ -32,6 +37,10 @@ namespace DungeonDraws.Game
         {
             switch (Type)
             {
+                case ModifierType.MONSTER_ATTACK:
+                    SpawnManager.Instance.TakePercentAttack(PercentChange, Faction.OVERLORD);
+                    break;
+
                 case ModifierType.INCOME:
                     GameManager.Instance.AddExpensesPercent(PercentChange);
                     break;
@@ -42,6 +51,25 @@ namespace DungeonDraws.Game
 
                 case ModifierType.GOLD_IN_5_DAYS:
                     GameManager.Instance.AddExpenses(PercentChange, 5);
+                    break;
+
+                case ModifierType.HERO_HEALTH:
+                    SpawnManager.Instance.TakePercentDamage(PercentChange, Faction.HERO);
+                    break;
+
+                case ModifierType.MONSTER_HEALTH:
+                    SpawnManager.Instance.TakePercentDamage(PercentChange, Faction.OVERLORD);
+                    break;
+
+                case ModifierType.HERO_SPAWN_RATE:
+                    SpawnManager.Instance.ChangeSpawnRate(PercentChange);
+                    break;
+
+                case ModifierType.RATS:
+                    for (int i = 0; i < PercentChange; i++)
+                    {
+                        SpawnManager.Instance.SpawnRat();
+                    }
                     break;
 
                 default:

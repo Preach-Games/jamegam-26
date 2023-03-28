@@ -16,9 +16,12 @@ namespace DungeonDraws.SO
         public GameObject CardPrefab;
 
         [Header("Global")]
-        public Range<float> HeroSpawnDelay;
         public int BaseGold;
         public int DailyIncome;
         public float DayDuration;
+
+        [Header("Spawn")]
+        public float TimeBetweenSpawn;
+        public CharacterInfo[] Enemies;
     }
 }

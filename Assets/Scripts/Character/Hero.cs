@@ -2,9 +2,16 @@ namespace DungeonDraws.Character
 {
     public class Hero : ACharacter
     {
-        public override int Side()
+        private void Awake()
         {
-            return 1;
+            AwakeInternal();
         }
+
+        private void Start()
+        {
+            StartInternal();
+        }
+
+        public override int Faction => 1;
     }
 }

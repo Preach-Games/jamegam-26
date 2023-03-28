@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace GameJamKit.Scripts.Utils
+namespace DungeonDraws.Scripts.Utils
 {
     public class SceneLoader : MonoBehaviour
     {

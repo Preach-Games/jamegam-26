@@ -1,5 +1,7 @@
 ﻿using DungeonDraws.Card;
+using DungeonDraws.Effect;
 using DungeonDraws.SO;
+using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -21,6 +23,9 @@ namespace DungeonDraws.Game
 
         [SerializeField]
         private TMP_Text _incomeText;
+
+        [SerializeField]
+        private GameObject _damageDisplayPrefab;
 
         private float _dayTimer;
 
@@ -46,6 +51,13 @@ namespace DungeonDraws.Game
             _upcomingExpenses = Enumerable.Repeat(0, 10).ToArray();
         }
 
+        private void Start()
+        {
+            _gameStatusHandler.Load(this, new EventArgs());
+        }
+        
+        private GameStatusHandler _gameStatusHandler = GameStatusHandler.Instance;
+
         private void Update()
         {
             if (!IsPaused)
@@ -54,14 +66,14 @@ namespace DungeonDraws.Game
                 if (_dayTimer < 0f)
                 {
                     _dayTimer = _info.DayDuration;
-                    CardsManager.Instance.ResetDay();
+                    _gameStatusHandler.DayReset(this, new EventArgs());
                     IsPaused = true;
                     _nextDayPanel.SetActive(true);
-                    _nextDayAdvice.text = $"Tip: {_advices[Random.Range(0, _advices.Length)]}";
+                    _nextDayAdvice.text = $"Tip: {_advices[UnityEngine.Random.Range(0, _advices.Length)]}";
 
                     Gold += _info.DailyIncome;
-                    Gold += _upcomingExpenses[0];
-                    _incomeText.text = $"Net Income: {_info.DailyIncome + _upcomingExpenses[0]} Gold Coin\nTotal Gold: {Gold}";
+                    Gold -= _upcomingExpenses[0];
+                    _incomeText.text = $"Net Income: {_info.DailyIncome - _upcomingExpenses[0]} Gold Coin\nTotal Gold: {Gold}";
                     for (int i = 0; i < _upcomingExpenses.Length - 1; i++)
                     {
                         _upcomingExpenses[i] = _upcomingExpenses[i + 1];
@@ -88,6 +100,12 @@ namespace DungeonDraws.Game
         public void NextDay()
         {
             IsPaused = false;
+        }
+
+        public void DisplayDamage(Vector3 pos, int amount)
+        {
+            var go = Instantiate(_damageDisplayPrefab, pos + Vector3.up, Quaternion.identity);
+            go.GetComponent<DamageDisplay>().Init(amount);
         }
     }
 }

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace DungeonDraws.Character
+namespace DungeonDraws.Character.Skill.Effect
 {
     public abstract class AEffect : MonoBehaviour
     {

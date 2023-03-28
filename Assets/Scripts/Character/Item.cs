@@ -5,7 +5,7 @@ namespace DungeonDraws.Character
 {
     public class Item : MonoBehaviour
     {
-        //public string name;
+        /*public string name;
         public string description;
 
         public List<Skill> skills;
@@ -13,6 +13,6 @@ namespace DungeonDraws.Character
         public void Use(ACharacter caster, ACharacter target, Skill skillToUse)
         {
             ;
-        }
+        }*/
     }
 }

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -22,6 +24,12 @@ namespace DungeonDraws.Card
 
         [SerializeField]
         private GameInfo _info;
+
+        // Post processing
+        [SerializeField]
+        private Volume _globalVolume;
+        [SerializeField]
+        private float _vignetteIntensity;
 
         private List<CardInfo> _cards;
         private List<CardInfo> _deck;
@@ -44,6 +52,15 @@ namespace DungeonDraws.Card
             _cardTimer = _info.TimeBeforeCardDisplay;
         }
 
+        private void Start()
+        {
+            GameStatusHandler.Instance.OnDayReset += (_sender, _e) =>
+            {
+                EndCardSelection();
+                _deck = new(_cards);
+            };
+        }
+
         private void Update()
         {
             if (_cardTimer > 0f && !GameManager.Instance.IsPaused)
@@ -61,12 +78,6 @@ namespace DungeonDraws.Card
             }
         }
 
-        public void ResetDay()
-        {
-            EndCardSelection();
-            _deck = new(_cards);
-        }
-
         public void AddCard(CardInfo card)
         {
             _deck.Add(card);
@@ -77,6 +88,10 @@ namespace DungeonDraws.Card
         {
             HideTooltip();
             StartCoroutine(RemoveCards());
+            if (_globalVolume.profile.TryGet(out Vignette vignette))
+            {
+                vignette.intensity.value = 0;
+            }
         }
 
         private IEnumerator RemoveCards()
@@ -107,15 +122,16 @@ namespace DungeonDraws.Card
                 var card = Instantiate(_info.CardPrefab, _cardContainer);
                 var cardInstance = card.GetComponent<CardInstance>();
                 var index = Random.Range(0, _deck.Count);
+                var info = _deck[index];
                 card.GetComponent<Button>().onClick.AddListener(new(() => {
-                    foreach (var m in _deck[index].Modifiers)
+                    foreach (var m in info.Modifiers)
                     {
                         m.Do();
                     }
                     _choosenCard = cardInstance;
                     EndCardSelection();
                 }));
-                cardInstance.Init(_deck[index]);
+                cardInstance.Init(info);
                 _deck.RemoveAt(index);
 
                 if (!_deck.Any())
@@ -125,6 +141,11 @@ namespace DungeonDraws.Card
             }
             _cardCanvas.SetActive(true);
             GameManager.Instance.IsPaused = true;
+
+            if (_globalVolume.profile.TryGet(out Vignette vignette))
+            {
+                vignette.intensity.value = _vignetteIntensity;
+            }
         }
 
         public void ShowTooltip(CardInfo card)
