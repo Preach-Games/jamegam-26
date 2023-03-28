@@ -1,4 +1,6 @@
-﻿using DungeonDraws.Game;
+﻿using System;
+using System.Collections.Generic;
+using DungeonDraws.Game;
 using DungeonDraws.Scripts.Systems.LevelGeneration;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Plotters;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Renderer;
@@ -8,13 +10,13 @@ using DungeonDraws.Scripts.Utils.Singleton;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace DungeonDraws.Level
 {
-    public class LevelManager: Singleton<LevelManager>
+    public class LevelManager : Singleton<LevelManager>
     {
-        [Header("Required")] 
-        [SerializeField] private LevelData _levelData;
+        [Header("Required")] [SerializeField] private LevelData _levelData;
         public GameObject _floorPrefab;
         public GameObject _wallPrefab;
         public GameObject _wallSeparatorPrefab;
@@ -25,33 +27,31 @@ namespace DungeonDraws.Level
         [SerializeField]
         private NavMeshSurface _nav;
 
-        [Header("Dev Options")]
-        [SerializeField] 
-        private bool _randomSeed; 
-        [SerializeField]
-        private bool _devLog;
-        [SerializeField]
-        private bool _drawGrid = false;
-        [SerializeField]
-        private bool _drawTiles = false;
-        [SerializeField]
-        private Loglevel _logLevel;
+        [Header("Dev Options")] [SerializeField]
+        private bool _randomSeed;
+
+        [SerializeField] private bool _devLog;
+        [SerializeField] private bool _drawGrid = false;
+        [SerializeField] private bool _drawTiles = false;
+        [SerializeField] private Loglevel _logLevel;
+
         private IXLogger _logger;
         private int _seed;
 
-        [Header("Generated Data")]
-        [SerializeField] private int[,] _tilesMap;
-        
+        [Header("Generated Data")] [SerializeField]
+        private int[,] _tilesMap;
+
         private LevelGenerator _generator;
         private LevelRenderer _renderer;
+
+        private Vector3 _lastSpawn;
+        private int _lastSpawnX;
+        private int _lastSpawnZ;
 
         private void Awake()
         {
             SetParams();
-            GameStatusHandler.Instance.OnLoading += (sender, eventArgs) =>
-            {
-                LoadLevel();
-            };
+            GameStatusHandler.Instance.OnLoading += (sender, eventArgs) => { LoadLevel(); };
             _logger.info("Registered event to trigger on game load");
         }
 
@@ -60,10 +60,11 @@ namespace DungeonDraws.Level
             _logger.info("Generating new level with seed: " + _levelData._seed);
             GenerateDungeon();
             // TODO: Sort out load complete and placement of dungeon assets etc.
-
             _nav.BuildNavMesh();
+
+            DungeonDraws.Game.GameStatusHandler.Instance.WorldBuilt(this, new EventArgs());
         }
-        
+
         private void OnValidate()
         {
             SetParams();
@@ -77,12 +78,12 @@ namespace DungeonDraws.Level
             _renderer = LevelRenderer.newInstance(this, _boardHolder);
             _seed = _levelData._seed;
         }
-        
+
         private void GenerateSeed()
         {
             _seed = Time.time.ToString().GetHashCode();
         }
-        
+
         [Button]
         private void GenerateDungeon()
         {
@@ -108,6 +109,18 @@ namespace DungeonDraws.Level
 
         public void OnDrawGizmos()
         {
+            if (_lastSpawn != null)
+            {
+                float tileWidth = _floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
+                float xPos = _lastSpawnX * tileWidth;
+                float zPos = _lastSpawnZ * tileWidth;
+                Gizmos.color = Color.cyan;
+                /// Why is this negative X to render last spawn??
+                Gizmos.DrawWireSphere(new Vector3(-_lastSpawn.x, 0.5f, _lastSpawn.z), 1f);
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawCube(new Vector3(xPos + tileWidth / 2, 0, zPos + tileWidth / 2),
+                    new Vector3(tileWidth, 1, tileWidth));
+            }
             if (_floorPrefab && _drawGrid)
             {
                 float tileWidth = _floorPrefab.GetComponent<MeshRenderer>().bounds.size.x;
@@ -124,7 +137,7 @@ namespace DungeonDraws.Level
                 }
             }
         }
-        
+
         public static void GridGizmo(float width, float height, int horizontalCellCount, int verticalCellCount,
             Vector3 position)
         {
@@ -178,11 +191,99 @@ namespace DungeonDraws.Level
 
                     if (value != (int)DetailedTileType.Empty)
                     {
-                        Gizmos.DrawCube(new Vector3(xPos + floorSpan / 2, 0, zPos + floorSpan/2),
+                        Gizmos.DrawCube(new Vector3(xPos + floorSpan / 2, 0, zPos + floorSpan / 2),
                             new Vector3(floorSpan, 1, floorSpan));
                     }
                 }
             }
+        }
+
+        public Vector3 GetCameraMapGridLocation()
+        {
+            if (_tilesMap != null)
+            {
+                int width = _tilesMap.GetLength((0));
+                int height = _tilesMap.GetLength(1);
+                for (int x = 0; x < width; x++)
+                {
+                    for (int y = 0; y < height; y++)
+                    {
+                        int xPos = (int)Mathf.Round(width / 2);
+                        int yPos = (int)Mathf.Round(height / 2);
+                        xPos = xPos + x >= width ? x - xPos : xPos + x;
+                        yPos = yPos + x >= height ? y - yPos : yPos + y;
+
+                        if ((DetailedTileType)_tilesMap[xPos, yPos] == DetailedTileType.Floor)
+                        {
+                            Vector2 returnPos = GetTileCoordinates(xPos, yPos);
+                            return new Vector3(returnPos.x, 2, returnPos.y);
+                        }
+                    }
+                }
+            }
+
+            _logger.error("_tilemap is null");
+            return new Vector3(0, 0, 0);
+        }
+
+        Vector2 GetTileCoordinates(int x, int z)
+        {
+            if (_tilesMap != null && _boardHolder != null && _floorPrefab != null)
+            {
+                float tileSize = _floorPrefab.transform.GetComponent<MeshRenderer>().bounds.size.x;
+                float xPos = x * tileSize;
+                float zPos = z * tileSize;
+
+                return new Vector2(
+                    xPos + tileSize / 2,
+                    zPos + tileSize / 2
+                );
+            }
+
+            _logger.error("_tilemap, _boardHolder and/or _floorPrefab are null");
+            return new Vector2(0, 0);
+        }
+
+        public Vector2 PickRandomLocation()
+        {
+            if (_tilesMap != null)
+            {
+                int maxAttempts = 1000;
+                for (int i = 0; i < maxAttempts; i++)
+                {
+                    int x = Random.Range(0, _tilesMap.GetLength(0));
+                    int z = Random.Range(0, _tilesMap.GetLength(1));
+                    DetailedTileType value = (DetailedTileType)_tilesMap[x, z];
+                    if (value == DetailedTileType.Floor)
+                    {
+                        _lastSpawnX = x;
+                        _lastSpawnZ = z;
+                        _lastSpawn = GetTileCoordinates(x, z);
+                        return _lastSpawn;
+                    }
+                }
+            }
+
+            _logger.error("_tilemap is null");
+            return new Vector2(0, 0);
+        }
+
+        public Vector2 FurthestWallFrom(Vector2 pos, DetailedTileType[] TileMask)
+        {
+            return new Vector2(0, 0);
+        }
+
+        public Vector4 GetBounds()
+        {
+            if (_tilesMap != null)
+            {
+                Vector2 min = GetTileCoordinates(0, 0);
+                Vector2 max = GetTileCoordinates(_tilesMap.GetLength(0), _tilesMap.GetLength(1));
+                return new Vector4(min.x, min.y, max.x, max.y);
+            }
+
+            _logger.error("_tilemap is null");
+            return new Vector4(0, 0, 0, 0);
         }
 
         // TODO: Implement method that returns a map texture of the generated dungeon

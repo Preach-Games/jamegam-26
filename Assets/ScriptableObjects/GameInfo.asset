@@ -15,10 +15,12 @@ MonoBehaviour:
   BaseDeck:
   - {fileID: 11400000, guid: 1f686546dda10c748995e6842a1b4cf2, type: 2}
   - {fileID: 11400000, guid: 59bc9ac2d08b8f0448f858e0702c5f74, type: 2}
+  - {fileID: 11400000, guid: ed83e825548ff98419021a804bf51a24, type: 2}
   Shop:
   - {fileID: 11400000, guid: 3dc753b04b4f9704fb8598da657c07ba, type: 2}
   - {fileID: 11400000, guid: 0ee22c323878ad04cb889796c5c53b5f, type: 2}
   - {fileID: 11400000, guid: cac43a7680f808545bf17c6b739bb2f0, type: 2}
+  - {fileID: 11400000, guid: d063c3b350a1db3448a566dc414f4408, type: 2}
   ShopCost: 10
   CardCount: 2
   TimeBeforeCardDisplay: 12
