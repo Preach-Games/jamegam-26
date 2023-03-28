@@ -44,7 +44,7 @@ namespace DungeonDraws.Character
         {
             if (other.CompareTag("Player"))
             {
-                var p = other.GetComponent<ACharacter>();
+                var p = other.GetComponent<ACharacter>() ?? other.transform.parent.GetComponent<ACharacter>();
                 if (FactionOverride != p.FactionOverride)
                 {
                     SetDynamicTarget(p);
