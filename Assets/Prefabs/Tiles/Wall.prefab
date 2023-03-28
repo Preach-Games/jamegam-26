@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 661929306191876133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ PrefabInstance:
     - target: {fileID: -8391222552659086748, guid: 39c6b4cf7d732a141b8fe10b4f85c7d6,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 39c6b4cf7d732a141b8fe10b4f85c7d6,
         type: 3}
@@ -109,7 +109,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 39c6b4cf7d732a141b8fe10b4f85c7d6,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -200,12 +200,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c119cbaf2fe83504cbfa8669b16da600,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: c119cbaf2fe83504cbfa8669b16da600,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
