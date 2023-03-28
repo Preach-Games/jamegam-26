@@ -77,7 +77,6 @@ namespace DungeonDraws.Spawn
         {
             Vector2 pos = LevelManager.Instance.PickRandomLocation();
             Spawn(info, new Vector3(pos.x, 1f, pos.y));
-            Debug.Break();
         }
 
         public GameObject Spawn(SO.CharacterInfo info, Vector3 pos)
