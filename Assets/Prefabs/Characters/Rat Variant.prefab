@@ -63,10 +63,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7060292935520969874, guid: 56da7190a2199464abac499eb8730c3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5504569052473067688, guid: 56da7190a2199464abac499eb8730c3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 56da7190a2199464abac499eb8730c3f,
         type: 3}
       propertyPath: m_Name
       value: Rat Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 56da7190a2199464abac499eb8730c3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 56da7190a2199464abac499eb8730c3f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110166363836171373, guid: 56da7190a2199464abac499eb8730c3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
