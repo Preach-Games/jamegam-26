@@ -22,10 +22,13 @@ namespace DungeonDraws.Level
         public GameObject _boardHolder;
 
         [SerializeField]
+        private GameObject _camera;
+
+        [SerializeField]
         private NavMeshSurface _nav;
 
         [Header("Dev Options")]
-        [SerializeField] 
+        [SerializeField]
         private bool _randomSeed; 
         [SerializeField]
         private bool _devLog;
@@ -49,9 +52,19 @@ namespace DungeonDraws.Level
             SetParams();
             GameStatusHandler.Instance.OnLoading += (sender, eventArgs) =>
             {
-                for (var i = -1; i < 2; i += 1)
+                var rects = new[]
+                {
+                    new Rect(0, 0, .5f, .5f),
+                    new Rect(.5f, 0, .5f, 0f),
+                    new Rect(0, .5f, .5f, .5f),
+                    new Rect(.5f, .5f, .5f, .5f)
+                };
+                for (var i = 0; i < rects.Length; i++)
                 {
                     LoadLevel(new(i * 1000f, 0f, 0f));
+                    var cam = Instantiate(_camera, new(i * 1000f, -10f, 0f), _camera.transform.rotation);
+                    var camera = cam.GetComponent<Camera>();
+                    camera.rect = rects[i];
                 }
             };
             _logger.info("Registered event to trigger on game load");
