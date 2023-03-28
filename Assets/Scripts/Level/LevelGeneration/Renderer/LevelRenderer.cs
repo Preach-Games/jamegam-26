@@ -23,7 +23,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
                 : null;
             if (oldTileParent != null && oldTileParent.name == "TileParent")
             {
-                Destroy(oldTileParent);
+                DestroyImmediate(oldTileParent);
             }
 
             GameObject tileParent = new GameObject("TileParent");
