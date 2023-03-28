@@ -10,18 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b810ab0ca927e914cb87c14ab80b01db, type: 3}
-  m_Name: Plague
+  m_Name: Community
   m_EditorClassIdentifier: 
-  Name: Bubonic Plague
-  Description: 'Wow free rats!
-
-    Don''t pay too much attention to these black
-    buboes growing on your monsters'
-  Image: {fileID: 21300000, guid: 2752f8f359684644da2f09a2d8952b15, type: 3}
+  Name: Community Chest
+  Description: Bank error in your favor!
+  Image: {fileID: 21300000, guid: ded493e1e36d45c4a80210b436f7afd6, type: 3}
   Modifiers:
-  - Type: 2
-    PercentChange: 5
+  - Type: 0
+    PercentChange: 3
     IsBonus: 1
-  - Type: 3
-    PercentChange: -10
-    IsBonus: 0
