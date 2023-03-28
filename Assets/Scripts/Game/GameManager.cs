@@ -1,5 +1,4 @@
-﻿using DungeonDraws.Card;
-using DungeonDraws.Effect;
+﻿using DungeonDraws.Effect;
 using DungeonDraws.SO;
 using System;
 using System.Linq;
@@ -27,11 +26,23 @@ namespace DungeonDraws.Game
         [SerializeField]
         private GameObject _damageDisplayPrefab;
 
+        [SerializeField]
+        private TMP_Text _goldLabel;
+
         private float _dayTimer;
 
         public bool IsPaused { set; get; }
 
-        public int Gold { set; get; }
+        private int _gold;
+        public int Gold
+        {
+            set
+            {
+                _gold = value;
+                DisplayGold();
+            }
+            get => _gold;
+        }
 
         int[] _upcomingExpenses;
 
@@ -79,6 +90,7 @@ namespace DungeonDraws.Game
                         _upcomingExpenses[i] = _upcomingExpenses[i + 1];
                     }
                     _upcomingExpenses[^1] = 0;
+                    DisplayGold();
                     if (Gold <= 0)
                     {
                         // Game Over
@@ -87,14 +99,22 @@ namespace DungeonDraws.Game
             }
         }
 
+        private void DisplayGold()
+        {
+            var futureExpenses = _upcomingExpenses == null ?  0 : _upcomingExpenses.Sum();
+            _goldLabel.text = $"Gold: {Gold} ({(futureExpenses > 0 ? "-" : "+")}{Mathf.Abs(futureExpenses)})";
+        }
+
         public void AddExpenses(int amount, int days)
         {
             _upcomingExpenses[days] += amount;
+            DisplayGold();
         }
 
         public void AddExpensesPercent(int amount)
         {
             _upcomingExpenses[0] += Mathf.CeilToInt(_info.DailyIncome * amount / 100f);
+            DisplayGold();
         }
 
         public void NextDay()

@@ -3847,7 +3847,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -3865,6 +3865,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5238442026759575726}
+  - {fileID: 1155627346}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5777,6 +5778,7 @@ MonoBehaviour:
   _incomeText: {fileID: 968040724675056584}
   _damageDisplayPrefab: {fileID: 5219198836022402586, guid: 25904e8d759c006499864047d8357645,
     type: 3}
+  _goldLabel: {fileID: 1155627347}
 --- !u!114 &2002116916
 MonoBehaviour:
   m_ObjectHideFlags: 0
