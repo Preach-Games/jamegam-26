@@ -21,7 +21,7 @@ namespace DungeonDraws.Scripts.Systems.LevelGeneration.Renderer
             GameObject oldTileParent = _boardHolder.transform.childCount > 0
                 ? _boardHolder.transform.GetChild(0).gameObject
                 : null;
-            if (oldTileParent != null)
+            if (oldTileParent != null && oldTileParent.name == "TileParent")
             {
                 Destroy(oldTileParent);
             }

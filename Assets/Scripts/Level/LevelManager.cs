@@ -59,7 +59,6 @@ namespace DungeonDraws.Level
             _nav.BuildNavMesh();
 
             DungeonDraws.Game.GameStatusHandler.Instance.WorldBuilt(this, new EventArgs());
-
         }
 
         private void OnValidate()
