@@ -42,9 +42,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amplitude: 0.21
+    - _Amplitude: 0.5
+    - _DepthFrequency: 18.84
     - _Frequency: 2.36
     - _MaskTreshold: 0.27
+    - _MaxMask: -1
+    - _MinMask: -1
     - _MovementSpeed: 1.36
     - _QueueControl: 0
     - _QueueOffset: 0
