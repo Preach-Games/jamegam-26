@@ -32,3 +32,5 @@ MonoBehaviour:
   TimeBetweenSpawn: 8
   Enemies:
   - {fileID: 11400000, guid: 83a2ab697014e6b478b1079d93605ac0, type: 2}
+  - {fileID: 11400000, guid: 58ec50aba2279fb43a2061b7106a77db, type: 2}
+  - {fileID: 11400000, guid: c7399769193281c41ab2ede2ee5415db, type: 2}

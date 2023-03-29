@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5970bce77c5a104dbb3c25e3923e595, type: 3}
+  m_Name: Djinn
+  m_EditorClassIdentifier: 
+  Physique: 4
+  Agility: 4
+  Mind: 2
+  Prefab: {fileID: 1609122947880846522, guid: dfe943f81fd32c74684d009b676b1f77, type: 3}
+  Faction: 1
+  Race: 2

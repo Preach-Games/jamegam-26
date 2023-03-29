@@ -27,6 +27,8 @@ namespace DungeonDraws.Game
                 ModifierType.GOLD => $"Gold Earned: {PTS()}",
                 ModifierType.GOLD_IN_5_DAYS => $"Gold Earned in 5 Days: {PTS()}",
                 ModifierType.RATS => $"Rats Gained: {PTS()}",
+                ModifierType.DJINN => $"Djinns Gained: {PTS()}",
+                ModifierType.MEDUSA => $"Medusas Gained: {PTS()}",
                 ModifierType.HERO_HEALTH => $"All Heros Health: {PTS()}%",
                 ModifierType.MONSTER_HEALTH => $"All Monsters Health: {PTS()}%",
                 ModifierType.MONSTER_ATTACK => $"All Monster Attack: {PTS()}%",
@@ -70,6 +72,20 @@ namespace DungeonDraws.Game
                     for (int i = 0; i < PercentChange; i++)
                     {
                         SpawnManager.Instance.Spawn(Race.RAT, SpawnMethod.Random);
+                    }
+                    break;
+
+                case ModifierType.DJINN:
+                    for (int i = 0; i < PercentChange; i++)
+                    {
+                        SpawnManager.Instance.Spawn(Race.DJINN, SpawnMethod.Random);
+                    }
+                    break;
+
+                case ModifierType.MEDUSA:
+                    for (int i = 0; i < PercentChange; i++)
+                    {
+                        SpawnManager.Instance.Spawn(Race.MEDUSA, SpawnMethod.Random);
                     }
                     break;
 

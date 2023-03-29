@@ -4,6 +4,8 @@
     {
         UNKOWN,
         RAT,
+        DJINN,
+        MEDUSA,
         HUMAN
     }
 }
