@@ -28,7 +28,7 @@ namespace DungeonDraws.Game
                 ModifierType.GOLD_IN_5_DAYS => $"Gold Earned in 5 Days: {PTS()}",
                 ModifierType.RATS => $"Rats Gained: {PTS()}",
                 ModifierType.DJINN => $"Djinns Gained: {PTS()}",
-                ModifierType.MEDUSA => $"Medusas Gained: {PTS()}",
+                ModifierType.MEDUSA => $"Gorgons Gained: {PTS()}",
                 ModifierType.HERO_HEALTH => $"All Heros Health: {PTS()}%",
                 ModifierType.MONSTER_HEALTH => $"All Monsters Health: {PTS()}%",
                 ModifierType.MONSTER_ATTACK => $"All Monster Attack: {PTS()}%",
