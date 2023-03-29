@@ -320,7 +320,8 @@ MonoBehaviour:
   m_text: X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 419cc33725f4aae47b8b62a1f75414bd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4589726581333663970, guid: 419cc33725f4aae47b8b62a1f75414bd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1667,7 +1668,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -207}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &654138748
 MonoBehaviour:
@@ -2596,7 +2597,8 @@ MonoBehaviour:
     Get a new random card, no refund!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 419cc33725f4aae47b8b62a1f75414bd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4589726581333663970, guid: 419cc33725f4aae47b8b62a1f75414bd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3752,10 +3754,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buy (10 Gold)
+  m_text: 'Buy
+
+    (10 Gold)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 419cc33725f4aae47b8b62a1f75414bd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4589726581333663970, guid: 419cc33725f4aae47b8b62a1f75414bd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3818,7 +3823,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1123444452
@@ -5424,7 +5429,8 @@ MonoBehaviour:
   m_text: Shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 419cc33725f4aae47b8b62a1f75414bd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4589726581333663970, guid: 419cc33725f4aae47b8b62a1f75414bd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6485,7 +6491,8 @@ MonoBehaviour:
   m_text: Next Day
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 419cc33725f4aae47b8b62a1f75414bd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4589726581333663970, guid: 419cc33725f4aae47b8b62a1f75414bd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6640,7 +6647,8 @@ MonoBehaviour:
   m_text: 'Net Income: 0 Gold Coin'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 419cc33725f4aae47b8b62a1f75414bd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4589726581333663970, guid: 419cc33725f4aae47b8b62a1f75414bd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6926,7 +6934,8 @@ MonoBehaviour:
   m_text: 'Tip: Sample text'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 419cc33725f4aae47b8b62a1f75414bd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4589726581333663970, guid: 419cc33725f4aae47b8b62a1f75414bd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6989,7 +6998,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3589651169041804606
@@ -7343,7 +7352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5.063}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: -3.3, y: -87.8}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &6885438249659963585
@@ -7389,7 +7398,8 @@ MonoBehaviour:
     Come back again tomorrow'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 419cc33725f4aae47b8b62a1f75414bd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 4589726581333663970, guid: 419cc33725f4aae47b8b62a1f75414bd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7452,7 +7462,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7170272377610188898
