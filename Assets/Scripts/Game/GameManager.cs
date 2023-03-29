@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DungeonDraws.Game
 {
@@ -96,7 +97,7 @@ namespace DungeonDraws.Game
                     DisplayGold();
                     if (Gold <= 0)
                     {
-                        // Game Over
+                        SceneManager.LoadScene("EndScreen");
                     }
                 }
             }

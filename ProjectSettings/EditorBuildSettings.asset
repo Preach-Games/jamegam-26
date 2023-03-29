@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Debug/Cards.unity
     guid: f4cdf266720cd4042a3463bafe5bc7cc
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 07e45eb16b8ff784d8fe6d1c246cc56d
   m_configObjects: {}

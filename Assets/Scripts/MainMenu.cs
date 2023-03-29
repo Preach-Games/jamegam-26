@@ -9,5 +9,9 @@ namespace DungeonDraws
         {
             SceneManager.LoadScene("Cards");
         }
+        public void LoadMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }
