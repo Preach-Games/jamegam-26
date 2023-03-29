@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5970bce77c5a104dbb3c25e3923e595, type: 3}
   m_Name: Rat
   m_EditorClassIdentifier: 
-  Physique: 2
-  Agility: 2
-  Mind: 1
+  Physique: 3
+  Agility: 3
+  Mind: 2
   Prefab: {fileID: 7048763982790807044, guid: 4b61c51405fcb0648b48777e1c440e12, type: 3}
   Faction: 1
   Race: 1

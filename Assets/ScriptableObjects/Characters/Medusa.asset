@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5970bce77c5a104dbb3c25e3923e595, type: 3}
   m_Name: Medusa
   m_EditorClassIdentifier: 
-  Physique: 6
-  Agility: 6
+  Physique: 7
+  Agility: 7
   Mind: 4
   Prefab: {fileID: 8349986677119357013, guid: 17f94d376656edc4d9af83aebd151932, type: 3}
   Faction: 1

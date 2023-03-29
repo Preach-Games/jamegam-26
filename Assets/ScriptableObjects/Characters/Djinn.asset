@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5970bce77c5a104dbb3c25e3923e595, type: 3}
   m_Name: Djinn
   m_EditorClassIdentifier: 
-  Physique: 4
-  Agility: 4
-  Mind: 2
+  Physique: 5
+  Agility: 5
+  Mind: 3
   Prefab: {fileID: 1609122947880846522, guid: dfe943f81fd32c74684d009b676b1f77, type: 3}
   Faction: 1
   Race: 2
