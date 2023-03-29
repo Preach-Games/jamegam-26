@@ -21,7 +21,7 @@ namespace DungeonDraws.Character
         {
             float velocity = _agent.velocity.magnitude;
             float t = Mathf.InverseLerp(0, _maxAgentSpeedApprox, _agent.velocity.magnitude);
-            float speed = Mathf.Lerp(0, _maxMovementSpeed, t);
+            float speed = velocity > 0.5f ? Mathf.Lerp(0, _maxMovementSpeed, t) : 0;
 
             _ondulationMat.SetFloat("_MovementSpeed", speed);
         }

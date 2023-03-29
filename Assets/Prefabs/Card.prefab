@@ -486,6 +486,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleText: {fileID: 7271681594126468019}
   _descriptionText: {fileID: 2740298082537672998}
-  _dissolveSpeed: 0.6
+  _dissolveSpeed: 0.8
   _dissolveMat: {fileID: 0}
   _cardArt: {fileID: 3144156985178310739}
