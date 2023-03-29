@@ -39,6 +39,10 @@ namespace DungeonDraws.Shop
 
         public void Buy()
         {
+            if (_shop.Count == 0)
+            {
+                return;
+            }
             GameManager.Instance.Gold -= _info.ShopCost;
             _buyButton.interactable = GameManager.Instance.Gold > _info.ShopCost && _shop.Any();
             var index = Random.Range(0, _shop.Count);

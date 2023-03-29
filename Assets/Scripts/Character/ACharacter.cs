@@ -92,6 +92,7 @@ namespace DungeonDraws.Character
             {
                 if (_agent.isStopped)
                 {
+                    transform.LookAt(_target.transform.position, Vector3.up);
                     if (_attackTimer <= 0f)
                     {
                         _attackTimer = _attackTimerRef;
