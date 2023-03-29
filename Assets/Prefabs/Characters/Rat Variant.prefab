@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 56da7190a2199464abac499eb8730c3f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56da7190a2199464abac499eb8730c3f,
         type: 3}
@@ -113,6 +113,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4175298767742370020, guid: 56da7190a2199464abac499eb8730c3f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 80bf8e16abc70124884fc9677209e36a, type: 2}
     - target: {fileID: 919132149155446097, guid: 56da7190a2199464abac499eb8730c3f,
         type: 3}
       propertyPath: m_Name
@@ -142,7 +147,17 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4872376648997877099}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56da7190a2199464abac499eb8730c3f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6758328237364558426}
   m_SourcePrefab: {fileID: 100100000, guid: 56da7190a2199464abac499eb8730c3f, type: 3}
+--- !u!23 &3106656130643496009 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4175298767742370020, guid: 56da7190a2199464abac499eb8730c3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7859718885151175509}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7048763982790807044 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56da7190a2199464abac499eb8730c3f,
@@ -170,3 +185,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.080289, y: 0.7482693, z: 0.79518676}
   m_Center: {x: 0.26083422, y: 0.38543046, z: 0.0122003555}
+--- !u!114 &6758328237364558426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048763982790807044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2d4f63035a4b442a11b44c7311a0d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesh: {fileID: 3106656130643496009}
+  _ondulationMat: {fileID: 2100000, guid: 80bf8e16abc70124884fc9677209e36a, type: 2}

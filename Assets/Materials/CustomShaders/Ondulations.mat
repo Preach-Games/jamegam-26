@@ -48,7 +48,7 @@ Material:
     - _MaskTreshold: 0.27
     - _MaxMask: -1
     - _MinMask: -1
-    - _MovementSpeed: 1.36
+    - _MovementSpeed: -32
     - _QueueControl: 0
     - _QueueOffset: 0
     - _xOffset: 9.1
