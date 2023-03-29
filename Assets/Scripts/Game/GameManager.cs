@@ -33,6 +33,8 @@ namespace DungeonDraws.Game
 
         public bool IsPaused { set; get; }
 
+        public int RoundCount { set; get; } = 0;
+
         private int _gold;
         public int Gold
         {
@@ -76,6 +78,7 @@ namespace DungeonDraws.Game
                 _dayTimer -= Time.deltaTime;
                 if (_dayTimer < 0f)
                 {
+                    RoundCount++;
                     _dayTimer = _info.DayDuration;
                     _gameStatusHandler.DayReset(this, new EventArgs());
                     IsPaused = true;

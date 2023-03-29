@@ -20,11 +20,21 @@ namespace DungeonDraws.Spawn
 
         private void Start()
         {
-            _spawnTime = SpawnManager.Instance.SpawnRate;
+            _spawnTime = GetSpawnTime();
+            _nextSpawn.text = $"Next Spawn: {Mathf.CeilToInt(_spawnTime)}";
             GameStatusHandler.Instance.OnDayReset += (_sender, _e) =>
             {
-                _spawnTime = SpawnManager.Instance.SpawnRate;
+                _spawnTime = GetSpawnTime();
+                _nextSpawn.text = $"Next Spawn: {Mathf.CeilToInt(_spawnTime)}";
             };
+        }
+
+        private float GetSpawnTime()
+        {
+            var minus = GameManager.Instance.RoundCount;
+            var res = SpawnManager.Instance.SpawnRate - minus;
+            if (res < 2) return 2f;
+            return res;
         }
 
         private void Update()
@@ -36,7 +46,7 @@ namespace DungeonDraws.Spawn
                 if (_spawnTime <= 0f)
                 {
                     Spawn();
-                    _spawnTime = SpawnManager.Instance.SpawnRate;
+                    _spawnTime = GetSpawnTime();
                 }
             }
         }
