@@ -15,6 +15,8 @@ namespace DungeonDraws.Character
         private Transform _goal;
         private Vector3 _spawn;
 
+        private Rigidbody _rb;
+
         private float _attackTimerRef = 2f;
         private float _attackTimer;
 
@@ -44,7 +46,7 @@ namespace DungeonDraws.Character
         {
             if (other.CompareTag("Player"))
             {
-                var p = other.GetComponent<ACharacter>();
+                var p = other.GetComponent<ACharacter>() ?? other.transform.parent.GetComponent<ACharacter>();
                 if (FactionOverride != p.FactionOverride)
                 {
                     SetDynamicTarget(p);
@@ -69,17 +71,22 @@ namespace DungeonDraws.Character
             if (GameManager.Instance.IsPaused)
             {
                 _agent.isStopped = true;
+                _rb.velocity = Vector3.zero;
                 return;
             }
             _attackTimer -= Time.deltaTime;
             try
             {
-                _agent.isStopped = _target != null && Vector3.Distance(transform.position, _target.transform.position) < 2f;
+                _agent.isStopped = _target != null && Vector3.Distance(transform.position, _target.transform.position) < 2.5f;
             }
             catch (MissingReferenceException)
             {
                 _agent.isStopped = true;
                 _target = null;
+            }
+            if (_agent.isStopped)
+            {
+                _rb.velocity = Vector3.zero;
             }
             if (_target != null)
             {
@@ -125,7 +132,7 @@ namespace DungeonDraws.Character
 
             //if (rollA + Agility > rollD + target.Agility)
             {
-                target.Hurt(Mathf.FloorToInt(Physique * AttackModifier / 100f));
+                target.Hurt(Mathf.FloorToInt(Physique * (1 + AttackModifier / 100f)));
             }
         }
 
@@ -176,6 +183,7 @@ namespace DungeonDraws.Character
         protected void AwakeInternal()
         {
             _agent = GetComponent<NavMeshAgent>();
+            _rb = GetComponent<Rigidbody>();
             _attackTimer = _attackTimerRef;
             _spawn = transform.position;
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using DungeonDraws.Game;
 using DungeonDraws.Scripts.Systems.LevelGeneration;
 using DungeonDraws.Scripts.Systems.LevelGeneration.Plotters;
@@ -9,7 +8,6 @@ using DungeonDraws.Scripts.Utils.Logging;
 using DungeonDraws.Scripts.Utils.Singleton;
 using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace DungeonDraws.Level
@@ -51,7 +49,7 @@ namespace DungeonDraws.Level
         private void Awake()
         {
             SetParams();
-            GameStatusHandler.Instance.OnLoading += (sender, eventArgs) => { LoadLevel(); };
+            GameStatusHandler.Instance.OnLoading += (sender, eventArgs) => { /* LoadLevel(); */ };
             _logger.info("Registered event to trigger on game load");
         }
 
@@ -60,7 +58,7 @@ namespace DungeonDraws.Level
             _logger.info("Generating new level with seed: " + _levelData._seed);
             GenerateDungeon();
             // TODO: Sort out load complete and placement of dungeon assets etc.
-            _nav.BuildNavMesh();
+            //_nav.BuildNavMesh();
 
             DungeonDraws.Game.GameStatusHandler.Instance.WorldBuilt(this, new EventArgs());
         }

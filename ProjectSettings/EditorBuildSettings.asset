@@ -5,16 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/GameJamKit/Scenes/MainMenuScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/GameJamKit/Scenes/GameScene.unity
-    guid: c994ba284ea1fad4eaacf880c4aba0d1
   - enabled: 1
-    path: Assets/Scenes/MainMenuScene.unity
-    guid: 420179aa8dc060f46a7855161965e75d
+    path: Assets/Scenes/MainMenu.unity
+    guid: 10d4e464dafeaa14c8373da36887087f
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
-    guid: ce2e86d1996676c449949c76b3173995
+    path: Assets/Scenes/Debug/Cards.unity
+    guid: f4cdf266720cd4042a3463bafe5bc7cc
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 07e45eb16b8ff784d8fe6d1c246cc56d
   m_configObjects: {}

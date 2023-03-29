@@ -5,6 +5,8 @@
         INCOME,
         HERO_SPAWN_RATE,
         RATS,
+        DJINN,
+        MEDUSA,
         HERO_HEALTH,
         MONSTER_HEALTH,
         GOLD,

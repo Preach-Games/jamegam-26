@@ -3,7 +3,6 @@ using DungeonDraws.Game;
 using DungeonDraws.SO;
 using System.Collections.Generic;
 using System.Linq;
-using DungeonDraws.Level;
 using UnityEngine;
 
 namespace DungeonDraws.Spawn
@@ -27,6 +26,9 @@ namespace DungeonDraws.Spawn
 
         [SerializeField]
         private GameObject _character;
+
+        [SerializeField]
+        private Transform[] _spawns;
 
         public float SpawnRate { private set; get; }
 
@@ -62,20 +64,12 @@ namespace DungeonDraws.Spawn
 
         public void Spawn(Race race, SpawnMethod spawnMethod)
         {
-            switch (spawnMethod)
-            {
-                case SpawnMethod.Random:
-                    SpawnAtRandom(_info.Enemies.FirstOrDefault(x => x.Race == race));
-                    break;
-                default:
-                    Debug.LogError("Spawn method not implemented: " + spawnMethod);
-                    break;
-            }
+            SpawnAtRandom(_info.Enemies.FirstOrDefault(x => x.Race == race));
         }
 
         private void SpawnAtRandom(SO.CharacterInfo info)
         {
-            Vector2 pos = LevelManager.Instance.PickRandomLocation();
+            Vector2 pos = _spawns[Random.Range(0, _spawns.Length)].position;
             Spawn(info, new Vector3(pos.x, 1f, pos.y));
         }
 
