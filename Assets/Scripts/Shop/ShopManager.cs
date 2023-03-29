@@ -39,7 +39,7 @@ namespace DungeonDraws.Shop
 
         public void Buy()
         {
-            if (_shop.Count == 0)
+            if (!_shop.Any())
             {
                 return;
             }
