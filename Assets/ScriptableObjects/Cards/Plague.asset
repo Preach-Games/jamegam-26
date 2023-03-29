@@ -20,8 +20,8 @@ MonoBehaviour:
   Image: {fileID: 21300000, guid: 2752f8f359684644da2f09a2d8952b15, type: 3}
   Modifiers:
   - Type: 2
-    PercentChange: 5
+    PercentChange: 6
     IsBonus: 1
-  - Type: 3
+  - Type: 6
     PercentChange: -10
     IsBonus: 0

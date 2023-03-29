@@ -20,9 +20,9 @@ MonoBehaviour:
     to do with that corpse under the table'
   Image: {fileID: 21300000, guid: 2a55157ba102c6e4b8c6ab6cc4247851, type: 3}
   Modifiers:
-  - Type: 6
+  - Type: 8
     PercentChange: 150
     IsBonus: 1
-  - Type: 5
+  - Type: 7
     PercentChange: 100
     IsBonus: 0
