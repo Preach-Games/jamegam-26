@@ -49,6 +49,6 @@ Material:
     - _MaskTreshold: 0
     - _MaxMask: 0.07
     - _MinMask: -0.06
-    - _MovementSpeed: 0
+    - _MovementSpeed: -25.223318
     m_Colors: []
   m_BuildTextureStacks: []
