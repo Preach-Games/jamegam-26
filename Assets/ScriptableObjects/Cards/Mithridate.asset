@@ -10,10 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b810ab0ca927e914cb87c14ab80b01db, type: 3}
-  m_Name: Nothing
+  m_Name: Mithridate
   m_EditorClassIdentifier: 
-  Name: Nothing!
-  Description: Sit at the tavern, grab a beer and wonder if you should buy more cards
-    in the shop
-  Image: {fileID: 21300000, guid: ded493e1e36d45c4a80210b436f7afd6, type: 3}
-  Modifiers: []
+  Name: Mithridate
+  Description: 'A mighty potion that will heal any disease from your monsters!
+
+    Will
+    make their hair silky and soft to the touch!
+
+    Return of the loved one guaranteed
+    under 1 week!'
+  Image: {fileID: 21300000, guid: 266ef55edc4c30f44b632236154d5002, type: 3}
+  Modifiers:
+  - Type: 4
+    PercentChange: 100
+    IsBonus: 1
