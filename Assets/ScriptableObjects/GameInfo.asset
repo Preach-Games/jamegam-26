@@ -28,7 +28,7 @@ MonoBehaviour:
   TimeBeforeCardDisplay: 12
   CardPrefab: {fileID: 8866023274045835825, guid: 850d652cb8f48d94086136f2813757fc,
     type: 3}
-  BaseGold: 15
+  BaseGold: 50
   DailyIncome: 5
   DayDuration: 30
   TimeBetweenSpawn: 8
